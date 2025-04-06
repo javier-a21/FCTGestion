@@ -1,0 +1,54 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Panel del TutorCentro";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Panel del TutorCentro</h1>
+
+    <div class="row">
+        <!-- Alumnos -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Alumnos</h5>
+                    <p class="card-text">Gestiona los alumnos de prácticas.</p>
+                    <a href="/TutorCentro/Alumnos" class="btn btn-primary">Ver Alumnos</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empresas -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Empresas</h5>
+                    <p class="card-text">Consulta y gestiona las empresas colaboradoras.</p>
+                    <a href="/TutorCentro/Empresas" class="btn btn-success">Ver Empresas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- RAEs -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">RAEs</h5>
+                    <p class="card-text">Revisa los documentos de prácticas (RAEs).</p>
+                    <a href="/TutorCentro/RAEs" class="btn btn-warning">Ver RAEs</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contactos -->
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Contactos</h5>
+                    <p class="card-text">Registra contactos con empresas o alumnos.</p>
+                    <a href="/TutorCentro/Contactos" class="btn btn-info">Ver Contactos</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

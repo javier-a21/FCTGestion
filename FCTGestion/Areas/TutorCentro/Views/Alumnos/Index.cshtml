@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FCTGestion.Models.Alumno>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Listado de Alumnos";
+}
+
+<h1 class="mb-4">Listado de Alumnos</h1>
+
+<a asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Create" class="btn btn-success mb-3">
+    ➕ Añadir Alumno
+</a>
+
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th>
+            <th>Correo Educación</th>
+            <th>Seguridad Social</th>
+            <th>Tutor Centro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var alumno in Model)
+        {
+            <tr>
+                <td>@alumno.Nombre</td>
+                <td>@alumno.CorreoEducacion</td>
+                <td>@alumno.SeguridadSocial</td>
+                <td>@alumno.TutorCentro?.Nombre</td>
+            </tr>
+        }
+    </tbody>
+</table>
