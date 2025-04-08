@@ -15,8 +15,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
+
 namespace FCTGestion.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class LoginModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -114,9 +116,36 @@ namespace FCTGestion.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                    var roles = await _signInManager.UserManager.GetRolesAsync(user);
+
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    }
+                    else if (roles.Contains("TutorCentro"))
+                    {
+                        return RedirectToAction("Index", "Panel", new { area = "TutorCentro" });
+                    }
+                    else if (roles.Contains("Profesor"))
+                    {
+                        return RedirectToAction("Index", "Panel", new { area = "Profesor" });
+                    }
+                    else if (roles.Contains("Alumno"))
+                    {
+                        return RedirectToAction("Index", "Panel", new { area = "Alumno" });
+                    }
+                    else if (roles.Contains("TutorEmpresa"))
+                    {
+                        return RedirectToAction("Index", "Panel", new { area = "TutorEmpresa" });
+                    }
+
+                    // Si no tiene rol, redirige a la raíz
+                    return LocalRedirect("~/");
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FCTGestion.Models.TutorEmpresa>
+
+@{
+    ViewData["Title"] = "Tutores de Empresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tutores de Empresa</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Nuevo Tutor</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Empresa</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tutor in Model)
+        {
+            <tr>
+                <td>@tutor.Nombre</td>
+                <td>@tutor.Correo</td>
+                <td>@tutor.Empresa?.Nombre</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@tutor.Id" class="btn btn-sm btn-info">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@tutor.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

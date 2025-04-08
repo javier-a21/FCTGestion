@@ -1,0 +1,36 @@
+﻿@model IEnumerable<FCTGestion.Models.Empresa>
+
+@{
+    ViewData["Title"] = "Empresas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empresas</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Nueva Empresa</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empresa in Model)
+        {
+            <tr>
+                <td>@empresa.Nombre</td>
+                <td>@empresa.Telefono</td>
+                <td>@empresa.Direccion</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-warning">Editar</a>
+                    <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-info">Detalles</a>
+                    <a asp-action="Delete" asp-route-id="@empresa.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

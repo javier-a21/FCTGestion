@@ -129,32 +129,57 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre", alumno.TutorCentroId);
             return View(alumno);
         }
+        // GET: TutorCentro/Alumnos/AsignarEmpresa
+        public async Task<IActionResult> AsignarEmpresa(int id)
+        {
+            var alumno = await _context.Alumnos.FindAsync(id);
+            if (alumno == null) return NotFound();
+
+            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Nombre");
+            ViewData["TutorEmpresaId"] = new SelectList(_context.TutoresEmpresa, "Id", "Nombre");
+
+            return View(alumno);
+        }
+
 
         // POST: TutorCentro/Alumnos/AsignarEmpresa
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AsignarEmpresa(int idAlumno, int EmpresaId, int TutorEmpresaId)
+        public async Task<IActionResult> AsignarEmpresa(int idAlumno, int EmpresaId, int TutorEmpresaId, DateTime FechaInicio, DateTime FechaFin)
         {
             var alumno1 = await _context.Alumnos.FindAsync(idAlumno);
             var empresa1 = await _context.Empresas.FindAsync(EmpresaId);
-            
-            if (alumno1 == null || empresa1 == null)
+            var tutor1 = await _context.TutoresEmpresa.FindAsync(TutorEmpresaId);
+
+            if (alumno1 == null || empresa1 == null || tutor1 == null)
             {
                 return NotFound();
             }
             else
             {
 
-                var asignacion = new RAE
-                {
-                    AlumnoId = idAlumno,
-                    EmpresaId = EmpresaId
+                alumno1.EmpresaId = EmpresaId;
+                alumno1.TutorEmpresaId = TutorEmpresaId;
+                alumno1.FechaInicioFCT = FechaInicio;
+                alumno1.FechaFinFCT = FechaFin;
 
-                };
-
+                await _context.SaveChangesAsync();
             }
-            return View(alumno1);
+            return RedirectToAction(nameof(Index));
     }
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var empresa = await _context.Empresas
+                .Include(e => e.Tutores)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (empresa == null) return NotFound();
+
+            return View(empresa);
+        }
+
     }
 
 }

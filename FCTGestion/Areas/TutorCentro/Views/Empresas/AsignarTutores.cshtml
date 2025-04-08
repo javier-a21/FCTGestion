@@ -1,0 +1,29 @@
+﻿@model FCTGestion.Models.Empresa
+
+@{
+    ViewData["Title"] = "Asignar Tutores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Asignar Tutores a @Model.Nombre</h2>
+
+<form asp-action="AsignarTutores" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label><strong>Selecciona los tutores de la empresa:</strong></label>
+        <div class="border p-3" style="max-height: 300px; overflow-y: auto;">
+            @foreach (var tutor in (List<FCTGestion.Models.TutorEmpresa>)ViewBag.TodosTutores)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="tutoresSeleccionados" value="@tutor.Id"
+                    @(Model.Tutores.Any(t => t.Id == tutor.Id) ? "checked" : "") />
+                    <label class="form-check-label">@tutor.Nombre</label>
+                </div>
+            }
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary mt-3">Cancelar</a>
+</form>

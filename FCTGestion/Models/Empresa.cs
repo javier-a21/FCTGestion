@@ -14,7 +14,7 @@ namespace FCTGestion.Models
 
         public string Telefono { get; set; }
 
-        public ICollection<TutorEmpresa> Tutores { get; set; }
+        public ICollection<TutorEmpresa> Tutores { get; set; } = new List<TutorEmpresa>();
         public ICollection<RAE> Relaciones { get; set; } = new List<RAE>();
 
     }

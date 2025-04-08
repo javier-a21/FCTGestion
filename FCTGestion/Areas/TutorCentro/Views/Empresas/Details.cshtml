@@ -1,0 +1,59 @@
+﻿@model FCTGestion.Models.Empresa
+
+@{
+    ViewData["Title"] = "Detalles de Empresa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detalles de Empresa</h2>
+
+<div>
+    <h4>@Model.Nombre</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Teléfono</dt>
+        <dd class="col-sm-10">@Model.Telefono</dd>
+
+        <dt class="col-sm-2">Dirección</dt>
+        <dd class="col-sm-10">@Model.Direccion</dd>
+    </dl>
+</div>
+<h4 class="mt-4">Tutores de la Empresa</h4>
+
+@if (Model.Tutores != null && Model.Tutores.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tutor in Model.Tutores)
+            {
+                <tr>
+                    <td>@tutor.Nombre</td>
+                    <td>@tutor.Correo</td>
+                    <td>
+                        <a asp-area="TutorCentro" asp-controller="TutoresEmpresa" asp-action="Details" asp-route-id="@tutor.Id" class="btn btn-sm btn-info">Ver</a>
+                        <a asp-area="TutorCentro" asp-controller="TutoresEmpresa" asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-area="TutorCentro" asp-controller="TutoresEmpresa" asp-action="Delete" asp-route-id="@tutor.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No hay tutores asignados a esta empresa.</p>
+}
+
+<a asp-area="TutorCentro" asp-controller="TutoresEmpresa" asp-action="Create" asp-route-empresaId="@Model.Id" class="btn btn-primary mt-2">
+    Añadir Tutor
+</a>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>
