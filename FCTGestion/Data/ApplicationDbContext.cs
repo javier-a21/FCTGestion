@@ -4,7 +4,7 @@ using FCTGestion.Models;
 
 namespace FCTGestion.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -18,6 +18,7 @@ namespace FCTGestion.Data
         public DbSet<RAE> RAEs { get; set; } = default!;
         public DbSet<TareaDiaria> TareasDiarias { get; set; } = default!;
         public DbSet<Contacto> Contactos { get; set; } = default!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -40,11 +41,5 @@ namespace FCTGestion.Data
                 .HasForeignKey(r => r.TutorEmpresaId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
-
-
-
-
-
     }
-
 }

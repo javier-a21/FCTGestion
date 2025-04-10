@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FCTGestion.Data;
 using FCTGestion.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace FCTGestion.Areas.TutorCentro.Controllers
+namespace FCTGestion.Areas.Admin.Controllers
 {
-    [Area("TutorCentro")]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class TutoresEmpresaController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -1,0 +1,20 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Panel del Administrador";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Panel del TutorCentro</h1>
+
+        <!-- Empresas -->
+        <div class="col-md-6 col-lg-3 mb-4">
+    <div class="card h-100 shadow">
+        <div class="card-body text-center">
+            <h5 class="card-title">Empresas</h5>
+            <p class="card-text">Consulta y gestiona las empresas colaboradoras.</p>
+            <a asp-area="TutorCentro" asp-controller="Empresas" asp-action="Index" class="btn btn-success">Ver Empresas</a>
+        </div>
+    </div>
+</div>
+
+        </div>

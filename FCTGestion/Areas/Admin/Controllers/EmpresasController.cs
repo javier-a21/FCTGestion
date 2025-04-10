@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using FCTGestion.Data;
 using FCTGestion.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace FCTGestion.Areas.TutorCentro.Controllers
+namespace FCTGestion.Areas.Admin.Controllers
 {
-    [Area("TutorCentro")]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class EmpresasController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -146,7 +148,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
 
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id });
         }
 
     }

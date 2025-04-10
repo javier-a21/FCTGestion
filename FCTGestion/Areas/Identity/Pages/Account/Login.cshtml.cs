@@ -16,19 +16,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
 
+
 namespace FCTGestion.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+
+        public LoginModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -88,6 +93,7 @@ namespace FCTGestion.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
@@ -109,61 +115,64 @@ namespace FCTGestion.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
-                {
-                    var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
-                    var roles = await _signInManager.UserManager.GetRolesAsync(user);
-
-                    _logger.LogInformation("User logged in.");
-
-                    if (roles.Contains("Admin"))
-                    {
-                        return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-                    }
-                    else if (roles.Contains("TutorCentro"))
-                    {
-                        return RedirectToAction("Index", "Panel", new { area = "TutorCentro" });
-                    }
-                    else if (roles.Contains("Profesor"))
-                    {
-                        return RedirectToAction("Index", "Panel", new { area = "Profesor" });
-                    }
-                    else if (roles.Contains("Alumno"))
-                    {
-                        return RedirectToAction("Index", "Panel", new { area = "Alumno" });
-                    }
-                    else if (roles.Contains("TutorEmpresa"))
-                    {
-                        return RedirectToAction("Index", "Panel", new { area = "TutorEmpresa" });
-                    }
-
-                    // Si no tiene rol, redirige a la raíz
-                    return LocalRedirect("~/");
-                }
-
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning("User account locked out.");
-                    return RedirectToPage("./Lockout");
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
-                }
+                return Page();
             }
 
-            // If we got this far, something failed, redisplay form
+            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
+                    return Page();
+                }
+
+                if (user.DebeCambiarPassword)
+                {
+                    return RedirectToPage("/Account/ChangePasswordFirstTime");
+                }
+
+                var roles = await _userManager.GetRolesAsync(user);
+
+                _logger.LogInformation("User logged in.");
+
+                if (roles.Contains("Admin"))
+                    return RedirectToAction("Index", "PanelAdmin", new { area = "Admin" });
+
+                if (roles.Contains("TutorCentro"))
+                    return RedirectToAction("Index", "Panel", new { area = "TutorCentro" });
+
+                if (roles.Contains("Profesor"))
+                    return RedirectToAction("Index", "Panel", new { area = "Profesor" });
+
+                if (roles.Contains("Alumno"))
+                    return RedirectToAction("Index", "Panel", new { area = "Alumno" });
+
+                if (roles.Contains("TutorEmpresa"))
+                    return RedirectToAction("Index", "Panel", new { area = "TutorEmpresa" });
+
+                return LocalRedirect("~/"); // Rol desconocido
+            }
+
+            if (result.RequiresTwoFactor)
+            {
+                return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+            }
+
+            if (result.IsLockedOut)
+            {
+                _logger.LogWarning("User account locked out.");
+                return RedirectToPage("./Lockout");
+            }
+
+            ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
             return Page();
+        
         }
     }
 }

@@ -13,9 +13,9 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
     public class AlumnosController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AlumnosController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public AlumnosController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -45,7 +45,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                 try
                 {
                     // Crear usuario de identidad
-                    var user = new IdentityUser
+                    var user = new ApplicationUser
                     {
                         UserName = alumno.CorreoEducacion,
                         Email = alumno.CorreoEducacion,
