@@ -56,16 +56,13 @@ namespace FCTGestion.Areas.Identity.Pages.Account
 
             // Redirige según el rol
             if (await _userManager.IsInRoleAsync(user, "TutorCentro"))
-                return RedirectToAction("Index", "Panel", new { area = "TutorCentro" });
+                return RedirectToAction("Index", "PanelTutorCentro", new { area = "TutorCentro" });
 
             if (await _userManager.IsInRoleAsync(user, "TutorEmpresa"))
-                return RedirectToAction("Index", "Panel", new { area = "TutorEmpresa" });
-
-            if (await _userManager.IsInRoleAsync(user, "Profesor"))
-                return RedirectToAction("Index", "Panel", new { area = "Profesor" });
+                return RedirectToAction("Index", "PanelTutorEmpresa", new { area = "TutorEmpresa" });
 
             if (await _userManager.IsInRoleAsync(user, "Alumno"))
-                return RedirectToAction("Index", "Panel", new { area = "Alumno" });
+                return RedirectToAction("Index", "PanelAlumno", new { area = "Alumnos" });
 
             if (await _userManager.IsInRoleAsync(user, "Admin"))
                 return RedirectToAction("Index", "PanelAdmin", new { area = "Admin" });

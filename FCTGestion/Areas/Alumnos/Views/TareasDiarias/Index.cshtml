@@ -1,15 +1,15 @@
-﻿@model IEnumerable<FCTGestion.Models.Alumno>
+﻿@model IEnumerable<FCTGestion.Models.TareaDiaria>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Listado de Alumnos";
+    ViewData["Title"] = "Listado de Tareas Diarias";
 }
 
-<h1 class="mb-4">Listado de Alumnos</h1>
+<h1 class="mb-4">Listado de Registro de Dias</h1>
 
 <a asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Create" class="btn btn-success mb-3">
-    ➕ Añadir Alumno
+    ➕ Añadir Registro
 </a>
 
 <input type="text" id="buscadorAlumnos" class="form-control mb-3" placeholder="Buscar alumno..." />
@@ -18,19 +18,23 @@
     <thead class="table-primary">
         <tr>
             <th>Nombre</th>
-            <th>Correo Educación</th>
-            <th>Seguridad Social</th>
-            <th>Tutor Centro</th>
+            <th>Fecha</th>
+            <th>Descipcion</th>
+            <th>Horas</th>
+            <th>Estado</th>
+            <th>Fecha Validacion</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var alumno in Model)
+        @foreach (var Tarea in Model)
         {
             <tr>
-                <td>@alumno.Nombre</td>
-                <td>@alumno.CorreoEducacion</td>
-                <td>@alumno.SeguridadSocial</td>
-                <td>@alumno.TutorCentro?.Nombre</td>
+                <td>@Tarea.Alumno.Nombre</td>
+                <td>@Tarea.Fecha</td>
+                <td>@Tarea.Descripcion</td>
+                <td>@Tarea.Horas</td>
+                <td>@Tarea.Estado</td>
+                <td>@Tarea.FechaValidacion</td>
             </tr>
         }
     </tbody>
@@ -48,3 +52,4 @@
         });
     </script>
 }
+>

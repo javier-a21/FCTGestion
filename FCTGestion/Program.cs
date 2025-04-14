@@ -71,16 +71,17 @@ using (var scope = app.Services.CreateScope())
 
     var user = new ApplicationUser
     {
-        UserName = "tuto2@turo.es",
-        Email = "tuto2@turo.es",
+        UserName = "iñigo",
+        Email = "iñigo@gmail.com",
         EmailConfirmed = true,
         DebeCambiarPassword = true
     };
 
-    var result = await userManager.CreateAsync(user, "Carteleria1*");
+    var result = await userManager.CreateAsync(user, "FCTPASSWORD");
     if (result.Succeeded)
     {
-        await userManager.AddToRoleAsync(user, "TutorCentro");
+        await userManager.AddToRoleAsync(user, "Alumno");
+    }
     }
 
 
@@ -90,26 +91,10 @@ using (var scope = app.Services.CreateScope())
 
 
     app.Run();
-async Task CrearRolesAsync(IServiceProvider serviceProvider)
-{
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>(); // o ApplicationUser si usas uno personalizado
 
-    string[] roles = { "Admin", "TutorCentro", "TutorEmpresa", "Alumno" };
 
-    foreach (var role in roles)
-    {
-        var roleExist = await roleManager.RoleExistsAsync(role);
-        if (!roleExist)
-        {
-            await roleManager.CreateAsync(new IdentityRole(role));
-        }
-        }
-        }
-        }
-        
-   
-    
+
+
 
 
 

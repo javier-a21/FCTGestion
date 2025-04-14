@@ -1,0 +1,22 @@
+﻿@model FCTGestion.Models.TareaDiaria
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Panel del TutorCentro";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Panel de Alumno</h1>
+
+    <!-- Contactos -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card h-100 shadow">
+            <div class="card-body text-center">
+                <h5 class="card-title">Contactos</h5>
+                <p class="card-text">Registra contactos con empresas o alumnos.</p>
+                <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-info">Ver Contactos</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+﻿@model FCTGestion.Models.Alumno;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Añadir Alumno";
+}
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Nombre" class="control-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CorreoEducacion" class="control-label"></label>
+        <input asp-for="CorreoEducacion" class="form-control" />
+        <span asp-validation-for="CorreoEducacion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SeguridadSocial" class="control-label"></label>
+        <input asp-for="SeguridadSocial" class="form-control" />
+        <span asp-validation-for="SeguridadSocial" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TutorCentroId" class="control-label"></label>
+        <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId"></select>
+        <span asp-validation-for="TutorCentroId" class="text-danger"></span>
+    </div>
+
+    <input type="hidden" asp-for="TutorCentroId" />
+
+    <button type="submit" class="btn btn-primary" id="btnGuardar" name="btnGuardar">Guardar</button>
+
+</form>
+
+<a asp-action="Index" class="btn btn-secondary">Volver al listado</a>

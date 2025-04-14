@@ -1,0 +1,56 @@
+﻿@model FCTGestion.Models.Alumno
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Editar Alumno";
+}
+
+<h1>Editar Alumno</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Id" />
+
+            <div class="mb-3">
+                <label asp-for="Nombre" class="form-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CorreoEducacion" class="form-label"></label>
+                <input asp-for="CorreoEducacion" class="form-control" />
+                <span asp-validation-for="CorreoEducacion" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="SeguridadSocial" class="form-label"></label>
+                <input asp-for="SeguridadSocial" class="form-control" />
+                <span asp-validation-for="SeguridadSocial" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="UserId" class="form-label"></label>
+                <input asp-for="UserId" class="form-control" />
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="TutorCentroId" class="form-label"></label>
+                <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId"></select>
+                <span asp-validation-for="TutorCentroId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

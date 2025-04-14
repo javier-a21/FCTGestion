@@ -1,0 +1,39 @@
+﻿
+@model FCTGestion.Models.Alumno
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Asignar Empresa";
+
+}
+
+<h2>Asignar Empresa a @Model.Nombre</h2>
+
+<form asp-action="AsignarEmpresa" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="idAlumno" value="@Model.Id" />
+
+    <div class="form-group">
+        <label for="EmpresaId">Empresa</label>
+        <select asp-for="EmpresaId" class="form-control" asp-items="ViewBag.EmpresaId">
+            <option value="">-- Selecciona una empresa --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="TutorEmpresaId">Tutor de Empresa</label>
+        <select asp-for="TutorEmpresaId" class="form-control" asp-items="ViewBag.TutorEmpresaId">
+            <option value="">-- Selecciona un tutor --</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="FechaInicio">Fecha de inicio FCT</label>
+        <input type="date" name="FechaInicio" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label for="FechaFin">Fecha de fin FCT</label>
+        <input type="date" name="FechaFin" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>

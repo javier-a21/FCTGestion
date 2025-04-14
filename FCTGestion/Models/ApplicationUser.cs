@@ -2,5 +2,5 @@
 
 public class ApplicationUser : IdentityUser
 {
-    public bool DebeCambiarPassword { get; set; } = false;
+    public bool DebeCambiarPassword { get; set; } = true;
 }

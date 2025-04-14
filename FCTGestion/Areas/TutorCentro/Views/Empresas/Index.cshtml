@@ -1,0 +1,43 @@
+﻿@model IEnumerable<FCTGestion.Models.Empresa>
+
+@{
+    ViewData["Title"] = "Empresas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Empresas</h2>
+
+<input type="text" id="buscadorEmpresas" class="form-control mb-3" placeholder="Buscar empresa..." />
+
+<table class="table table-striped" id="tablaEmpresas">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Dirección</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empresa in Model)
+        {
+            <tr>
+                <td>@empresa.Nombre</td>
+                <td>@empresa.Telefono</td>
+                <td>@empresa.Direccion</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        document.getElementById('buscadorEmpresas').addEventListener('input', function () {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tablaEmpresas tbody tr');
+
+            filas.forEach(fila => {
+                const textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+}

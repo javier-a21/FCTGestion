@@ -16,6 +16,10 @@
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Gestión FCT</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/logo.png" alt="Logo FCT" style="height: 40px;" />
+                </a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                         aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,15 +40,41 @@
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="TutorCentro" asp-controller="TutoresEmpresa" asp-action="Index">Tutores</a>
-                                </li>
                             }
                             else if (User.IsInRole("Admin"))
                             {
+                               
                                 <li class="nav-item">
-                                    <a asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index">Panel Admin</a>
+                                </li>
 
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">Tutores</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
+                                </li>
+                            }
+                            else if (User.IsInRole("Alumno"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Alumno" asp-controller="TareasDiarias" asp-action="Index">Panel Alumno</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">Tutores</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
                                 </li>
                             }
                         }
