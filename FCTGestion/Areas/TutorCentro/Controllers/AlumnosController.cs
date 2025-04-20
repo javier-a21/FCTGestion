@@ -23,10 +23,18 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var userId = _userManager.GetUserId(User);
+
+            var tutor = await _context.TutoresCentro.FirstOrDefaultAsync(a => a.UserId == userId);
+            if (tutor == null) return NotFound();
+
             var alumnos = await _context.Alumnos
                 .Include(a => a.TutorCentro)
+                .Where(a => a.TutorCentroId == tutor.Id)
                 .ToListAsync();
+
             return View(alumnos);
+
         }
         // GET: TutorCentro/Alumnos/Create
         public IActionResult Create()
@@ -35,43 +43,52 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             return View();
         }
 
-        // POST: TutorCentro/Alumnos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,CorreoEducacion,SeguridadSocial,TutorCentroId")] Alumno alumno)
+        public async Task<IActionResult> Create([Bind("Nombre,CorreoEducacion,SeguridadSocial")] Alumno alumno)
         {
             if (ModelState.IsValid)
             {
+                var userId = _userManager.GetUserId(User);
+
+                // Obtener el tutorCentro logueado
+                var tutorCentro = await _context.TutoresCentro.FirstOrDefaultAsync(t => t.UserId == userId);
+                if (tutorCentro == null)
+                {
+                    return NotFound("No se encontró al tutor centro correspondiente.");
+                }
+
                 try
                 {
-                    // Crear usuario de identidad
+                    // Crear usuario de Identity para el alumno
                     var user = new ApplicationUser
                     {
                         UserName = alumno.CorreoEducacion,
                         Email = alumno.CorreoEducacion,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        DebeCambiarPassword = true
                     };
 
-                    string passwordPorDefecto = "Alumno123.";
-
-                    var result = await _userManager.CreateAsync(user, passwordPorDefecto);
+                    var result = await _userManager.CreateAsync(user, "Alumno123."); // contraseña por defecto
 
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "Alumno");
 
+                        // Asignar el tutor al alumno
                         alumno.UserId = user.Id;
-                        _context.Add(alumno);
+                        alumno.TutorCentroId = tutorCentro.Id;
+
+                        _context.Alumnos.Add(alumno);
                         await _context.SaveChangesAsync();
 
+                        TempData["Mensaje"] = "✅ Alumno creado y vinculado correctamente.";
                         return RedirectToAction(nameof(Index));
                     }
                     else
                     {
                         foreach (var error in result.Errors)
-                        {
                             ModelState.AddModelError(string.Empty, error.Description);
-                        }
                     }
                 }
                 catch (Exception ex)
@@ -80,9 +97,9 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                 }
             }
 
-            ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre", alumno.TutorCentroId);
             return View(alumno);
         }
+
 
 
 

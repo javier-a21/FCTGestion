@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,27 +64,25 @@
                             else if (User.IsInRole("Alumno"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Alumno" asp-controller="TareasDiarias" asp-action="Index">Panel Alumno</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index">Panel Alumno</a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">Tutores</a>
+                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="create">Añadir Tarea</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
-                                </li>
                             }
                         }
                     </ul>
 
                     @if (SignInManager.IsSignedIn(User))
                     {
+                        var user = await UserManager.GetUserAsync(User);
+                        var roles = await UserManager.GetRolesAsync(user);
+                        var rol = roles.FirstOrDefault() ?? "Sin rol";
+
                         <span class="navbar-text me-3">
-                            Bienvenido, @User.Identity.Name
+                            Beinvenido @user.UserName (@rol)
                         </span>
                         <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
                             <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>

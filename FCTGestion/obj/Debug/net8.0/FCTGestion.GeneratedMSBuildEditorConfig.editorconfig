@@ -76,6 +76,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUGFuZWxBZG1pblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresCentro/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHV0b3Jlc0NlbnRyb1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresCentro/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHV0b3Jlc0NlbnRyb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresEmpresa/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHV0b3Jlc0VtcHJlc2FcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -102,6 +110,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Alumnos/Views/PanelAlumno/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWx1bW5vc1xWaWV3c1xQYW5lbEFsdW1ub1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Alumnos/Views/TareasDiarias/create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWx1bW5vc1xWaWV3c1xUYXJlYXNEaWFyaWFzXGNyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Alumnos/Views/TareasDiarias/Index.cshtml]

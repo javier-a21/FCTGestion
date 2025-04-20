@@ -19,7 +19,7 @@ namespace FCTGestion.Models
         public int AlumnoId { get; set; }
 
         [ForeignKey("AlumnoId")]
-        public Alumno Alumno { get; set; }
+        public Alumno? Alumno { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

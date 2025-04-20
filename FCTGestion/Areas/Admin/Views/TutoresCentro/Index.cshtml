@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FCTGestion.Models.TutorCentro>
+
+@{
+    ViewData["Title"] = "Tutores Centro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
+        @TempData["Mensaje"]
+    </div>
+}
+<h2>@ViewData["Title"]</h2>
+
+<a asp-action="Create" class="btn btn-success mb-3">➕ Crear Nuevo Tutor</a>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-primary">
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Usuario (Email)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tutor in Model)
+        {
+            <tr>
+                <td>@tutor.Nombre</td>
+                <td>@tutor.Correo</td>
+                <td>@tutor.Usuario?.Email</td>
+                <td>
+                    <form asp-action="Delete" method="post" asp-route-id="@tutor.Id" onsubmit="return confirm('¿Seguro que quieres eliminar este tutor?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        setTimeout(function () {
+            var alerta = document.getElementById('alertaTemporal');
+            if (alerta) {
+                alerta.classList.remove('show');
+                alerta.classList.add('fade');
+                alerta.style.opacity = '0';
+
+
+                setTimeout(() => alerta.remove(), 500);
+            }
+        }, 3000);
+    </script>
+}
+

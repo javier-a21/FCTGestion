@@ -1,55 +1,89 @@
 ﻿@model IEnumerable<FCTGestion.Models.TareaDiaria>
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
 @{
+    ViewData["Title"] = "Tareas por semana";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Listado de Tareas Diarias";
+
+    DateTime fechaRef = (ViewBag.FechaReferencia as DateTime?) ?? DateTime.Today;
+    DateTime semanaAnterior = fechaRef.AddDays(-7);
+    DateTime semanaSiguiente = fechaRef.AddDays(7);
+}
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
+        @TempData["Mensaje"]
+    </div>
 }
 
-<h1 class="mb-4">Listado de Registro de Dias</h1>
 
-<a asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Create" class="btn btn-success mb-3">
+<h2>Tareas del @ViewBag.SemanaInicio al @ViewBag.SemanaFin</h2>
+<h2>Tareas del @ViewBag.SemanaInicio al @ViewBag.SemanaFin</h2>
+
+<div class="mb-3">
+    <a asp-action="Index" asp-route-fechaReferencia="@semanaAnterior.ToString("yyyy-MM-dd")" class="btn btn-outline-primary">
+        ← Semana anterior
+    </a>
+    <a asp-action="Index" asp-route-fechaReferencia="@semanaSiguiente.ToString("yyyy-MM-dd")" class="btn btn-outline-primary">
+        Semana siguiente →
+    </a>
+    <a asp-action="Index" class="btn btn-outline-secondary">
+        ⟳ Semana actual
+    </a>
+</div>
+
+<a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Create" class="btn btn-success mb-3">
     ➕ Añadir Registro
 </a>
 
-<input type="text" id="buscadorAlumnos" class="form-control mb-3" placeholder="Buscar alumno..." />
-
-<table id="tablaAlumnos" class="table table-bordered table-striped">
+<table class="table table-bordered table-striped">
     <thead class="table-primary">
         <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Descipcion</th>
-            <th>Horas</th>
-            <th>Estado</th>
-            <th>Fecha Validacion</th>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Descripción</th>
+            <th class="text-center">Horas</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Validación</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var Tarea in Model)
+        @foreach (var tarea in Model)
         {
             <tr>
-                <td>@Tarea.Alumno.Nombre</td>
-                <td>@Tarea.Fecha</td>
-                <td>@Tarea.Descripcion</td>
-                <td>@Tarea.Horas</td>
-                <td>@Tarea.Estado</td>
-                <td>@Tarea.FechaValidacion</td>
+                <td class ="text-center"> @tarea.Fecha.ToShortDateString() </td>
+                <td class="text-center">@tarea.Descripcion</td>
+                <td class="text-center">@tarea.Horas</td>
+                <td class="text-center">@tarea.Estado</td>
+                <td class="text-center">@(tarea.FechaValidacion?.ToShortDateString() ?? "Pendiente")</td>
+                <td class=" text-center">
+                    @if (tarea.Estado == EstadoValidacion.Pendiente)
+                    {
+                        <a asp-controller="TareasDiarias" asp-action="Delete"
+                           asp-route-fecha="@tarea.Fecha.ToString("yyyy-MM-dd")" class="btn btn-outline-danger">
+                            Eliminar
+                        </a>
+                    }else{
+                        <a di class="btn btn-outline-danger disabled" >
+                            Eliminar
+                        </a>
+                    }
+                    
+                </td>
             </tr>
         }
     </tbody>
 </table>
 @section Scripts {
     <script>
-        document.getElementById('buscadorAlumnos').addEventListener('input', function () {
-            const filtro = this.value.toLowerCase();
-            const filas = document.querySelectorAll('#tablaAlumnos tbody tr');
+        setTimeout(function () {
+            var alerta = document.getElementById('alertaTemporal');
+            if (alerta) {
+                alerta.classList.remove('show'); 
+                alerta.classList.add('fade');    
+                alerta.style.opacity = '0';
 
-            filas.forEach(fila => {
-                const textoFila = fila.textContent.toLowerCase();
-                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-            });
-        });
+              
+                setTimeout(() => alerta.remove(), 500);
+            }
+        }, 3000); 
     </script>
 }
->

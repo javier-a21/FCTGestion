@@ -1,22 +1,53 @@
 ﻿@model FCTGestion.Models.TareaDiaria
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Panel del TutorCentro";
 }
 
-<div class="container mt-5">
-    <h1 class="mb-4">Panel de Alumno</h1>
 
+
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = await UserManager.GetUserAsync(User);
+    var roles = await UserManager.GetRolesAsync(user);
+    var rol = roles.FirstOrDefault() ?? "Sin rol";
+
+    <h1 class="text-center"> Beinvenido @user.UserName</h1>
+    <h1 class="text-center"> Registrado  como @rol</h1>
+}
+
+
+<div class="container mt-5">
+    <div><h3 id="totalHoras">Horas...</h3></div>
+    <h1 class="mb-4">Panel de Alumno</h1>
+  
     <!-- Contactos -->
     <div class="col-md-6 col-lg-3 mb-4">
         <div class="card h-100 shadow">
             <div class="card-body text-center">
-                <h5 class="card-title">Contactos</h5>
-                <p class="card-text">Registra contactos con empresas o alumnos.</p>
-                <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-info">Ver Contactos</a>
+                <h5 class="card-title">Registro de Tareas</h5>
+                <p class="card-text">Registra las tareas que se realizan cada dia en la empresa.</p>
+                <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-info">Registro de Tareas</a>
             </div>
         </div>
     </div>
 </div>
+
+
+<script>
+    fetch('/Alumnos/TareasDiarias/getNumHoras')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('totalHoras').innerText = `Total horas: ${data}`;
+        });
+
+
+</script>
+
