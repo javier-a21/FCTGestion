@@ -120,25 +120,25 @@ namespace FCTGestion.Areas.Identity.Pages.Account
                 return Page();
             }
 
-            var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+            // Buscar usuario por correo
+            var user = await _userManager.FindByEmailAsync(Input.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
+                return Page();
+            }
+
+            // Iniciar sesión usando el UserName real
+            var result = await _signInManager.PasswordSignInAsync(user.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByEmailAsync(Input.Email);
-
-                if (user == null)
-                {
-                    ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
-                    return Page();
-                }
-
                 if (user.DebeCambiarPassword)
                 {
                     return RedirectToPage("/Account/ChangePasswordFirstTime");
                 }
 
                 var roles = await _userManager.GetRolesAsync(user);
-
                 _logger.LogInformation("User logged in.");
 
                 if (roles.Contains("Admin"))
@@ -169,7 +169,7 @@ namespace FCTGestion.Areas.Identity.Pages.Account
 
             ModelState.AddModelError(string.Empty, "Intento de inicio de sesión no válido.");
             return Page();
-        
         }
+
     }
 }

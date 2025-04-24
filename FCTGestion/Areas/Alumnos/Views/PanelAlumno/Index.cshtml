@@ -18,14 +18,14 @@
     var user = await UserManager.GetUserAsync(User);
     var roles = await UserManager.GetRolesAsync(user);
     var rol = roles.FirstOrDefault() ?? "Sin rol";
-
-    <h1 class="text-center"> Beinvenido @user.UserName</h1>
+    var nombre = (user.UserName.Replace("_", " "));
+    <h1 class="text-center"> Beinvenido @nombre</h1>
     <h1 class="text-center"> Registrado  como @rol</h1>
 }
 
 
 <div class="container mt-5">
-    <div><h3 id="totalHoras">Horas...</h3></div>
+    <div class="text-center"><h3 id="totalHoras">Horas...</h></div>
     <h1 class="mb-4">Panel de Alumno</h1>
   
     <!-- Contactos -->

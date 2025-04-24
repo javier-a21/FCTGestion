@@ -1,0 +1,51 @@
+﻿@using FCTGestion.Models
+
+@model IEnumerable<FCTGestion.Models.TareaDiaria>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var alumno = ViewBag.Alumno as Alumno;
+    DateTime inicio = ViewBag.SemanaInicio;
+    DateTime fin = ViewBag.SemanaFin;
+}
+
+<h2>Validar tareas de @alumno?.Nombre (@inicio.ToShortDateString() - @fin.ToShortDateString())</h2>
+
+<form method="post" asp-action="ValidarSemana">
+    <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
+    <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Descripción</th>
+                <th>Horas</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tarea in Model)
+            {
+                <tr>
+                    <td>@tarea.Fecha.ToShortDateString()</td>
+                    <td>@tarea.Descripcion</td>
+                    <td>@tarea.Horas</td>
+                    <td>@tarea.Estado</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mb-3">
+        <label for="observacion">Observaciones del tutor:</label>
+        <textarea class="form-control" name="observacion" id="observacion" rows="3" placeholder="Observaciones generales para esta semana..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">✅ Validar semana</button>
+</form>
+
+<div class="mt-4">
+    <a class="btn btn-outline-secondary" asp-action="ValidarSemana" asp-route-alumnoId="@ViewBag.AlumnoId" asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">← Semana anterior</a>
+    <a class="btn btn-outline-secondary" asp-action="ValidarSemana" asp-route-alumnoId="@ViewBag.AlumnoId" asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">Semana siguiente →</a>
+</div>

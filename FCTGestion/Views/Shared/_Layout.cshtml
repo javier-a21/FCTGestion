@@ -1,6 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@{
+    var alumno = ViewBag.Alumno as FCTGestion.Models.Alumno;
+}
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,10 +21,46 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Gestión FCT</a>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/img/logo.png" alt="Logo FCT" style="height: 40px;" />
-                </a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    if (User.IsInRole("TutorCentro"))
+                    {
+                     <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">Gestión FCT</a>
+                    <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">
+                    <img src = "~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
+                    </a>
+                    }
+                    else if (User.IsInRole("Admin"))
+                    {
+                        <a class="navbar-brand" asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index">Gestión FCT</a>
+                        <a class="navbar-brand" asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index">
+                            <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
+                        </a>
+                    }
+                    else if (User.IsInRole("Alumno"))
+                    {
+                        <a class="navbar-brand" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">Gestión FCT</a>
+                         <a class="navbar-brand" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">
+                            <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
+                            </a>
+
+
+                    }
+                    else if (User.IsInRole("TutorEmpresa"))
+                    {
+                        @if (alumno != null)
+                        {
+                            <a class="btn btn-outline-primary" asp-action="ValidarSemana" asp-controller="TareasDiarias" asp-area="TutorEmpresa" asp-route-alumnoId="@alumno.Id">
+                                Validar tareas
+                            </a>
+                        }
+                        
+
+
+
+                    }
+                }
+                
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
                         aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +95,11 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">Tutores</a>
+                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">TutoresEmpresa</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresCentro" asp-action="Index">TutoresCentro</a>
                                 </li>
 
                                 <li class="nav-item">
@@ -63,13 +108,30 @@
                             }
                             else if (User.IsInRole("Alumno"))
                             {
+
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index">Panel Alumno</a>
+                                    <a class="nav-link" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">Panel </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index">Listado Tareas</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="create">Añadir Tarea</a>
                                 </li>
+
+                            }
+                            else if (User.IsInRole("TutorEmpresa"))
+                            {
+
+                                @if (alumno != null)
+                                {
+                                    <a class="btn btn-outline-primary" asp-action="ValidarSemana" asp-controller="TareasDiarias" asp-area="TutorEmpresa" asp-route-alumnoId="@alumno.Id">
+                                        Validar tareas
+                                    </a>
+                                }
+
 
                             }
                         }

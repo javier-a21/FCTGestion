@@ -63,7 +63,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                     // Crear usuario de Identity para el alumno
                     var user = new ApplicationUser
                     {
-                        UserName = alumno.CorreoEducacion,
+                        UserName = alumno.Nombre,
                         Email = alumno.CorreoEducacion,
                         EmailConfirmed = true,
                         DebeCambiarPassword = true

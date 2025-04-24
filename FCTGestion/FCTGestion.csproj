@@ -22,9 +22,4 @@
     <None Include="wwwroot\img\logo.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\TutorEmpresa\Controllers\" />
-    <Folder Include="Areas\TutorEmpresa\Views\" />
-  </ItemGroup>
-
 </Project>

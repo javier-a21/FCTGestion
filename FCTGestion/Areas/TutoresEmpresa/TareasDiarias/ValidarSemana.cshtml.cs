@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FCTGestion.Areas.TutorCentro.Views.Empresas
+namespace FCTGestion.Areas.TutoresEmpresa.TareasDiarias
 {
-    public class DetailsModel : PageModel
+    public class IndexModel : PageModel
     {
         public void OnGet()
         {
