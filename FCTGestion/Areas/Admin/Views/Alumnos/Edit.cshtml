@@ -42,9 +42,10 @@
                 <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId"></select>
                 <span asp-validation-for="TutorCentroId" class="text-danger"></span>
             </div>
-
+            <div  class="mt-3">
             <button type="submit" class="btn btn-primary">Guardar</button>
             <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
         </form>
     </div>
 </div>

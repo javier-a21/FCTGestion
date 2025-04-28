@@ -7,10 +7,10 @@
     DateTime semanaAnterior = fechaRef.AddDays(-7);
     DateTime semanaSiguiente = fechaRef.AddDays(7);
 }
-@if (TempData["Mensaje"] != null)
+@if (TempData["MensajeTareaDiaria"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
-        @TempData["Mensaje"]
+        @TempData["MensajeTareaDiaria"]
     </div>
 }
 
@@ -53,20 +53,23 @@
                 <td class="text-center">@tarea.Horas</td>
                 <td class="text-center">@tarea.Estado</td>
                 <td class="text-center">@(tarea.FechaValidacion?.ToShortDateString() ?? "Pendiente")</td>
-                <td class=" text-center">
+                <td class="text-center">
                     @if (tarea.Estado == EstadoValidacion.Pendiente)
                     {
-                        <a asp-controller="TareasDiarias" asp-action="Delete"
-                           asp-route-fecha="@tarea.Fecha.ToString("yyyy-MM-dd")" class="btn btn-outline-danger">
-                            Eliminar
-                        </a>
-                    }else{
-                        <a di class="btn btn-outline-danger disabled" >
-                            Eliminar
-                        </a>
+                        <form asp-action="Delete" asp-route-fecha="@tarea.Fecha.ToString("yyyy-MM-dd")" method="post" onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta tarea?');" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                🗑️ Eliminar
+                            </button>
+                        </form>
                     }
-                    
+                    else
+                    {
+                        <button class="btn btn-outline-danger btn-sm disabled">
+                            Eliminar
+                        </button>
+                    }
                 </td>
+
             </tr>
         }
     </tbody>

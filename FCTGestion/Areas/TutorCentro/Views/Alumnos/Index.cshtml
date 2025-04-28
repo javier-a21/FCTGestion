@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Listado de Alumnos";
 }
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Mensaje"]
+    </div>
+}
 
 <h1 class="mb-4">Listado de Alumnos</h1>
 
@@ -14,27 +20,49 @@
 
 <input type="text" id="buscadorAlumnos" class="form-control mb-3" placeholder="Buscar alumno..." />
 
-<table id="tablaAlumnos" class="table table-bordered table-striped">
-    <thead class="table-primary">
-        <tr>
-            <th>Nombre</th>
-            <th>Correo Educación</th>
-            <th>Seguridad Social</th>
-            <th>Tutor Centro</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var alumno in Model)
-        {
+<div class="table-responsive">
+    <table id="tablaAlumnos" class="table table-bordered table-striped">
+        <thead class="table-primary">
             <tr>
-                <td>@alumno.Nombre</td>
-                <td>@alumno.CorreoEducacion</td>
-                <td>@alumno.SeguridadSocial</td>
-                <td>@alumno.TutorCentro?.Nombre</td>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Correo Educación</th>
+                <th class="text-center">Seguridad Social</th>
+                <th class="text-center">Tutor Centro</th>
+                <th class="text-center">Empresa</th>
+                <th class="text-center">Tutor Empresa</th>
+                <th class="text-center"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var alumno in Model)
+            {
+                <tr>
+                    <td class="text-center">@alumno.Nombre</td>
+                    <td class="text-center">@alumno.CorreoEducacion</td>
+                    <td class="text-center">@alumno.SeguridadSocial</td>
+                    <td class="text-center">@alumno.TutorCentro?.Nombre</td>
+                    <td class="text-center">@(alumno.Empresa?.Nombre ?? "Sin Asignar")</td>
+                    <td class="text-center">@(alumno.TutorEmpresa?.Nombre ?? "Sin Asignar")</td>
+                    <td class="text-center">
+                        <a class="btn btn-outline-primary btn-sm"
+                           asp-area="TutorCentro"
+                           asp-controller="Alumnos"
+                           asp-action="AsignarEmpresa"
+                           asp-route-id="@alumno.Id">
+                            Asignar Empresa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   </div>
+    <div class="text-start mb-4 mt-3">
+        <a asp-area="TutorCentro" asp-controller="Panel" asp-action="Index" class="btn btn-outline-primary">
+            🔙 Volver al Panel
+        </a>
+</div>
+
 @section Scripts {
     <script>
         document.getElementById('buscadorAlumnos').addEventListener('input', function () {
@@ -46,5 +74,16 @@
                 fila.style.display = textoFila.includes(filtro) ? '' : 'none';
             });
         });
+
+  
+        window.setTimeout(function () {
+            var alert = document.querySelector('.alert');
+            if (alert) {
+                alert.classList.add('fade');
+                setTimeout(function () {
+                    alert.remove();
+                }, 500); 
+            }
+        }, 3000);
     </script>
 }

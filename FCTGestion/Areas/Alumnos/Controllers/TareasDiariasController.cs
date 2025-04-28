@@ -79,7 +79,7 @@ namespace FCTGestion.Areas.Alumnos.Controllers
                     _context.TareasDiarias.Add(tareaInsert);
                     await _context.SaveChangesAsync();
 
-                    TempData["Mensaje"] = "Tarea guardada correctamente ✅";
+                    TempData["MensajeTareaDiaria"] = "Tarea guardada correctamente ✅";
                     //  Redirigir a Index (listado)
                     return RedirectToAction("Index");
                 }
@@ -144,7 +144,7 @@ namespace FCTGestion.Areas.Alumnos.Controllers
             }
             _context.TareasDiarias.Remove(tarea);
 
-            TempData["Mensaje"] = "Tarea eliminada correctamente ✅";
+            TempData["MensajeTareaDiaria"] = "Tarea eliminada correctamente ✅";
 
             await _context.SaveChangesAsync();
 

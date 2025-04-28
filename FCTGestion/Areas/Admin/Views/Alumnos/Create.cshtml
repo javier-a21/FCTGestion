@@ -1,47 +1,44 @@
-﻿@model FCTGestion.Models.Alumno;
+﻿@model FCTGestion.Models.Alumno
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Añadir Alumno";
-}
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    ViewData["Title"] = "Crear Alumno";
 }
 
-
-<h2>@ViewData["Title"]</h2>
+<h1 class="mb-4">Crear Nuevo Alumno</h1>
 
 <form asp-action="Create" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+    @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <label asp-for="Nombre" class="control-label"></label>
+    <div class="form-group mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
         <input asp-for="Nombre" class="form-control" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="CorreoEducacion" class="control-label"></label>
-        <input asp-for="CorreoEducacion" class="form-control" />
+    <div class="form-group mb-3">
+        <label asp-for="CorreoEducacion" class="form-label"></label>
+        <input type="email" asp-for="CorreoEducacion" class="form-control" />
         <span asp-validation-for="CorreoEducacion" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="SeguridadSocial" class="control-label"></label>
+    <div class="form-group mb-3">
+        <label asp-for="SeguridadSocial" class="form-label"></label>
         <input asp-for="SeguridadSocial" class="form-control" />
         <span asp-validation-for="SeguridadSocial" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <label asp-for="TutorCentroId" class="control-label"></label>
-        <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId"></select>
+    <div class="form-group mb-3">
+        <label asp-for="TutorCentroId" class="form-label">Tutor del Centro</label>
+        <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId" required>
+            <option value="">-- Selecciona un tutor centro --</option>
+        </select>
         <span asp-validation-for="TutorCentroId" class="text-danger"></span>
     </div>
 
-    <input type="hidden" asp-for="TutorCentroId" />
-
-    <button type="submit" class="btn btn-primary" id="btnGuardar" name="btnGuardar">Guardar</button>
-
+    <button type="submit" class="btn btn-primary">💾 Crear Alumno</button>
 </form>
 
-<a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -6,48 +6,82 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Panel del TutorCentro";
+    ViewData["Title"] = "Panel del Alumno";
 }
-
-
-
-
-
-@if (SignInManager.IsSignedIn(User))
-{
-    var user = await UserManager.GetUserAsync(User);
-    var roles = await UserManager.GetRolesAsync(user);
-    var rol = roles.FirstOrDefault() ?? "Sin rol";
-    var nombre = (user.UserName.Replace("_", " "));
-    <h1 class="text-center"> Beinvenido @nombre</h1>
-    <h1 class="text-center"> Registrado  como @rol</h1>
-}
-
 
 <div class="container mt-5">
-    <div class="text-center"><h3 id="totalHoras">Horas...</h></div>
-    <h1 class="mb-4">Panel de Alumno</h1>
-  
-    <!-- Contactos -->
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card h-100 shadow">
-            <div class="card-body text-center">
-                <h5 class="card-title">Registro de Tareas</h5>
-                <p class="card-text">Registra las tareas que se realizan cada dia en la empresa.</p>
-                <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-info">Registro de Tareas</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        var roles = await UserManager.GetRolesAsync(user);
+        var rol = roles.FirstOrDefault() ?? "Sin rol";
+        var nombre = (user.UserName.Replace("_", " "));
+
+        <div class="text-center mb-4">
+            <h1 class="fw-bold text-break" style="word-break: break-word; max-width: 100%; overflow-wrap: break-word;">Bienvenido, @nombre</h1>
+            <h5 class="text-muted">Registrado como: <span class="badge bg-primary">@rol</span></h5>
+        </div>
+    }
+
+    <div class="text-center mb-4">
+        <h3 id="totalHoras" class="fw-bold mb-2">Calculando horas realizadas...</h3>
+        <h3 id="totalHorasRestantes" class="fw-bold text-success">Calculando horas restantes...</h3>
+
+    </div>
+
+    <div class="row justify-content-center g-5">
+        <!-- Listado de Tareas -->
+        <div class="col-12 col-md-8 col-lg-5">
+            <div class="card h-100 shadow-sm border-0 tarjeta-hover p-4">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Listado de Tareas</h4>
+                    <p class="card-text flex-grow-1 fs-5">Revisa las tareas que has registrado esta semana.</p>
+                    <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-info mt-3">Ver Tareas</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Añadir nueva Tarea -->
+        <div class="col-12 col-md-8 col-lg-5">
+            <div class="card h-100 shadow-sm border-0 tarjeta-hover p-4">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Registrar Nueva Tarea</h4>
+                    <p class="card-text flex-grow-1 fs-5">Añade las tareas diarias que realizas en la empresa.</p>
+                    <a asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Create" class="btn btn-success mt-3">Añadir Tarea</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+@section Styles {
+    <style>
+        .tarjeta-hover {
+            transition: all 0.3s ease;
+        }
 
-<script>
+            .tarjeta-hover:hover {
+                transform: scale(1.03);
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            }
+    </style>
+}
+
+@section Scripts {
+ <script>
     fetch('/Alumnos/TareasDiarias/getNumHoras')
         .then(res => res.json())
         .then(data => {
-            document.getElementById('totalHoras').innerText = `Total horas: ${data}`;
+            document.getElementById('totalHoras').innerText = `Total horas realizadas: ${data}`;
+
+            let horasRestantes = 350 - data;
+            if (horasRestantes < 0) {
+                horasRestantes = 0; // Nunca mostramos negativo
+            }
+
+            document.getElementById('totalHorasRestantes').innerText = `Horas restantes: ${horasRestantes}`;
         });
-
-
 </script>
 
+
+}

@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace FCTGestion.Areas.TutoresEmpresa.Controllers
 {
-    [Area("TutorEmpresa")]
+    [Area("TutoresEmpresa")]
     [Authorize(Roles = "TutorEmpresa")]
     public class TareasDiariasController : Controller
     {
@@ -23,10 +24,22 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
             _userManager = userManager;
         }
         // GET: HomeController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var userId = _userManager.GetUserId(User);
+            var tutor = await _context.TutoresEmpresa.FirstOrDefaultAsync(t => t.UserId == userId);
+            if (tutor == null) return NotFound();
+
+            var alumnos = await _context.Alumnos
+                .Where(a => a.TutorEmpresaId == tutor.Id)
+                .ToListAsync();
+
+            ViewBag.Alumnos = new SelectList(alumnos, "Id", "Nombre");
+
             return View();
         }
+
+
 
         // GET: HomeController/Details/5
         public ActionResult Details(int id)

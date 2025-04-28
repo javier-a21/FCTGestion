@@ -151,7 +151,7 @@ namespace FCTGestion.Areas.Identity.Pages.Account
                     return RedirectToAction("Index", "PanelAlumno", new { area = "Alumnos" });
 
                 if (roles.Contains("TutorEmpresa"))
-                    return RedirectToAction("Index", "Panel", new { area = "TutorEmpresa" });
+                    return RedirectToAction("Index", "PanelTutorEmpresa", new { area = "TutoresEmpresa" });
 
                 return LocalRedirect("~/"); // Rol desconocido
             }

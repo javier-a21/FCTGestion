@@ -37,3 +37,34 @@
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#EmpresaId').change(function () {
+                var empresaId = $(this).val();
+
+                if (empresaId) {
+                    $.get('/TutorCentro/Alumnos/GetTutoresPorEmpresa', { empresaId: empresaId }, function (data) {
+                        var $tutorSelect = $('#TutorEmpresaId');
+                        $tutorSelect.empty();
+                        $tutorSelect.append($('<option>', {
+                            value: '',
+                            text: '-- Selecciona un tutor --'
+                        }));
+                        $.each(data, function (index, tutor) {
+                            $tutorSelect.append($('<option>', {
+                                value: tutor.id,
+                                text: tutor.nombre
+                            }));
+                        });
+                    });
+                } else {
+                    $('#TutorEmpresaId').empty().append($('<option>', {
+                        value: '',
+                        text: '-- Selecciona un tutor --'
+                    }));
+                }
+            });
+        });
+    </script>
+}

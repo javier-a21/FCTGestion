@@ -65,6 +65,8 @@ namespace FCTGestion.Areas.Admin.Controllers
                         _context.Add(alumno);
                         await _context.SaveChangesAsync();
 
+                        TempData["MensajeCrearAlumno"] = "Alumno añadido correctamente.";
+
                         return RedirectToAction(nameof(Index));
                     }
                     else

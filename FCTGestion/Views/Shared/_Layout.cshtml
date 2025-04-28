@@ -1,9 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@{
-    var alumno = ViewBag.Alumno as FCTGestion.Models.Alumno;
-}
+
 
 
 
@@ -16,6 +14,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FCTGestion.styles.css" asp-append-version="true" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
@@ -48,13 +47,11 @@
                     }
                     else if (User.IsInRole("TutorEmpresa"))
                     {
-                        @if (alumno != null)
-                        {
-                            <a class="btn btn-outline-primary" asp-action="ValidarSemana" asp-controller="TareasDiarias" asp-area="TutorEmpresa" asp-route-alumnoId="@alumno.Id">
-                                Validar tareas
-                            </a>
-                        }
-                        
+
+                        <a class="navbar-brand" asp-area="TutoresEmpresa" asp-controller="PanelTutorEmpresa" asp-action="Index">Gestión FCT</a>
+                        <a class="navbar-brand" asp-area="TutoresEmpresa" asp-controller="PanelTutorEmpresa" asp-action="Index">
+                            <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
+                        </a>
 
 
 
@@ -125,12 +122,10 @@
                             else if (User.IsInRole("TutorEmpresa"))
                             {
 
-                                @if (alumno != null)
-                                {
-                                    <a class="btn btn-outline-primary" asp-action="ValidarSemana" asp-controller="TareasDiarias" asp-area="TutorEmpresa" asp-route-alumnoId="@alumno.Id">
-                                        Validar tareas
-                                    </a>
-                                }
+                                <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index">
+    Ver Tareas Diarias
+</a>
+
 
 
                             }

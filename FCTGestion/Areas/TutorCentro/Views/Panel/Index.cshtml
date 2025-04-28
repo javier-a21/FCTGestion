@@ -3,39 +3,39 @@
     ViewData["Title"] = "Panel del TutorCentro";
 }
 
-<div class="container mt-5">
-    <h1 class="mb-4">Panel del TutorCentro</h1>
+<div class="container py-5">
+    <h1 class="mb-4 text-center">Panel del Tutor del Centro</h1>
 
-    <div class="row">
-        <!-- Alumnos -->
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Alumnos</h5>
-                    <p class="card-text">Gestiona los alumnos de prácticas.</p>
-                    <a href="/TutorCentro/Alumnos" class="btn btn-primary">Ver Alumnos</a>
+    <div class="row g-4 mt-4">
+        <!-- Gestión de Alumnos -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm rounded-3">
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title mb-3">Alumnos</h5>
+                    <p class="card-text flex-grow-1">Gestiona la asignación de empresas, tutores de empresa y prácticas de los alumnos.</p>
+                    <a href="/TutorCentro/Alumnos" class="btn btn-primary mt-auto">Ver Alumnos</a>
                 </div>
             </div>
         </div>
 
-        <!-- RAEs -->
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">RAEs</h5>
-                    <p class="card-text">Revisa los documentos de prácticas (RAEs).</p>
-                    <a href="/TutorCentro/RAEs" class="btn btn-warning">Ver RAEs</a>
+        <!-- Gestión de Empresas -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm rounded-3">
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title mb-3">Empresas</h5>
+                    <p class="card-text flex-grow-1">Consulta el listado de empresas colaboradoras y edita su información.</p>
+                    <a href="/TutorCentro/Empresas" class="btn btn-primary mt-auto">Ver Empresas</a>
                 </div>
             </div>
         </div>
 
-        <!-- Contactos -->
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Contactos</h5>
-                    <p class="card-text">Registra contactos con empresas o alumnos.</p>
-                    <a href="/TutorCentro/Contactos" class="btn btn-info">Ver Contactos</a>
+        <!-- Otras acciones o módulo vacío que puedes completar -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm rounded-3">
+                <div class="card-body text-center d-flex flex-column">
+                    <h5 class="card-title mb-3">Tareas Diarias</h5>
+                    <p class="card-text flex-grow-1">Visualiza las tareas diarias reportadas por los alumnos.</p>
+                    <a href="/TutorCentro/TareasDiarias" class="btn btn-primary mt-auto">Ver Tareas</a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Seleccionar Alumno";
+}
+
+<h2 class="mb-4">Selecciona un alumno para consultar sus tareas</h2>
+
+<form asp-action="ConsultarSemana" method="get">
+    <div class="form-group mb-3">
+        <label for="alumnoId" class="form-label">Alumno:</label>
+        <select id="alumnoId" name="alumnoId" class="form-control" asp-items="ViewBag.Alumnos" required>
+            <option value="">-- Selecciona un alumno --</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Consultar Semana</button>
+    <div class="text-start mb-4 mt-3">
+        <a asp-area="TutorCentro" asp-controller="Panel" asp-action="Index" class="btn btn-outline-primary">
+            🔙 Volver al Panel de TutorCentro
+        </a>
+    </div>
+
+</form>

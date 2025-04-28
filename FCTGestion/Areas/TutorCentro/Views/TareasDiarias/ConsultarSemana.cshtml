@@ -1,0 +1,81 @@
+﻿@using FCTGestion.Models
+
+@model IEnumerable<FCTGestion.Models.TareaDiaria>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Tareas semanales del alumno";
+
+    var alumno = ViewBag.Alumno as Alumno;
+    DateTime inicio = ViewBag.SemanaInicio;
+    DateTime fin = ViewBag.SemanaFin;
+}
+
+<div class="container py-4">
+    <h2 class="mb-4 text-center">
+        Tareas de @alumno?.Nombre (@inicio.ToShortDateString() - @fin.ToShortDateString())
+    </h2>
+
+    <!-- Alerta si no hay tareas -->
+    @if (TempData["Aviso"] != null)
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @TempData["Aviso"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- Mostrar tabla solo si hay tareas -->
+    @if (Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Descripción</th>
+                        <th>Horas</th>
+                        <th>Estado</th>
+                        <th>Observaciones del Tutor Empresa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tarea in Model)
+                    {
+                        <tr>
+                            <td>@tarea.Fecha.ToShortDateString()</td>
+                            <td>@tarea.Descripcion</td>
+                            <td>@tarea.Horas</td>
+                            <td>@tarea.Estado</td>
+                            <td>@(string.IsNullOrEmpty(tarea.Observaciones) ? "Sin observaciones" : tarea.Observaciones)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <!-- Navegación entre semanas -->
+    <div class="d-flex justify-content-between mt-4">
+        <a class="btn btn-outline-secondary"
+           asp-action="ConsultarSemana"
+           asp-route-alumnoId="@ViewBag.AlumnoId"
+           asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">
+            ← Semana anterior
+        </a>
+
+        <a class="btn btn-outline-secondary"
+           asp-action="ConsultarSemana"
+           asp-route-alumnoId="@ViewBag.AlumnoId"
+           asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">
+            Semana siguiente →
+        </a>
+    </div>
+
+    <!-- Botón para volver a elegir otro alumno -->
+    <div class="text-center mt-5">
+        <a class="btn btn-outline-primary" asp-action="Index">
+            🔙 Volver a seleccionar otro alumno
+        </a>
+    </div>
+</div>

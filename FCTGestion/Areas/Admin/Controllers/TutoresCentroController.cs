@@ -87,5 +87,61 @@ public class TutoresCentroController : Controller
 
         return View(tutorCentro);
     }
+    // GET: Admin/TutoresCentro/Edit/5
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null) return NotFound();
+
+        var tutorCentro = await _context.TutoresCentro
+            .Include(t => t.Usuario)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+        if (tutorCentro == null) return NotFound();
+
+        return View(tutorCentro);
+    }
+
+    // POST: Admin/TutoresCentro/Edit/5
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Correo,UserId")] TutorCentro tutorCentro)
+    {
+        if (id != tutorCentro.Id) return NotFound();
+
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                var tutorExistente = await _context.TutoresCentro
+                    .Include(t => t.Usuario)
+                    .FirstOrDefaultAsync(t => t.Id == id);
+
+                if (tutorExistente == null) return NotFound();
+
+                tutorExistente.Nombre = tutorCentro.Nombre;
+                tutorExistente.Correo = tutorCentro.Correo;
+
+                // Actualizar también el ApplicationUser (usuario)
+                if (tutorExistente.Usuario != null)
+                {
+                    tutorExistente.Usuario.Email = tutorCentro.Correo;
+                    tutorExistente.Usuario.UserName = tutorCentro.Correo;
+                    _context.Update(tutorExistente.Usuario);
+                }
+
+                _context.Update(tutorExistente);
+                await _context.SaveChangesAsync();
+
+                TempData["MensajeCrearCentro"] = "Tutor actualizado correctamente.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+        }
+
+        return View(tutorCentro);
+    }
 
 }

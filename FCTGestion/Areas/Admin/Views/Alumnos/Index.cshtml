@@ -5,7 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Listado de Alumnos";
 }
-
+@if (TempData["MensajeCrearAlumno"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
+        @TempData["MensajeCrearAlumno"]
+    </div>
+}
 <h1 class="mb-4">Listado de Alumnos</h1>
 
 <a asp-area="Admin" asp-controller="Alumnos" asp-action="Create" class="btn btn-success mb-3">
@@ -17,24 +22,32 @@
 <table id="tablaAlumnos" class="table table-bordered table-striped">
     <thead class="table-primary">
         <tr>
-            <th>Nombre</th>
-            <th>Correo Educación</th>
-            <th>Seguridad Social</th>
-            <th>Tutor Centro</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Correo Educación</t>
+            <th class="text-center">Seguridad Social</th>
+            <th class="text-center">Tutor Centro</th>
+            <th class="text-center">Tutor Empresa</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var alumno in Model)
         {
             <tr>
-                <td>@alumno.Nombre</td>
-                <td>@alumno.CorreoEducacion</td>
-                <td>@alumno.SeguridadSocial</td>
-                <td>@alumno.TutorCentro?.Nombre</td>
+                <td class="text-center">@alumno.Nombre</td>
+                <td class="text-center">@alumno.CorreoEducacion</td>
+                <td class="text-center">@alumno.SeguridadSocial</td>
+                <td class="text-center">@alumno.TutorCentro?.Nombre</td>
+                <td class="text-center">@alumno.TutorEmpresa?.Nombre</td>
+
             </tr>
         }
     </tbody>
 </table>
+<div class="text-start mb-4 mt-3">
+    <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary">
+        🔙 Volver al Panel 
+    </a>
+    </div>
 @section Scripts {
     <script>
         document.getElementById('buscadorAlumnos').addEventListener('input', function () {
@@ -46,5 +59,18 @@
                 fila.style.display = textoFila.includes(filtro) ? '' : 'none';
             });
         });
+                     setTimeout(function () {
+                    var alerta = document.getElementById('alertaTemporal');
+                    if (alerta) {
+                        alerta.classList.remove('show');
+                        alerta.classList.add('fade');
+                        alerta.style.opacity = '0';
+
+
+                        setTimeout(() => alerta.remove(), 500);
+                    }
+                }, 3000);
+    
     </script>
-}
+
+       }

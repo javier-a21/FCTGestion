@@ -4,42 +4,72 @@
 }
 
 <div class="container mt-5">
-    <h1 class="mb-4">Panel del Administrador</h1>
+    <h1 class="mb-5 text-center">Panel del Administrador</h1>
 
-    <div class="row">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
         <!-- Empresas -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Empresas</h5>
-                    <p class="card-text">Gestiona las Empresas para las Practicas.</p>
-                    <a asp-area="Admin" asp-controller="Empresas" class="btn btn-primary">Ver Empresas</a>
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Empresas</h4>
+                    <p class="card-text flex-grow-1 fs-5">Gestiona las empresas asociadas a las prácticas.</p>
+                    <a asp-area="Admin" asp-controller="Empresas" asp-action="Index" class="btn btn-primary mt-3">
+                        Ver Empresas
+                    </a>
                 </div>
             </div>
         </div>
-
 
         <!-- Alumnos -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Alumnos</h5>
-                    <p class="card-text">Gestiona los alumnos de prácticas.</p>
-                    <a asp-area="Admin" asp-controller="Empresas" class="btn btn-primary">Ver Alumnos</a>
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Alumnos</h4>
+                    <p class="card-text flex-grow-1 fs-5">Gestiona los alumnos que realizarán las prácticas.</p>
+                    <a asp-area="Admin" asp-controller="Alumnos" asp-action="Index" class="btn btn-primary mt-3">
+                        Ver Alumnos
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Tutores -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Tutores de las Empresas</h5>
-                    <p class="card-text">Gestiona los tutores de las empresas de practicas.</p>
-                    <a asp-area="Admin" asp-controller="Empresas" class="btn btn-primary">Ver Tutores de Empresa</a>
+        <!-- Tutores de Empresa -->
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Tutores de Empresa</h4>
+                    <p class="card-text flex-grow-1 fs-5">Gestiona los tutores asignados en las empresas.</p>
+                    <a asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index" class="btn btn-primary mt-3">
+                        Ver Tutores de Empresa
+                    </a>
                 </div>
             </div>
-  
+        </div>
+
+        <!-- Tutores de Centro -->
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Tutores del Centro</h4>
+                    <p class="card-text flex-grow-1 fs-5">Gestiona los tutores del centro educativo.</p>
+                    <a asp-area="Admin" asp-controller="TutoresCentro" asp-action="Index" class="btn btn-primary mt-3">
+                        Ver Tutores del Centro
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-</div>
+
+@section Styles {
+    <style>
+        .tarjeta-hover {
+            transition: all 0.3s ease;
+        }
+
+            .tarjeta-hover:hover {
+                transform: scale(1.03);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            }
+    </style>
+}

@@ -29,13 +29,15 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             if (tutor == null) return NotFound();
 
             var alumnos = await _context.Alumnos
-                .Include(a => a.TutorCentro)
                 .Where(a => a.TutorCentroId == tutor.Id)
+                .Include(a => a.TutorCentro)
+                .Include(a => a.Empresa)
+                .Include(a => a.TutorEmpresa)
                 .ToListAsync();
 
             return View(alumnos);
-
         }
+
         // GET: TutorCentro/Alumnos/Create
         public IActionResult Create()
         {
@@ -174,13 +176,26 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             }
             else
             {
+                try
+                {
+                    alumno1.EmpresaId = EmpresaId;
+                    alumno1.TutorEmpresaId = TutorEmpresaId;
+                    alumno1.FechaInicioFCT = FechaInicio;
+                    alumno1.FechaFinFCT = FechaFin;
 
-                alumno1.EmpresaId = EmpresaId;
-                alumno1.TutorEmpresaId = TutorEmpresaId;
-                alumno1.FechaInicioFCT = FechaInicio;
-                alumno1.FechaFinFCT = FechaFin;
+                    await _context.SaveChangesAsync(); 
 
-                await _context.SaveChangesAsync();
+                    TempData["Mensaje"] = "✅ Empresa y tutor asignados correctamente.";
+
+                    return RedirectToAction(nameof(Index));
+
+
+                }
+                catch (Exception ex)
+                {
+                    // Puedes poner un breakpoint aquí o un log
+                    Console.WriteLine("Error al guardar: " + ex.Message);
+                }
             }
             return RedirectToAction(nameof(Index));
     }
@@ -195,6 +210,18 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             if (empresa == null) return NotFound();
 
             return View(empresa);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetTutoresPorEmpresa(int empresaId)
+        {
+            var tutores = await _context.TutoresEmpresa
+                .Where(t => t.EmpresaId == empresaId)
+                .Select(t => new {
+                    id = t.Id,
+                    nombre = t.Nombre
+                }).ToListAsync();
+
+            return Json(tutores);
         }
 
     }

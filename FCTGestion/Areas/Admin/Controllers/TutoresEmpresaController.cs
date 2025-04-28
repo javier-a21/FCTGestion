@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using FCTGestion.Data;
 using FCTGestion.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace FCTGestion.Areas.Admin.Controllers
 {
@@ -11,12 +12,15 @@ namespace FCTGestion.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class TutoresEmpresaController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
-        public TutoresEmpresaController(ApplicationDbContext context)
+        public TutoresEmpresaController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
 
         // GET: TutorCentro/TutoresEmpresa
         public async Task<IActionResult> Index()
@@ -37,16 +41,45 @@ namespace FCTGestion.Areas.Admin.Controllers
         }
 
 
-        // POST: TutorCentro/TutoresEmpresa/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Correo,EmpresaId")] TutorEmpresa tutorEmpresa)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tutorEmpresa);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Crear usuario en Identity
+                var user = new ApplicationUser
+                {
+                    UserName = tutorEmpresa.Correo,
+                    Email = tutorEmpresa.Correo,
+                    EmailConfirmed = true,
+                    DebeCambiarPassword = true // si usas esto
+                };
+
+                // Contraseña por defecto
+                var password = "Tutor123."; 
+
+                var result = await _userManager.CreateAsync(user, password);
+                if (result.Succeeded)
+                {
+                    // Asignar rol
+                    await _userManager.AddToRoleAsync(user, "TutorEmpresa");
+
+                    // Vincular el tutor con el nuevo usuario
+                    tutorEmpresa.UserId = user.Id;
+
+                    _context.Add(tutorEmpresa);
+                    await _context.SaveChangesAsync();
+                    TempData["MensajeCrearEmpresa"] = "Tutor añadido correctamente.";
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
             }
 
             ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Nombre", tutorEmpresa.EmpresaId);
@@ -84,6 +117,7 @@ namespace FCTGestion.Areas.Admin.Controllers
                     if (!TutorEmpresaExists(tutorEmpresa.Id)) return NotFound();
                     else throw;
                 }
+                TempData["MensajeCrearEmpresa"] = "Tutor actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
 
@@ -125,11 +159,22 @@ namespace FCTGestion.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var tutor = await _context.TutoresEmpresa.FindAsync(id);
-            if (tutor != null)
+
+            if (tutor == null) return NotFound();
+
+            // Comprobar si tiene alumnos asignados
+            var tieneAlumnosAsignados = await _context.Alumnos.AnyAsync(a => a.TutorEmpresaId == id);
+
+            if (tieneAlumnosAsignados)
             {
-                _context.TutoresEmpresa.Remove(tutor);
-                await _context.SaveChangesAsync();
+                TempData["Error"] = "❌ No puedes eliminar este tutor porque tiene alumnos asignados.";
+                return RedirectToAction(nameof(Index));
             }
+
+            _context.TutoresEmpresa.Remove(tutor);
+            await _context.SaveChangesAsync();
+
+            TempData["MensajeCrearEmpresa"] = "✅ Tutor eliminado correctamente.";
             return RedirectToAction(nameof(Index));
         }
 
