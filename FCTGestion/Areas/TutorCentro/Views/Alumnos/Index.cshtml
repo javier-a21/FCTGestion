@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Listado de Alumnos";
 }
-@if (TempData["Mensaje"] != null)
+@if (TempData["MensajeCreacionAlumnos"] != null)
 {
     <div class="alert alert-success">
-        @TempData["Mensaje"]
+        @TempData["MensajeCreacionAlumnos"]
     </div>
 }
 
@@ -62,7 +62,7 @@
             🔙 Volver al Panel
         </a>
 </div>
-
+<script src="~/js/desvanecerAlerta.js"></script>
 @section Scripts {
     <script>
         document.getElementById('buscadorAlumnos').addEventListener('input', function () {
@@ -74,16 +74,5 @@
                 fila.style.display = textoFila.includes(filtro) ? '' : 'none';
             });
         });
-
-  
-        window.setTimeout(function () {
-            var alert = document.querySelector('.alert');
-            if (alert) {
-                alert.classList.add('fade');
-                setTimeout(function () {
-                    alert.remove();
-                }, 500); 
-            }
-        }, 3000);
     </script>
 }

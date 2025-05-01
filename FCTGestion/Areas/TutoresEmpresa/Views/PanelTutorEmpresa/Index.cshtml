@@ -1,25 +1,62 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Panel del TutorEmpresa";
+    ViewData["Title"] = "Panel del Tutor de Empresa";
 }
 
 <div class="container mt-5">
-    <h1 class="mb-4">Panel del TutorCentro</h1>
+    <h1 class="mb-4 text-center">Panel del Tutor de Empresa</h1>
 
-    <div class="row">
-        <!-- Alumnos -->
-        <div class="col-md-6 col-lg-3 mb-4">
-            <div class="card h-100 shadow">
+    <div class="row justify-content-center">
+        <!-- Validar tareas -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow rounded-4">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Alumnos</h5>
-                    <p class="card-text">Gestiona los alumnos de prácticas.</p>
-                    <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index">
-                        Validar tareas por alumno
+                    <h5 class="card-title">Validar tareas</h5>
+                    <p class="card-text">Revisa y aprueba las tareas semanales de tus alumnos.</p>
+                    <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-outline-primary">
+                        Ir a Tareas
                     </a>
-
                 </div>
             </div>
         </div>
 
+        <!-- Ver alumnos asignados -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Alumnos asignados</h5>
+                    <p class="card-text">Consulta el listado de alumnos bajo tu tutela.</p>
+                    <a asp-area="TutoresEmpresa" asp-controller="Alumnos" asp-action="Index" class="btn btn-outline-success">
+                        Ver alumnos
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contactar con el centro -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Contacto con el centro</h5>
+                    <p class="card-text">Envía consultas o comentarios al tutor del centro.</p>
+                    <a asp-area="TutoresEmpresa" asp-controller="Soporte" asp-action="Index" class="btn btn-outline-warning">
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card h-100 shadow rounded-4">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Mi perfil</h5>
+                    <p class="card-text">Consulta y actualiza tus datos personales.</p>
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-secondary">
+                        Ver perfil
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

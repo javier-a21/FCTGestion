@@ -8,10 +8,10 @@ namespace FCTGestion.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Tutor del Centro")]
+        [Display(Name = "ID del TutorCentro")]
         public int TutorCentroId { get; set; }
 
-        public TutorCentro TutorCentro { get; set; }
+        public virtual TutorCentro? TutorCentro { get; set; } 
 
         [Required]
         [DataType(DataType.Date)]

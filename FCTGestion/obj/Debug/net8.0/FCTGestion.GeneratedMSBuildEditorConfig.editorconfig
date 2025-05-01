@@ -60,10 +60,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1wcmVzYXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Empresas/Empresas.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1wcmVzYXNcRW1wcmVzYXMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Empresas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1wcmVzYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -144,12 +140,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Identity/Pages/Account/Manage/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Identity/Pages/Account/Manage/Email.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Identity/Pages/Account/Manage/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Identity/Pages/Account/Manage/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
@@ -196,6 +200,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Contacto/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Contacto/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Empresas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcRW1wcmVzYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -230,26 +242,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Empresas/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Empresas/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Empresas/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Empresas/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcRWRpdC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Empresas/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wcmVzYXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Home/Index.cshtml]

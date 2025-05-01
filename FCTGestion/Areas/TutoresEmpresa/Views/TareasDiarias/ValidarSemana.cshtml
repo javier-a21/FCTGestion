@@ -8,44 +8,82 @@
     DateTime fin = ViewBag.SemanaFin;
 }
 
+@if (TempData["MensajeValidacionTareas"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["MensajeValidacionTareas"]
+    </div>
+}
+
 <h2>Validar tareas de @alumno?.Nombre (@inicio.ToShortDateString() - @fin.ToShortDateString())</h2>
 
-<form method="post" asp-action="ValidarSemana">
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">Fecha</th>
+            <th class="text-center">Descripción</th>
+            <th class="text-center">Horas</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Observaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tarea in Model)
+        {
+            <tr>
+                <td class="text-center">@tarea.Fecha.ToShortDateString()</td>
+                <td class="text-center">@tarea.Descripcion</td>
+                <td class="text-center">@tarea.Horas</td>
+                <td class="text-center">@tarea.Estado</td>
+                <td class="text-center">@tarea.Observaciones</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<!-- Formulario para validar la semana -->
+<form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="ValidarSemana" class="mt-3">
     <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
     <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
     <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Fecha</th>
-                <th>Descripción</th>
-                <th>Horas</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var tarea in Model)
-            {
-                <tr>
-                    <td>@tarea.Fecha.ToShortDateString()</td>
-                    <td>@tarea.Descripcion</td>
-                    <td>@tarea.Horas</td>
-                    <td>@tarea.Estado</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <button type="submit" class="btn btn-success">✅ Validar tareas de la semana</button>
+</form>
+
+
+<!-- Formulario para guardar observaciones -->
+<form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="GuardarObservacion" class="mt-3">
+    <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
+    <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
+    <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
 
     <div class="mb-3">
         <label for="observacion">Observaciones del tutor:</label>
-        <textarea class="form-control" name="observacion" id="observacion" rows="3" placeholder="Observaciones generales para esta semana..."></textarea>
+        <textarea class="form-control" name="observacion" id="observacion" rows="3" placeholder="Observaciones generales para esta semana...">@Model.FirstOrDefault()?.Observaciones?.Trim()</textarea>
     </div>
 
-    <button type="submit" class="btn btn-success">✅ Validar semana</button>
+    <button type="submit" class="btn btn-secondary">💾 Guardar observaciones</button>
 </form>
-
+<!-- Navegación entre semanas -->
 <div class="mt-4">
-    <a class="btn btn-outline-secondary" asp-action="ValidarSemana" asp-route-alumnoId="@ViewBag.AlumnoId" asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">← Semana anterior</a>
-    <a class="btn btn-outline-secondary" asp-action="ValidarSemana" asp-route-alumnoId="@ViewBag.AlumnoId" asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">Semana siguiente →</a>
+    <a class="btn btn-outline-secondary"
+       asp-area="TutoresEmpresa"
+       asp-controller="TareasDiarias"
+       asp-action="ValidarSemana"
+       asp-route-alumnoId="@ViewBag.AlumnoId"
+       asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">
+        ← Semana anterior
+    </a>
+
+    <a class="btn btn-outline-secondary"
+       asp-area="TutoresEmpresa"
+       asp-controller="TareasDiarias"
+       asp-action="ValidarSemana"
+       asp-route-alumnoId="@ViewBag.AlumnoId"
+       asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">
+        Semana siguiente →
+    </a>
 </div>
+<script src="~/js/desvanecerAlerta.js"></script>

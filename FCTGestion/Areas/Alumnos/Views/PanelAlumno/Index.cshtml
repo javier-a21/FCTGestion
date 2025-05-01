@@ -15,10 +15,10 @@
         var user = await UserManager.GetUserAsync(User);
         var roles = await UserManager.GetRolesAsync(user);
         var rol = roles.FirstOrDefault() ?? "Sin rol";
-        var nombre = (user.UserName.Replace("_", " "));
+        var nombre = (user.UserName?.Replace("_", " "));
 
         <div class="text-center mb-4">
-            <h1 class="fw-bold text-break" style="word-break: break-word; max-width: 100%; overflow-wrap: break-word;">Bienvenido, @nombre</h1>
+            <h1 class="fw-bold text-break" style="word-break: break-word; max-width: 100%; overflow-wrap: break-word;">Hola @nombre</h1>
             <h5 class="text-muted">Registrado como: <span class="badge bg-primary">@rol</span></h5>
         </div>
     }
@@ -54,34 +54,22 @@
     </div>
 </div>
 
-@section Styles {
-    <style>
-        .tarjeta-hover {
-            transition: all 0.3s ease;
-        }
-
-            .tarjeta-hover:hover {
-                transform: scale(1.03);
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            }
-    </style>
-}
 
 @section Scripts {
- <script>
-    fetch('/Alumnos/TareasDiarias/getNumHoras')
-        .then(res => res.json())
-        .then(data => {
-            document.getElementById('totalHoras').innerText = `Total horas realizadas: ${data}`;
+    <script>
+        fetch('/Alumnos/TareasDiarias/getNumHoras')
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('totalHoras').innerText = `Total horas realizadas: ${data}`;
 
-            let horasRestantes = 350 - data;
-            if (horasRestantes < 0) {
-                horasRestantes = 0; // Nunca mostramos negativo
-            }
+                let horasRestantes = 350 - data;
+                if (horasRestantes < 0) {
+                    horasRestantes = 0; // Nunca mostramos negativo
+                }
 
-            document.getElementById('totalHorasRestantes').innerText = `Horas restantes: ${horasRestantes}`;
-        });
-</script>
+                document.getElementById('totalHorasRestantes').innerText = `Horas restantes: ${horasRestantes}`;
+            });
+    </script>
 
 
 }

@@ -1,5 +1,6 @@
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\appsettings.Development.json
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\appsettings.json
+C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\efpt.config.json
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\FCTGestion.staticwebassets.runtime.json
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\FCTGestion.staticwebassets.endpoints.json
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\FCTGestion.exe
@@ -288,11 +289,10 @@ C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets\msbuild.
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.FCTGestion.props
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.FCTGestion.props
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets.pack.json
-C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.csproj.Up2Date
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.dll
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\refint\FCTGestion.dll
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.pdb
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.genruntimeconfig.cache
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\ref\FCTGestion.dll
-C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\efpt.config.json
+C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

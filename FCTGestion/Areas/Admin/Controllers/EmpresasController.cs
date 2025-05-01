@@ -53,6 +53,7 @@ namespace FCTGestion.Areas.Admin.Controllers
             {
                 _context.Add(empresa);
                 await _context.SaveChangesAsync();
+                TempData["MensajeCrearTutoresEmpresa"] = "Empresa añadida correctamente.";
                 return RedirectToAction(nameof(Index));
             }
             return View(empresa);
@@ -65,6 +66,7 @@ namespace FCTGestion.Areas.Admin.Controllers
 
             var empresa = await _context.Empresas.FindAsync(id);
             if (empresa == null) return NotFound();
+            TempData["MensajeCrearTutoresEmpresa"] = "Empresa editado correctamente.";
 
             return View(empresa);
         }

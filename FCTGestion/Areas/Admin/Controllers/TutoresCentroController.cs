@@ -73,7 +73,8 @@ public class TutoresCentroController : Controller
                 _context.TutoresCentro.Add(tutorCentro);
                 await _context.SaveChangesAsync();
 
-                TempData["Mensaje"] = "Tutor creado correctamente";
+                TempData["MensajeCrearTutoresCentro"] = "Tutor Añadido correctamente.";
+
                 return RedirectToAction(nameof(Index));
             }
             else
@@ -132,7 +133,7 @@ public class TutoresCentroController : Controller
                 _context.Update(tutorExistente);
                 await _context.SaveChangesAsync();
 
-                TempData["MensajeCrearCentro"] = "Tutor actualizado correctamente.";
+                TempData["MensajeCrearTutoresCentro"] = "Tutor actualizado correctamente.";
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateConcurrencyException)

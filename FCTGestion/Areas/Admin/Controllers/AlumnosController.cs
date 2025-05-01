@@ -5,6 +5,8 @@ using FCTGestion.Data;
 using FCTGestion.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+using FCTGestion.Helpers;
+
 
 namespace FCTGestion.Areas.Admin.Controllers
 {

@@ -74,18 +74,5 @@
         }
     </tbody>
 </table>
-@section Scripts {
-    <script>
-        setTimeout(function () {
-            var alerta = document.getElementById('alertaTemporal');
-            if (alerta) {
-                alerta.classList.remove('show'); 
-                alerta.classList.add('fade');    
-                alerta.style.opacity = '0';
+<script src="~/js/desvanecerAlerta.js"></script>
 
-              
-                setTimeout(() => alerta.remove(), 500);
-            }
-        }, 3000); 
-    </script>
-}

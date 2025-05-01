@@ -5,6 +5,7 @@ using FCTGestion.Data;
 using FCTGestion.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
+using FCTGestion.Helpers;
 
 namespace FCTGestion.Areas.TutorCentro.Controllers
 {
@@ -65,11 +66,12 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                     // Crear usuario de Identity para el alumno
                     var user = new ApplicationUser
                     {
-                        UserName = alumno.Nombre,
+                        UserName = Utilidades.NormalizarNombreUsuario(alumno.Nombre),
                         Email = alumno.CorreoEducacion,
                         EmailConfirmed = true,
                         DebeCambiarPassword = true
                     };
+
 
                     var result = await _userManager.CreateAsync(user, "Alumno123."); // contraseña por defecto
 
@@ -84,7 +86,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                         _context.Alumnos.Add(alumno);
                         await _context.SaveChangesAsync();
 
-                        TempData["Mensaje"] = "✅ Alumno creado y vinculado correctamente.";
+                        TempData["MensajeCreacionAlumnos"] = "✅ Alumno creado y vinculado correctamente.";
                         return RedirectToAction(nameof(Index));
                     }
                     else
@@ -101,6 +103,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
 
             return View(alumno);
         }
+
 
 
 

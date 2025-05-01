@@ -4,40 +4,55 @@
 }
 
 <div class="container py-5">
-    <h1 class="mb-4 text-center">Panel del Tutor del Centro</h1>
+    <div class="text-center mb-5">
+        <h1 class="fw-bold">Panel del Tutor del Centro</h1>
+        <p class="text-muted fs-5">Gestiona a tus alumnos, empresas y revisa sus tareas diarias</p>
+    </div>
 
-    <div class="row g-4 mt-4">
+    <div class="row justify-content-center g-5">
         <!-- Gestión de Alumnos -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm rounded-3">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-1 tarjeta-hover p-4">
                 <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title mb-3">Alumnos</h5>
-                    <p class="card-text flex-grow-1">Gestiona la asignación de empresas, tutores de empresa y prácticas de los alumnos.</p>
+                    <h4 class="card-title mb-3">Alumnos</h4>
+                    <p class="card-text flex-grow-1 fs-5">Gestiona la asignación de empresas, tutores de empresa y prácticas de los alumnos.</p>
                     <a href="/TutorCentro/Alumnos" class="btn btn-primary mt-auto">Ver Alumnos</a>
                 </div>
             </div>
         </div>
 
         <!-- Gestión de Empresas -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm rounded-3">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-1 tarjeta-hover p-4">
                 <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title mb-3">Empresas</h5>
-                    <p class="card-text flex-grow-1">Consulta el listado de empresas colaboradoras y edita su información.</p>
+                    <h4 class="card-title mb-3">Empresas</h4>
+                    <p class="card-text flex-grow-1 fs-5">Consulta el listado de empresas colaboradoras y edita su información.</p>
                     <a href="/TutorCentro/Empresas" class="btn btn-primary mt-auto">Ver Empresas</a>
                 </div>
             </div>
         </div>
 
-        <!-- Otras acciones o módulo vacío que puedes completar -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm rounded-3">
+        <!-- Tareas Diarias -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-1 tarjeta-hover p-4">
                 <div class="card-body text-center d-flex flex-column">
-                    <h5 class="card-title mb-3">Tareas Diarias</h5>
-                    <p class="card-text flex-grow-1">Visualiza las tareas diarias reportadas por los alumnos.</p>
+                    <h4 class="card-title mb-3">Tareas Diarias</h4>
+                    <p class="card-text flex-grow-1 fs-5">Visualiza y revisa las tareas diarias reportadas por tus alumnos.</p>
                     <a href="/TutorCentro/TareasDiarias" class="btn btn-primary mt-auto">Ver Tareas</a>
+                </div>
+            </div>
+        </div>
+        <!-- Tareas Diarias -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-1 tarjeta-hover p-4">
+                <div class="card-body text-center d-flex flex-column">
+                    <h4 class="card-title mb-3">Contactos</h4>
+                    <p class="card-text flex-grow-1 fs-5">Visualiza y revisa los contactos registrados.</p>
+                    <a href="/TutorCentro/Contacto" class="btn btn-primary mt-auto">Ver Contactos</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+

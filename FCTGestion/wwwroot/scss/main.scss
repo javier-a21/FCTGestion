@@ -1,0 +1,195 @@
+﻿// 1. Variables personalizadas
+@import 'variables'; // Archivo donde irás poniendo tus propios colores, tamaños, etc.
+
+// 2. Sobrescribir variables de Bootstrap
+$primary: #007bff; // Azul intenso
+$secondary: #6c757d; // Gris Bootstrap
+$success: #28a745; // Verde correcto
+$danger: #dc3545; // Rojo error
+$warning: #ffc107; // Amarillo advertencia
+$info: #17a2b8; // Azul clarito
+
+// Tipografía
+$font-family-base: Verdana, sans-serif;
+
+// Bordes
+$border-radius: 0.5rem;
+$border-radius-lg: 0.75rem;
+$border-radius-sm: 0.3rem;
+
+// 3. Importar Bootstrap
+@import 'bootstrap/bootstrap.scss'; // Bootstrap original pero ya con tus variables sobrescritas
+
+// 4. Estilos propios
+html, body {
+    height: 100%;
+}
+
+
+main {
+    flex: 1;
+}
+
+.modo-oscuro {
+    background-color: #1e1e1e;
+    color: #e5e5e5;
+
+    a {
+        color: #00ABE4;
+
+        &:hover {
+            color: lighten(#00ABE4, 10%);
+        }
+    }
+
+    .navbar {
+        background-color: #2b2b2b !important;
+        border-bottom: 1px solid #444;
+
+        .nav-link, .navbar-brand {
+            color: #ffffff !important;
+        }
+    }
+
+    .card {
+        background-color: #2a2a2a !important;
+        color: #e5e5e5 !important;
+        border: 1px solid #444;
+    }
+    // Tablas
+    table.table {
+        background-color: #2a2a2a !important;
+        color: #e5e5e5 !important;
+        border-color: #555 !important;
+    }
+
+    .table thead, .table thead th {
+        background-color: #333 !important;
+        color: #fff !important;
+        border-color: #555 !important;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #2f2f2f !important;
+    }
+
+    .table-hover > tbody > tr:hover {
+        background-color: #3a3a3a !important;
+    }
+
+    .table-bordered > :not(caption) > * > * {
+        border-color: #555 !important;
+    }
+
+    .table td, .table th {
+        border-color: #555 !important;
+    }
+    // Botones
+    .btn-primary, .btn-success, .btn-danger, .btn-secondary {
+        color: #fff !important;
+    }
+
+    .btn-outline-primary {
+        color: #00ABE4 !important;
+        border-color: #00ABE4 !important;
+
+        &:hover {
+            background-color: #00ABE4 !important;
+            color: #fff !important;
+        }
+    }
+
+    .alert {
+        background-color: #333 !important;
+        border-color: #444 !important;
+        color: #f1f1f1 !important;
+    }
+
+    .navbar-toggler {
+        border-color: #ccc;
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255,0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+    }
+
+    .navbar-text {
+        color: #f1f1f1 !important;
+    }
+}
+
+// Botón cambio de tema (Switch)
+.switch-tema {
+    margin:1em;
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch-tema input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #555555; /* gris oscuro en modo claro */
+    transition: 0.4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Cuando activas el checkbox */
+input:checked + .slider {
+    background-color: #FFD700; /* amarillo en modo oscuro */
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+//Margen custom
+.c-margin{
+    margin-top:20%;
+}
+.max-w500{
+    max-width:800px;
+}
+//Cards
+.tarjeta-hover {
+        transition: all 0.3s ease;
+    }
+.tarjeta-hover:hover {
+        transform: scale(1.03);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+footer {
+    font-size: 0.9rem;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+// 5. Componentes reutilizables
+@import 'tarjetas';
+@import 'botones';
+// @import 'pages/inicio';
+// @import 'pages/admin';

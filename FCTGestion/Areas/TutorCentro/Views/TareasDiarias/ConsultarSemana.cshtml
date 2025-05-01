@@ -32,10 +32,10 @@
             <table class="table table-bordered table-striped">
                 <thead class="table-primary">
                     <tr>
-                        <th>Fecha</th>
-                        <th>Descripción</th>
-                        <th>Horas</th>
-                        <th>Estado</th>
+                        <th class="text-center">Fecha</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Horas</th>
+                        <th class="text-center">Estado</th>
                         <th>Observaciones del Tutor Empresa</th>
                     </tr>
                 </thead>
@@ -43,11 +43,11 @@
                     @foreach (var tarea in Model)
                     {
                         <tr>
-                            <td>@tarea.Fecha.ToShortDateString()</td>
-                            <td>@tarea.Descripcion</td>
-                            <td>@tarea.Horas</td>
-                            <td>@tarea.Estado</td>
-                            <td>@(string.IsNullOrEmpty(tarea.Observaciones) ? "Sin observaciones" : tarea.Observaciones)</td>
+                            <td class="text-center">@tarea.Fecha.ToShortDateString()</td>
+                            <td class="text-center">@tarea.Descripcion</td>
+                            <td class="text-center">@tarea.Horas</td>
+                            <td class="text-center">@tarea.Estado</td>
+                            <td class="text-center">@(string.IsNullOrEmpty(tarea.Observaciones) ? "Sin observaciones" : tarea.Observaciones)</td>
                         </tr>
                     }
                 </tbody>

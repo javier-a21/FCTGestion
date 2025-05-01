@@ -4,7 +4,12 @@
     ViewData["Title"] = "Empresas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@if (TempData["MensajeCrearTutoresEmpresa"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
+        @TempData["MensajeCrearTutoresEmpresa"]
+    </div>
+}
 <h2>Empresas</h2>
 
 <a asp-action="Create" class="btn btn-primary mb-3">Nueva Empresa</a>
@@ -27,7 +32,6 @@
                 <td class="text-center">@empresa.Direccion</td>
                 <td class="text-center">
                     <a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-warning m-1">Editar</a>
-                    <a asp-action="Details" asp-route-id="@empresa.Id" class="btn btn-sm btn-info m-1">Detalles</a>
                     <a asp-action="Delete" asp-route-id="@empresa.Id" class="btn btn-sm btn-danger m-1">Eliminar</a>
                 </td>
             </tr>
@@ -39,3 +43,5 @@
         🔙 Volver al Panel 
     </a>
     </div>
+
+<script src="~/js/desvanecerAlerta.js"></script> 

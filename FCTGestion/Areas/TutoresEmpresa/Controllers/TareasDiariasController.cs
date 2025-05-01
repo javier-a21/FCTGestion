@@ -143,7 +143,7 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
             return View(tareas);
         }
         [HttpPost]
-        public async Task<IActionResult> ValidarSemana(int alumnoId, DateTime fechaInicio, DateTime fechaFin, string observacion)
+        public async Task<IActionResult> ValidarSemana(int alumnoId, DateTime fechaInicio, DateTime fechaFin)
         {
             var userId = _userManager.GetUserId(User);
 
@@ -159,15 +159,36 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
             {
                 tarea.Estado = EstadoValidacion.Aprobada;
                 tarea.FechaValidacion = DateTime.Now;
+            }
+
+            await _context.SaveChangesAsync();
+
+            TempData["MensajeValidacionTareas"] = "✅ Tareas validadas correctamente.";
+            return RedirectToAction("ValidarSemana", new { alumnoId = alumnoId, fechaReferencia = fechaInicio });
+        }
+
+
+    [HttpPost]
+        public async Task<IActionResult> GuardarObservacion(int alumnoId, DateTime fechaInicio, DateTime fechaFin, string observacion)
+        {
+            var userId = _userManager.GetUserId(User);
+            var tutorEmpresa = await _context.TutoresEmpresa.FirstOrDefaultAsync(te => te.UserId == userId);
+            if (tutorEmpresa == null)
+                return Unauthorized();
+
+            var tareas = await _context.TareasDiarias
+                .Where(t => t.AlumnoId == alumnoId && t.Fecha >= fechaInicio && t.Fecha <= fechaFin)
+                .ToListAsync();
+
+            foreach (var tarea in tareas)
+            {
                 tarea.Observaciones = observacion;
             }
 
             await _context.SaveChangesAsync();
 
-            TempData["Mensaje"] = "✅ Tareas validadas correctamente.";
+            TempData["MensajeValidacionTareas"] = "💬 Observaciones guardadas correctamente.";
             return RedirectToAction("ValidarSemana", new { alumnoId = alumnoId, fechaReferencia = fechaInicio });
         }
-
-
-    }
-}
+        }
+        }

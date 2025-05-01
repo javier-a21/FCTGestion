@@ -12,18 +12,18 @@
 <table class="table table-striped" id="tablaEmpresas">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Dirección</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Teléfono</th>
+            <th class="text-center">Dirección</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var empresa in Model)
         {
             <tr>
-                <td>@empresa.Nombre</td>
-                <td>@empresa.Telefono</td>
-                <td>@empresa.Direccion</td>
+                <td class="text-center">@empresa.Nombre</td>
+                <td class="text-center">@empresa.Telefono</td>
+                <td class="text-center">@empresa.Direccion</td>
             </tr>
         }
     </tbody>
@@ -32,6 +32,9 @@
     <a asp-area="TutorCentro" asp-controller="Panel" asp-action="Index" class="btn btn-outline-primary">
         🔙 Volver al Panel
     </a>
+</div>
+<script src="~/js/desvanecerAlerta.js"></script>
+
 @section Scripts {
     <script>
         document.getElementById('buscadorEmpresas').addEventListener('input', function () {
