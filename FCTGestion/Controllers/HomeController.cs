@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using FCTGestion.Models;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 
 namespace FCTGestion.Controllers
 {
@@ -27,6 +28,13 @@ namespace FCTGestion.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult GenerarPDF()
+        {
+            return new ViewAsPdf("DemoPDF") // Nombre de la vista sin extensión
+            {
+                FileName = "ejemplo.pdf"
+            };
         }
     }
 }

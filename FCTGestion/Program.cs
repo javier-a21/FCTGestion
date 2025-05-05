@@ -35,6 +35,10 @@ builder.Services.AddControllersWithViews(options =>
 
 var app = builder.Build();
 
+var env = app.Environment;
+
+Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

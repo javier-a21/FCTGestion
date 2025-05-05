@@ -1,5 +1,14 @@
 wwwroot\css\main.css
 wwwroot\css\site.css
+wwwroot\evaluaciones\Evaluacion_dfsa_20250505181214.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505164632.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505164759.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505165146.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505171812.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172431.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172643.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172707.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172942.pdf
 wwwroot\favicon.ico
 wwwroot\img\logo.png
 wwwroot\js\desvanecerAlerta.js
@@ -62,6 +71,7 @@ wwwroot\lib\jquery-validation\LICENSE.md
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\Rotativa\wkhtmltopdf.exe
 wwwroot\scss\_botones.scss
 wwwroot\scss\_tarjetas.scss
 wwwroot\scss\_variables.scss

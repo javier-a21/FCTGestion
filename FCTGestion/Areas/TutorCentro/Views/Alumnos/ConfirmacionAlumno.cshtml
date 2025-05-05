@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Datos del Alumno Creado";
+}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h4 class="alert-heading">✅ Alumno creado correctamente</h4>
+        <p><strong>Guarda esta información antes de salir. No se volverá a mostrar.</strong></p>
+    </div>
+
+    <div class="card shadow-sm border-primary">
+        <div class="card-body">
+            <h5 class="card-title">Credenciales del alumno</h5>
+
+            <div class="mb-3">
+                <label class="form-label">Correo electrónico:</label>
+                <div class="input-group">
+                    <input id="correo" class="form-control" value="@ViewBag.Correo" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copiarTexto('correo')">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contraseña generada:</label>
+                <div class="input-group">
+                    <input id="contrasena" class="form-control" value="@ViewBag.Contrasena" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copiarTexto('contrasena')">📋 Copiar</button>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label">Correo y contraseña juntos:</label>
+                <div class="input-group">
+                    <input id="completo" class="form-control"
+                           value="@ViewBag.Correo - @ViewBag.Contrasena" readonly>
+                    <button class="btn btn-outline-secondary" type="button" onclick="copiarTexto('completo')">📋 Copiar</button>
+                </div>
+            </div>
+
+            <p class="text-danger">🔒 Asegúrate de enviar estos datos al alumno por un canal seguro.</p>
+        </div>
+    </div>
+
+    <a asp-action="Index" class="btn btn-primary mt-4">⬅️ Volver al listado</a>
+</div>
+
+@section Scripts {
+    <script>
+        function copiarTexto(id) {
+            const input = document.getElementById(id);
+            input.select();
+            input.setSelectionRange(0, 99999); // Para móviles
+            document.execCommand("copy");
+
+            // Mensaje de confirmación simple
+            alert("Texto copiado: " + input.value);
+        }
+    </script>
+}

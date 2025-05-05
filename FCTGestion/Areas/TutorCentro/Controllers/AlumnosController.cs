@@ -38,6 +38,36 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
 
             return View(alumnos);
         }
+        private string GenerarContrasenaSegura()
+        {
+            const string mayusculas = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+            const string minusculas = "abcdefghijkmnopqrstuvwxyz";
+            const string numeros = "23456789";
+            const string simbolos = "!@#$%&*";
+            const int longitudTotal = 10;
+
+            var random = new Random();
+
+            
+            var caracteres = new List<char>
+    {
+        mayusculas[random.Next(mayusculas.Length)],
+        minusculas[random.Next(minusculas.Length)],
+        numeros[random.Next(numeros.Length)],
+        simbolos[random.Next(simbolos.Length)]
+    };
+
+            
+            string todos = mayusculas + minusculas + numeros + simbolos;
+            while (caracteres.Count < longitudTotal)
+            {
+                caracteres.Add(todos[random.Next(todos.Length)]);
+            }
+
+            
+            return new string(caracteres.OrderBy(x => random.Next()).ToArray());
+        }
+
 
         // GET: TutorCentro/Alumnos/Create
         public IActionResult Create()
@@ -53,17 +83,15 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             if (ModelState.IsValid)
             {
                 var userId = _userManager.GetUserId(User);
-
-                // Obtener el tutorCentro logueado
                 var tutorCentro = await _context.TutoresCentro.FirstOrDefaultAsync(t => t.UserId == userId);
+
                 if (tutorCentro == null)
-                {
                     return NotFound("No se encontró al tutor centro correspondiente.");
-                }
 
                 try
                 {
-                    // Crear usuario de Identity para el alumno
+                    var contrasenaGenerada = GenerarContrasenaSegura();
+
                     var user = new ApplicationUser
                     {
                         UserName = Utilidades.NormalizarNombreUsuario(alumno.Nombre),
@@ -72,22 +100,23 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                         DebeCambiarPassword = true
                     };
 
-
-                    var result = await _userManager.CreateAsync(user, "Alumno123."); // contraseña por defecto
+                    var result = await _userManager.CreateAsync(user, contrasenaGenerada);
 
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "Alumno");
 
-                        // Asignar el tutor al alumno
                         alumno.UserId = user.Id;
                         alumno.TutorCentroId = tutorCentro.Id;
 
                         _context.Alumnos.Add(alumno);
                         await _context.SaveChangesAsync();
 
-                        TempData["MensajeCreacionAlumnos"] = "✅ Alumno creado y vinculado correctamente.";
-                        return RedirectToAction(nameof(Index));
+                        // Pasar datos por TempData
+                        TempData["CorreoAlumno"] = alumno.CorreoEducacion;
+                        TempData["ContrasenaGenerada"] = contrasenaGenerada;
+
+                        return RedirectToAction(nameof(ConfirmacionAlumno));
                     }
                     else
                     {
@@ -104,6 +133,17 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
             return View(alumno);
         }
 
+        public IActionResult ConfirmacionAlumno()
+        {
+            if (TempData["CorreoAlumno"] == null || TempData["ContrasenaGenerada"] == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            ViewBag.Correo = TempData["CorreoAlumno"];
+            ViewBag.Contrasena = TempData["ContrasenaGenerada"];
+            return View();
+        }
 
 
 

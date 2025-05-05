@@ -1,0 +1,153 @@
+﻿@model Proyecto.ViewModels.EvaluacionFCTViewModel
+@{
+    Layout = null;
+    var estiloTitulo = "font-weight:bold;font-size:1.2em;margin-top:20px;";
+    var estiloItem = "margin-left:20px;margin-bottom:5px;";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Evaluación FCT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+            margin: 40px;
+        }
+
+        .seccion {
+            margin-bottom: 20px;
+        }
+
+        .grupo {
+            margin-left: 20px;
+        }
+
+        .campo {
+            margin-bottom: 8px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 6px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center">EVALUACIÓN DE LA FORMACIÓN EN CENTROS DE TRABAJO (FCT)</h2>
+
+    <div class="seccion">
+        <div><strong>Alumno/a:</strong> @Model.AlumnoNombre</div>
+        <div><strong>Ciclo Formativo:</strong> @Model.CicloFormativo</div>
+        <div><strong>Empresa:</strong> @Model.EmpresaNombre</div>
+        <div><strong>Nº de horas realizadas:</strong> @Model.HorasRealizadas</div>
+    </div>
+
+    <div class="seccion">
+        <div style="@estiloTitulo">Actitud</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Valoración</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Asistencia</td><td>@Model.Asistencia</td></tr>
+                <tr><td>Puntualidad</td><td>@Model.Puntualidad</td></tr>
+                <tr><td>Responsabilidad</td><td>@Model.Responsabilidad</td></tr>
+                <tr><td>Iniciativa</td><td>@Model.Iniciativa</td></tr>
+                <tr><td>Trabajo en equipo</td><td>@Model.TrabajoEnEquipo</td></tr>
+                <tr><td>Interés por las prácticas</td><td>@Model.InteresPracticas</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seccion">
+        <div style="@estiloTitulo">Aprendizaje y habilidades</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Criterio</th>
+                    <th>Valoración</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Conocimientos previos</td><td>@Model.ConocimientosPrevios</td></tr>
+                <tr><td>Adquisición de habilidades prácticas</td><td>@Model.HabilidadesPracticas</td></tr>
+                <tr><td>Organización y planificación</td><td>@Model.OrganizacionPlanificacion</td></tr>
+                <tr><td>Ritmo de trabajo</td><td>@Model.RitmoTrabajo</td></tr>
+                <tr><td>Desarrollo de tareas</td><td>@Model.DesarrolloTareas</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h5 style="margin: 30px">Rúbrica : MBA Muy Baja; BA Baja; N Normal; B Buena; E Excelente</h5>
+
+    <div class="seccion">
+        <div style="@estiloTitulo">Resultados de aprendizaje alcanzados</div>
+        <table>
+            <thead>
+                <tr>
+                    @for (int i = 1; i <= 15; i++)
+                    {
+                        <th>@i</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @for (int i = 1; i <= 15; i++)
+                    {
+                        var marcado = Model.ResultadosAprendizaje.Contains(i) ? "X" : "";
+                        <td>@marcado</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="seccion">
+        <div style="@estiloTitulo">Evaluación final</div>
+        <div class="grupo" style="margin-top: 30px">
+            <div class="campo"><strong>Resultado:</strong> @(Model.Apto ? "APTO" : "NO APTO")</div>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <div style="@estiloTitulo">Observaciones, orientaciones</div>
+        <div class="grupo">
+            <p>@Model.Observaciones</p>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <div style="display: flex; justify-content: space-between; margin-top: 60px;">
+            <div>
+                <strong>Fecha y firma del tutor/a FCT del Centro Educativo</strong>
+               
+
+                <div style="margin-top: 60px;">___________________________</div>
+            </div>
+            <div>
+                <strong>Firma, sello y fecha del responsable de la empresa</strong>
+               
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

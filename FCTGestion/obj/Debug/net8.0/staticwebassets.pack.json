@@ -5,12 +5,52 @@
       "PackagePath": "staticwebassets\\FCTGestion.eqaakpp9de.bundle.scp.css"
     },
     {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\Rotativa\\wkhtmltopdf.exe",
+      "PackagePath": "staticwebassets\\Rotativa\\wkhtmltopdf.exe"
+    },
+    {
       "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\css\\main.css",
       "PackagePath": "staticwebassets\\css\\main.css"
     },
     {
       "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505164632.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505164632.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505164759.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505164759.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505165146.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505165146.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505171812.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505171812.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505172431.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505172431.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505172643.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505172643.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505172707.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505172707.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_Javier Andueza_20250505172942.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_Javier Andueza_20250505172942.pdf"
+    },
+    {
+      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\evaluaciones\\Evaluacion_dfsa_20250505181214.pdf",
+      "PackagePath": "staticwebassets\\evaluaciones\\Evaluacion_dfsa_20250505181214.pdf"
     },
     {
       "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\favicon.ico",

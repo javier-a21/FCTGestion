@@ -1,0 +1,141 @@
+﻿@model Proyecto.ViewModels.EvaluacionFCTViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Evaluación FCT";
+}
+
+<h2>Evaluación FCT</h2>
+<form asp-action="Create" method="post">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <h4>Datos generales</h4>
+    <div><label>Alumno:</label> <input asp-for="AlumnoNombre" class="form-control" /></div>
+    <span asp-validation-for="AlumnoNombre" class="text-danger"></span>
+    <div><label>Empresa:</label> <input asp-for="EmpresaNombre" class="form-control" /></div>
+    <span asp-validation-for="EmpresaNombre" class="text-danger"></span>
+    <div><label>Ciclo Formativo:</label> <input asp-for="CicloFormativo" class="form-control" /></div>
+    <span asp-validation-for="CicloFormativo" class="text-danger"></span>
+    <div><label>Horas realizadas:</label> <input asp-for="HorasRealizadas" class="form-control" type="number" /></div>
+    <span asp-validation-for="HorasRealizadas" class="text-danger"></span>
+
+    <h4>Actitud</h4>
+    <div class="mb-2">
+        <label>Asistencia:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="Asistencia" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="Asistencia" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Puntualidad:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="Puntualidad" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="Puntualidad" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Responsabilidad:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="Responsabilidad" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="Responsabilidad" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Iniciativa:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="Iniciativa" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="Iniciativa" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Trabajo en equipo:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="TrabajoEnEquipo" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="TrabajoEnEquipo" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Interés por las prácticas:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="InteresPracticas" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="InteresPracticas" class="text-danger"></span>
+    </div>
+
+    <h4>Aprendizaje y Habilidades</h4>
+    <div class="mb-2">
+        <label>Conocimientos previos:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="ConocimientosPrevios" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="ConocimientosPrevios" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Habilidades prácticas:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="HabilidadesPracticas" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="HabilidadesPracticas" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Organización y planificación:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="OrganizacionPlanificacion" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="OrganizacionPlanificacion" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Ritmo de trabajo:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="RitmoTrabajo" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="RitmoTrabajo" class="text-danger"></span>
+    </div>
+    <div class="mb-2">
+        <label>Desarrollo de tareas:</label>
+        @foreach (var opcion in new[] { "MBa", "Ba", "N", "B", "E" })
+        {
+            <label class="ms-2"><input type="radio" asp-for="DesarrolloTareas" value="@opcion" /> @opcion</label>
+        }
+        <span asp-validation-for="DesarrolloTareas" class="text-danger"></span>
+    </div>
+
+    <h5 class="mt-3">MBA Muy Baja; BA Baja; N Normal; B Buena; E Excelente</h5>
+
+    <h4 class="mt-3">Resultados de aprendizaje alcanzados</h4>
+    <div>
+        @for (int i = 1; i <= 15; i++)
+        {
+            <label class="me-2 mt-3">
+                <input type="checkbox" name="ResultadosAprendizaje" value="@i" /> @i
+            </label>
+        }
+    </div>
+
+    <h4>Evaluación final</h4>
+    <label class="me-3"><input type="radio" asp-for="Apto" value="true" /> Apto</label>
+    <label><input type="radio" asp-for="Apto" value="false" /> No Apto</label>
+    <span asp-validation-for="Apto" class="text-danger"></span>
+
+    <div class="mt-3">
+        <label>Observaciones:</label>
+        <textarea asp-for="Observaciones" class="form-control"></textarea>
+        <span asp-validation-for="Observaciones" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Generar PDF</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

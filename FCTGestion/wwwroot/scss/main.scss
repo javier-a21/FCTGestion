@@ -38,7 +38,7 @@ main {
         color: #00ABE4;
 
         &:hover {
-            color: lighten(#00ABE4, 10%);
+            color: #32c8ff;
         }
     }
 
@@ -56,7 +56,7 @@ main {
         color: #e5e5e5 !important;
         border: 1px solid #444;
     }
-    // Tablas
+
     table.table {
         background-color: #2a2a2a !important;
         color: #e5e5e5 !important;
@@ -84,7 +84,7 @@ main {
     .table td, .table th {
         border-color: #555 !important;
     }
-    // Botones
+
     .btn-primary, .btn-success, .btn-danger, .btn-secondary {
         color: #fff !important;
     }
@@ -115,6 +115,78 @@ main {
 
     .navbar-text {
         color: #f1f1f1 !important;
+    }
+
+    footer {
+        background-color: #1e1e1e !important;
+        color: #ccc;
+
+        a {
+            color: #a7d3f1 !important;
+
+            &:hover {
+                color: #ffffff !important;
+                text-decoration: underline;
+            }
+        }
+
+        .text-muted {
+            color: #999 !important;
+        }
+
+        .bg-secondary {
+            background-color: #2a2a2a !important;
+            color: #ccc !important;
+        }
+
+        h5 {
+            color: #f1f1f1;
+        }
+
+        .border-top {
+            border-top: 1px solid #444 !important;
+        }
+    }
+
+    input, textarea, select {
+        background-color: #2a2a2a !important;
+        color: #e5e5e5 !important;
+        border: 1px solid #555 !important;
+    }
+
+    input::placeholder, textarea::placeholder {
+        color: #999 !important;
+    }
+
+    label {
+        color: #e5e5e5;
+    }
+
+    .btn-warning {
+        background-color: #ffc107 !important;
+        color: #000 !important;
+    }
+
+    .btn-info {
+        background-color: #17a2b8 !important;
+        color: #fff !important;
+    }
+    // Texto atenuado
+    .text-muted {
+        color: #aaa !important;
+    }
+    // Badges
+    .badge.bg-primary {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    .badge {
+        border-radius: 0.5rem;
+    }
+
+    .btn {
+        box-shadow: 0 0 0.25rem rgba(255, 255, 255, 0.1);
     }
 }
 

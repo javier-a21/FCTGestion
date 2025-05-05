@@ -4,16 +4,16 @@
 }
 
 <div class="container mt-5">
-    <h1 class="mb-4 text-center">Panel del Tutor de Empresa</h1>
+    <h1 class="mb-5 text-center">Panel del Tutor de Empresa</h1>
 
-    <div class="row justify-content-center">
+    <div class="row row-cols-1 row-cols-md-2 g-4 justify-content-center">
         <!-- Validar tareas -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow rounded-4">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Validar tareas</h5>
-                    <p class="card-text">Revisa y aprueba las tareas semanales de tus alumnos.</p>
-                    <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-outline-primary">
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Validar tareas</h4>
+                    <p class="card-text flex-grow-1 fs-5">Revisa y aprueba las tareas semanales de tus alumnos.</p>
+                    <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-primary mt-3">
                         Ir a Tareas
                     </a>
                 </div>
@@ -21,39 +21,27 @@
         </div>
 
         <!-- Ver alumnos asignados -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow rounded-4">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Alumnos asignados</h5>
-                    <p class="card-text">Consulta el listado de alumnos bajo tu tutela.</p>
-                    <a asp-area="TutoresEmpresa" asp-controller="Alumnos" asp-action="Index" class="btn btn-outline-success">
+        <div class="col">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Alumnos asignados</h4>
+                    <p class="card-text flex-grow-1 fs-5">Consulta el listado de alumnos bajo tu tutela.</p>
+                    <a asp-area="TutoresEmpresa" asp-controller="Alumnos" asp-action="Index" class="btn btn-primary mt-3">
                         Ver alumnos
                     </a>
+
                 </div>
             </div>
         </div>
 
-        <!-- Contactar con el centro -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow rounded-4">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Contacto con el centro</h5>
-                    <p class="card-text">Envía consultas o comentarios al tutor del centro.</p>
-                    <a asp-area="TutoresEmpresa" asp-controller="Soporte" asp-action="Index" class="btn btn-outline-warning">
-                        Contactar
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Perfil -->
-        <div class="col-md-6 col-lg-4 mb-4">
-            <div class="card h-100 shadow rounded-4">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Mi perfil</h5>
-                    <p class="card-text">Consulta y actualiza tus datos personales.</p>
-                    <a asp-area="Identity" asp-page="/Account/Manage/Index" class="btn btn-outline-secondary">
-                        Ver perfil
+        <!-- Evaluación FCT -->
+        <div class="col-md-6 col-lg-4 d-flex justify-content-center">
+            <div class="card h-100 shadow-sm border-0 p-4 tarjeta-hover w-100">
+                <div class="card-body d-flex flex-column text-center">
+                    <h4 class="card-title mb-3">Evaluación FCT</h4>
+                    <p class="card-text flex-grow-1 fs-5">Rellena la evaluación final de FCT para un alumno.</p>
+                    <a class="btn btn-primary mt-3" asp-area="TutoresEmpresa" asp-controller="EvaluacionFCT" asp-action="Create">
+                        Rellenar Evaluación
                     </a>
                 </div>
             </div>

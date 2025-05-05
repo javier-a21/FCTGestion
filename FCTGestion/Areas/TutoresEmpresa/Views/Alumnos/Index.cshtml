@@ -1,0 +1,38 @@
+﻿@model List<FCTGestion.Models.Alumno>
+@{
+    ViewData["Title"] = "Alumnos Asignados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Alumnos Asignados</h2>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning">No tienes alumnos asignados actualmente.</div>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
+            <tr>
+                <th>Nombre</th>
+                <th>Correo Educación</th>
+                <th>Empresa</th>
+                <th>FCT Inicio</th>
+                <th>FCT Fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alumno in Model)
+            {
+                <tr>
+                    <td>@alumno.Nombre</td>
+                    <td>@alumno.CorreoEducacion</td>
+                    <td>@alumno.Empresa?.Nombre</td>
+                    <td>@(alumno.FechaInicioFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
+                    <td>@(alumno.FechaFinFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

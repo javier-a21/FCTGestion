@@ -188,6 +188,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xBc2lnbmFyRW1wcmVzYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Alumnos/ConfirmacionAlumno.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xDb25maXJtYWNpb25BbHVtbm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Alumnos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -228,6 +232,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/Alumnos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcQWx1bW5vc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/Alumnos/SinAsignaciones.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcQWx1bW5vc1xTaW5Bc2lnbmFjaW9uZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/EvaluacionFCT/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcRXZhbHVhY2lvbkZDVFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/EvaluacionFCT/EvaluacionPDF.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcRXZhbHVhY2lvbkZDVFxFdmFsdWFjaW9uUERGLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/PanelTutorEmpresa/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcUGFuZWxUdXRvckVtcHJlc2FcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -242,6 +262,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutoresEmpresa/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Home/DemoPDF.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZW1vUERGLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Home/Index.cshtml]
