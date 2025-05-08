@@ -4,44 +4,66 @@
     ViewData["Title"] = "Empresas";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @if (TempData["MensajeCrearTutoresEmpresa"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
         @TempData["MensajeCrearTutoresEmpresa"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-<h2>Empresas</h2>
 
-<a asp-action="Create" class="btn btn-primary mb-3">Nueva Empresa</a>
+<h2 class="mb-4">Empresas</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Teléfono</th>
-            <th class="text-center">Dirección</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var empresa in Model)
-        {
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-primary">Nueva Empresa</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-primary text-center">
             <tr>
-                <td class="text-center">@empresa.Nombre</td>
-                <td class="text-center">@empresa.Telefono</td>
-                <td class="text-center">@empresa.Direccion</td>
-                <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-warning m-1">Editar</a>
-                    <a asp-action="Delete" asp-route-id="@empresa.Id" class="btn btn-sm btn-danger m-1">Eliminar</a>
-                </td>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No hay empresas registradas.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var empresa in Model)
+                {
+                    <tr>
+                        <td class="text-truncate" style="max-width: 150px;">
+                            @(empresa.Nombre.Length > 30 ? empresa.Nombre.Substring(0, 30) + "..." : empresa.Nombre)
+                        </td>
+                        <td class="text-center">@empresa.Telefono</td>
+                        <td class="text-truncate" style="max-width: 150px;">
+                            @(empresa.Direccion.Length > 30 ? empresa.Direccion.Substring(0, 30) + "..." : empresa.Direccion)
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Edit" asp-route-id="@empresa.Id" class="btn btn-sm btn-warning m-1">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@empresa.Id" class="btn btn-sm btn-danger m-1">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="text-start mb-4 mt-3">
     <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary">
-        🔙 Volver al Panel 
+        🔙 Volver al Panel
     </a>
-    </div>
+</div>
 
-<script src="~/js/desvanecerAlerta.js"></script> 
+<!-- Scripts -->
+<script src="~/js/desvanecerAlerta.js"></script>

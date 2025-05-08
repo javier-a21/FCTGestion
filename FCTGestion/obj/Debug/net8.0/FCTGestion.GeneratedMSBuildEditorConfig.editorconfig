@@ -264,10 +264,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3Jlc0VtcHJlc2FcVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Home/DemoPDF.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZW1vUERGLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

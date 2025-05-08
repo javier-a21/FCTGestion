@@ -52,6 +52,8 @@
             </div>
         </div>
     </div>
+    <div id="fechasFct" class="text-end mt-4">Cargando fechas de FCT...</div>
+
 </div>
 
 
@@ -64,11 +66,25 @@
 
                 let horasRestantes = 350 - data;
                 if (horasRestantes < 0) {
-                    horasRestantes = 0; // Nunca mostramos negativo
+                    horasRestantes = 0; // Nunca negativo
                 }
 
                 document.getElementById('totalHorasRestantes').innerText = `Horas restantes: ${horasRestantes}`;
             });
+                fetch('/Alumnos/TareasDiarias/getInicioFin')
+        .then(res => res.json())
+        .then(data => {
+            const inicio = data.inicio ?? "No asignado";
+            const fin = data.fin ?? "No asignado";
+
+            document.getElementById('fechasFct').innerText = `Fecha de inicio FCT: ${inicio} - Fecha de fin: ${fin}`;
+        })
+
+
+
+
+
+
     </script>
 
 

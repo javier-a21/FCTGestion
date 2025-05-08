@@ -301,18 +301,6 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\_botones.scss",
-      "PackagePath": "staticwebassets\\scss\\_botones.scss"
-    },
-    {
-      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\_tarjetas.scss",
-      "PackagePath": "staticwebassets\\scss\\_tarjetas.scss"
-    },
-    {
-      "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\_variables.scss",
-      "PackagePath": "staticwebassets\\scss\\_variables.scss"
-    },
-    {
       "Id": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\bootstrap\\_accordion.scss",
       "PackagePath": "staticwebassets\\scss\\bootstrap\\_accordion.scss"
     },

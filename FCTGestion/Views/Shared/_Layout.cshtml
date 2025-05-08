@@ -130,7 +130,7 @@
                         <input type="checkbox" id="toggleTema" @(Context.Request.Cookies["tema"] == "oscuro" ? "checked" : "") />
                         <span class="slider"></span>
                     </label>
-
+                    <br />
 
 
 
@@ -139,13 +139,18 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         var user = await UserManager.GetUserAsync(User);
+
+                        var nombre = (user?.UserName?.Replace("_", " "));
+
                         var roles = await UserManager.GetRolesAsync(user);
+
                         var rol = roles.FirstOrDefault() ?? "Sin rol";
 
-                        <span class="navbar-text me-3">
-                            Usuario: @user.UserName (@rol)
+                        <span class="nav-link">
+                            Usuario: @nombre (@rol)
                         </span>
-                        <a class="btn btn-outline-primary btn-sm me-2"
+                        <br />
+                        <a class="btn btn-outline-primary btn-sm m-3"
                            asp-area="Identity" asp-page="/Account/Manage/Index">
                             Mi perfil
                         </a>
@@ -159,7 +164,7 @@
         </nav>
     </header>
 
-    <main class="flex-grow-1">
+    <main class="">
         <div class="container py-3">
             @RenderBody()
         </div>

@@ -4,6 +4,7 @@
     ViewData["Title"] = "Tutores de Empresa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alertaTemporal">
@@ -11,46 +12,75 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
 @if (TempData["MensajeCrearEmpresa"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
         @TempData["MensajeCrearEmpresa"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-<h2>Tutores de Empresa</h2>
 
-<a asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Create" class="btn btn-primary mb-3">
-    Nuevo Tutor
-</a>
+<h2 class="mb-4">Tutores de Empresa</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Correo</th>
-            <th class="text-center">Empresa</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tutor in Model)
-        {
+<div class="mb-3 d-flex gap-2 flex-wrap">
+    <a asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Create" class="btn btn-primary">
+        ➕ Nuevo Tutor
+    </a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+        <thead class="table-primary text-center">
             <tr>
-                <td class="text-center">@tutor.Nombre</td>
-                <td class="text-center">@tutor.Correo</td>
-                <td class="text-center">@tutor.Empresa?.Nombre</td>
-                <td class="text-center">
-                    <a asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-sm btn-warning m-1 ">Editar</a>
-                    <a asp-action="Details" asp-route-id="@tutor.Id" class="btn btn-sm btn-info m-1">Detalles</a>
-                    <a asp-action="Delete" asp-route-id="@tutor.Id" class="btn btn-sm btn-danger m-1">Eliminar</a>
-                </td>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Empresa</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No hay tutores registrados.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var tutor in Model)
+                {
+                    <tr>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            @(tutor.Nombre.Length > 30 ? tutor.Nombre.Substring(0, 30) + "..." : tutor.Nombre)
+                        </td>
+                        <td class="text-truncate" style="max-width: 250px;">
+                            @(tutor.Correo.Length > 40 ? tutor.Correo.Substring(0, 40) + "..." : tutor.Correo)
+                        </td>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            @(tutor.Empresa?.Nombre ?? "Sin Empresa")
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                                <a asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-warning btn-sm">Editar</a>
+                                <a asp-action="Details" asp-route-id="@tutor.Id" class="btn btn-info btn-sm">Detalles</a>
+                                <form asp-action="Delete" asp-route-id="@tutor.Id" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro que quieres eliminar este tutor?');">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="text-start mb-4 mt-3">
     <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary">
         🔙 Volver al Panel
     </a>
 </div>
-<script src="~/js/desvanecerAlerta.js"></script> 
+
+<!-- Scripts -->
+<script src="~/js/desvanecerAlerta.js"></script>

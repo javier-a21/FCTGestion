@@ -112,6 +112,28 @@ namespace FCTGestion.Areas.Alumnos.Controllers
 
             return Json(tareasHorasTotales);
         }
+        [HttpGet]
+        public async Task<IActionResult> getInicioFin()
+        {
+            var userId = _userManager.GetUserId(User);
+            var alumno1 = await _context.Alumnos.FirstOrDefaultAsync(a => a.UserId == userId);
+            if (alumno1 == null)
+            {
+                return NotFound();
+            }
+
+
+            var fechaInicio = alumno1.FechaInicioFCT?.ToString("dd/MM/yyyy");
+            var fechaFin = alumno1.FechaFinFCT?.ToString("dd/MM/yyyy");
+
+            var fechas = new
+            {
+                Inicio = fechaInicio,
+                Fin = fechaFin
+            };
+
+            return Json(fechas);
+        }
         [HttpPost]
         public async Task<IActionResult> ValidarFecha([FromBody] DateTime fecha)
         {

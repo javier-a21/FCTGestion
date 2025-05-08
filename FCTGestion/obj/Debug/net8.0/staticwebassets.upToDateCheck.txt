@@ -72,9 +72,6 @@ wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
 wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
 wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
 wwwroot\Rotativa\wkhtmltopdf.exe
-wwwroot\scss\_botones.scss
-wwwroot\scss\_tarjetas.scss
-wwwroot\scss\_variables.scss
 wwwroot\scss\bootstrap\_accordion.scss
 wwwroot\scss\bootstrap\_alert.scss
 wwwroot\scss\bootstrap\_badge.scss

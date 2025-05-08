@@ -11850,12 +11850,19 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
-html, body {
+html {
   height: 100%;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
-  flex: 1;
+  flex-grow: 1;
+  min-height: 75vh;
 }
 
 .modo-oscuro {
@@ -11984,6 +11991,10 @@ main {
   box-shadow: 0 0 0.25rem rgba(255, 255, 255, 0.1);
 }
 
+.navbar-text {
+  margin-left: 15px;
+}
+
 .switch-tema {
   margin: 1em;
   position: relative;
@@ -12008,6 +12019,7 @@ main {
   background-color: #555555; /* gris oscuro en modo claro */
   transition: 0.4s;
   border-radius: 34px;
+  min-width: 57px;
 }
 
 .slider:before {
@@ -12050,6 +12062,7 @@ input:checked + .slider:before {
 
 footer {
   font-size: 0.9rem;
+  background-color: rgb(242, 242, 242);
 }
 
 footer a:hover {

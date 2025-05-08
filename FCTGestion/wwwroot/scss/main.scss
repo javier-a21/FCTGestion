@@ -1,7 +1,4 @@
-﻿// 1. Variables personalizadas
-@import 'variables'; // Archivo donde irás poniendo tus propios colores, tamaños, etc.
-
-// 2. Sobrescribir variables de Bootstrap
+﻿// 1. Sobrescribir variables de Bootstrap
 $primary: #007bff; // Azul intenso
 $secondary: #6c757d; // Gris Bootstrap
 $success: #28a745; // Verde correcto
@@ -17,17 +14,22 @@ $border-radius: 0.5rem;
 $border-radius-lg: 0.75rem;
 $border-radius-sm: 0.3rem;
 
-// 3. Importar Bootstrap
+// 2. Importar Bootstrap
 @import 'bootstrap/bootstrap.scss'; // Bootstrap original pero ya con tus variables sobrescritas
 
-// 4. Estilos propios
-html, body {
+// 3. Estilos propios
+html{
     height: 100%;
 }
-
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
 main {
-    flex: 1;
+    flex-grow: 1;
+    min-height: 75vh;
 }
 
 .modo-oscuro {
@@ -189,6 +191,9 @@ main {
         box-shadow: 0 0 0.25rem rgba(255, 255, 255, 0.1);
     }
 }
+.navbar-text {
+    margin-left: 15px;
+}
 
 // Botón cambio de tema (Switch)
 .switch-tema {
@@ -215,6 +220,7 @@ main {
     background-color: #555555; /* gris oscuro en modo claro */
     transition: 0.4s;
     border-radius: 34px;
+    min-width:57px;
 }
 
 .slider:before {
@@ -254,14 +260,10 @@ input:checked + .slider:before {
 }
 footer {
     font-size: 0.9rem;
+    background-color: rgb(242, 242, 242);
 }
 
 footer a:hover {
     text-decoration: underline;
 }
 
-// 5. Componentes reutilizables
-@import 'tarjetas';
-@import 'botones';
-// @import 'pages/inicio';
-// @import 'pages/admin';

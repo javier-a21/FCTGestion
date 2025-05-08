@@ -9,45 +9,64 @@
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
         @TempData["MensajeCrearTutoresCentro"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
-<h2>@ViewData["Title"]</h2>
 
-<a asp-action="Create" class="btn btn-success mb-3">➕ Crear Nuevo Tutor</a>
+<h2 class="mb-4">@ViewData["Title"]</h2>
 
-<table class="table table-bordered table-striped">
-    <thead class="table-primary">
-        <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Correo Electronico</th>
-            <th class="text-center">Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tutor in Model)
-        {
+<div class="mb-3">
+    <a asp-action="Create" class="btn btn-success">➕ Crear Nuevo Tutor</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="table-primary text-center">
             <tr>
-                <td class="text-center">@tutor.Nombre</td>
-                <td class="text-center">@tutor.Correo</td>
-                <td class="text-center">
-                    <div class="d-flex justify-content-center gap-2">
-                        <a asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-sm btn-warning">Editar</a>
-
-                        <form asp-action="Delete" method="post" asp-route-id="@tutor.Id" onsubmit="return confirm('¿Seguro que quieres eliminar este tutor?');">
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                        </form>
-                    </div>
-                </td>
-
+                <th>Nombre</th>
+                <th>Correo Electrónico</th>
+                <th>Acciones</th>
             </tr>
-        }
-    </tbody>
-   
-</table>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No hay tutores registrados.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var tutor in Model)
+                {
+                    <tr>
+                        <td class="text-truncate" style="max-width: 150px;">
+                            @(tutor.Nombre.Length > 30 ? tutor.Nombre.Substring(0, 30) + "..." : tutor.Nombre)
+                        </td>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            @(tutor.Correo.Length > 30 ? tutor.Correo.Substring(0, 30) + "..." : tutor.Correo)
+                        </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                                <a asp-action="Edit" asp-route-id="@tutor.Id" class="btn btn-sm btn-warning">Editar</a>
+
+                                <form asp-action="Delete" method="post" asp-route-id="@tutor.Id" onsubmit="return confirm('¿Seguro que quieres eliminar este tutor?');" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="text-start mb-4 mt-3">
     <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary">
         🔙 Volver al Panel
     </a>
 </div>
-<script src="~/js/desvanecerAlerta.js"></script>
 
+<!-- Scripts -->
+<script src="~/js/desvanecerAlerta.js"></script>

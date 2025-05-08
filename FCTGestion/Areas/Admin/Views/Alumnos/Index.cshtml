@@ -5,50 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Listado de Alumnos";
 }
+
 @if (TempData["MensajeCrearAlumno"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
         @TempData["MensajeCrearAlumno"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+
 <h1 class="mb-4">Listado de Alumnos</h1>
 
-<a asp-area="Admin" asp-controller="Alumnos" asp-action="Create" class="btn btn-success mb-3">
-    ➕ Añadir Alumno
-</a>
+<div class="mb-3 d-flex gap-2 flex-wrap">
+    <a asp-area="Admin" asp-controller="Alumnos" asp-action="Create" class="btn btn-success">
+        ➕ Añadir Alumno
+    </a>
+    <input type="text" id="buscadorAlumnos" class="form-control" placeholder="Buscar alumno..." style="max-width: 300px;" />
+</div>
 
-<input type="text" id="buscadorAlumnos" class="form-control mb-3" placeholder="Buscar alumno..." />
-
-<table id="tablaAlumnos" class="table table-bordered table-striped">
-    <thead class="table-primary">
-        <tr>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Correo Educación</t>
-            <th class="text-center">Seguridad Social</th>
-            <th class="text-center">Tutor Centro</th>
-            <th class="text-center">Tutor Empresa</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var alumno in Model)
-        {
+<div class="table-responsive">
+    <table id="tablaAlumnos" class="table table-bordered table-striped table-hover align-middle">
+        <thead class="table-primary text-center">
             <tr>
-                <td class="text-center">@alumno.Nombre</td>
-                <td class="text-center">@alumno.CorreoEducacion</td>
-                <td class="text-center">@alumno.SeguridadSocial</td>
-                <td class="text-center">@alumno.TutorCentro?.Nombre</td>
-                <td class="text-center">@alumno.TutorEmpresa?.Nombre</td>
-
+                <th>Nombre</th>
+                <th>Correo Educación</th>
+                <th>Seguridad Social</th>
+                <th>Tutor Centro</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No hay alumnos registrados.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var alumno in Model)
+                {
+                    <tr>
+                        <td class="text-truncate" style="max-width: 250px;">
+                            @(alumno.Nombre.Length > 50 ? alumno.Nombre.Substring(0, 50) + "..." : alumno.Nombre)
+                        </td>
+                        <td class="text-truncate" style="max-width: 300px;">
+                            @(alumno.CorreoEducacion.Length > 50 ? alumno.CorreoEducacion.Substring(0, 50) + "..." : alumno.CorreoEducacion)
+                        </td>
+                        <td class="text-truncate" style="max-width: 200px;">
+                            @(alumno.SeguridadSocial)
+                        </td>
+                        <td class="text-truncate" style="max-width: 250px;">
+                            @(alumno.TutorCentro?.Nombre ?? "Sin Tutor")
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 <div class="text-start mb-4 mt-3">
     <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary">
-        🔙 Volver al Panel 
+        🔙 Volver al Panel
     </a>
-    </div>
+</div>
+
+<!-- Scripts -->
 <script src="~/js/desvanecerAlerta.js"></script>
+
 @section Scripts {
     <script>
         document.getElementById('buscadorAlumnos').addEventListener('input', function () {
@@ -61,5 +85,4 @@
             });
         });
     </script>
-
-       }
+}
