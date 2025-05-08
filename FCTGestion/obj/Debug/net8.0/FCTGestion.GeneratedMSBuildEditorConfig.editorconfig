@@ -208,6 +208,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Contacto/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Contacto/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Contacto/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQ29udGFjdG9cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

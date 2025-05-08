@@ -1,0 +1,26 @@
+﻿@model FCTGestion.Models.Contacto
+
+@{
+    ViewData["Title"] = "Eliminar Contacto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar Contacto</h2>
+
+<div class="alert alert-warning">
+    <strong>¿Estás seguro de que deseas eliminar este contacto?</strong>
+</div>
+
+<div class="mb-3">
+    <p><strong>Fecha:</strong> @Model.Fecha.ToShortDateString()</p>
+    <p><strong>Alumno:</strong> @(Model.Alumno?.Nombre ?? "N/A")</p>
+    <p><strong>Tutor Empresa:</strong> @(Model.TutorEmpresa?.Nombre ?? "N/A")</p>
+    <p><strong>Medio:</strong> @Model.Medio</p>
+    <p><strong>Resumen:</strong> @Model.Resumen</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

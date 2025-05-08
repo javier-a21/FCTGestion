@@ -295,5 +295,5 @@ C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\refint\FCTGestion.dll
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.pdb
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\FCTGestion.genruntimeconfig.cache
 C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\ref\FCTGestion.dll
-C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\ProyectoFinal\FCTGestion\FCTGestion\bin\Debug\net8.0\Rotativa.AspNetCore.dll
+C:\ProyectoFinal\FCTGestion\FCTGestion\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

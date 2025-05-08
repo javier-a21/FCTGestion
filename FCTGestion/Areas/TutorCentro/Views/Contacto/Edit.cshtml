@@ -1,48 +1,49 @@
 ﻿@model FCTGestion.Models.Contacto
 
 @{
+    ViewData["Title"] = "Editar Contacto";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewData["Title"] = "Añadir Contacto";
-}
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-area="TutorCentro" asp-action="Create" method="post">
+<form asp-action="Edit" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
 
-    <!-- Fecha -->
+    <input type="hidden" asp-for="Id" />
+
+    <!-- Fecha del Contacto -->
     <div class="form-group mb-3">
-        <label asp-for="Fecha" class="control-label">Fecha del Contacto</label>
+        <label asp-for="Fecha">Fecha del Contacto</label>
         <input asp-for="Fecha" class="form-control" type="date" />
         <span asp-validation-for="Fecha" class="text-danger"></span>
     </div>
 
-    <!-- Dropdown para Alumnos -->
+    <!-- Dropdown Alumno -->
     <div class="form-group mb-3">
         <label for="AlumnoId">Alumno Contactado (opcional)</label>
         <select asp-for="AlumnoId" class="form-control">
             <option value="">Seleccionar Alumno</option>
             @foreach (var alumno in ViewBag.Alumnos as List<FCTGestion.Models.Alumno>)
             {
-                <option value="@alumno.Id">@alumno.Nombre</option>
+                <option value="@alumno.Id" selected="@(alumno.Id == Model.AlumnoId)">
+                    @alumno.Nombre
+                </option>
             }
         </select>
         <span asp-validation-for="AlumnoId" class="text-danger"></span>
     </div>
 
-
-    <!-- Dropdown para Tutores de Empresa -->
+    <!-- Dropdown TutorEmpresa -->
     <div class="form-group mb-3">
-        <label for="TutorEmpresaId" class="control-label">Tutor Empresa Contactado (opcional)</label>
+        <label for="TutorEmpresaId">Tutor Empresa Contactado (opcional)</label>
         <select asp-for="TutorEmpresaId" class="form-control">
             <option value="">Seleccionar Tutor Empresa</option>
             @foreach (var tutor in ViewBag.TutoresEmpresa as List<FCTGestion.Models.TutorEmpresa>)
             {
-                <option value="@tutor.Id">@tutor.Nombre</option>
+                <option value="@tutor.Id" selected="@(tutor.Id == Model.TutorEmpresaId)">
+                    @tutor.Nombre
+                </option>
             }
         </select>
         <span asp-validation-for="TutorEmpresaId" class="text-danger"></span>
@@ -50,20 +51,24 @@
 
     <!-- Medio de contacto -->
     <div class="form-group mb-3">
-        <label asp-for="Medio" class="control-label">Medio de contacto</label>
+        <label asp-for="Medio">Medio de contacto</label>
         <input asp-for="Medio" class="form-control" />
         <span asp-validation-for="Medio" class="text-danger"></span>
     </div>
 
     <!-- Resumen de la conversación -->
     <div class="form-group mb-3">
-        <label asp-for="Resumen" class="control-label">Resumen</label>
+        <label asp-for="Resumen">Resumen</label>
         <textarea asp-for="Resumen" class="form-control"></textarea>
         <span asp-validation-for="Resumen" class="text-danger"></span>
     </div>
 
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary" id="btnGuardar" name="btnGuardar">Guardar</button>
-        <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
     </div>
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

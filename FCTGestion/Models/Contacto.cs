@@ -10,20 +10,23 @@ namespace FCTGestion.Models
         [Required]
         [Display(Name = "ID del TutorCentro")]
         public int TutorCentroId { get; set; }
-
-        public virtual TutorCentro? TutorCentro { get; set; } 
+        public virtual TutorCentro? TutorCentro { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Fecha del contacto")]
         public DateTime Fecha { get; set; }
 
-        [Required]
-        [Display(Name = "Con quién se contactó")]
-        public string ConQuien { get; set; }
+        [Display(Name = "Alumno Contactado")]
+        public int? AlumnoId { get; set; }
+        public virtual Alumno? Alumno { get; set; }
+
+        [Display(Name = "Tutor Empresa Contactado")]
+        public int? TutorEmpresaId { get; set; }
+        public virtual TutorEmpresa? TutorEmpresa { get; set; }
 
         [Display(Name = "Medio de contacto (teléfono, email...)")]
-        public string? Como { get; set; }
+        public string? Medio { get; set; }
 
         [Display(Name = "Resumen de la conversación")]
         public string? Resumen { get; set; }

@@ -18,16 +18,16 @@
 <body class="d-flex flex-column min-vh-100 @(Context.Request.Cookies["tema"] == "oscuro" ? "modo-oscuro" : "")">
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 @if (SignInManager.IsSignedIn(User))
                 {
                     if (User.IsInRole("TutorCentro"))
                     {
-                     <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">Gestión FCT</a>
-                    <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">
-                    <img src = "~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
-                    </a>
+                        <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">Gestión FCT</a>
+                        <a class="navbar-brand" asp-area="TutorCentro" asp-controller="Panel" asp-action="Index">
+                            <img src = "~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
+                        </a>
                     }
                     else if (User.IsInRole("Admin"))
                     {
@@ -39,9 +39,9 @@
                     else if (User.IsInRole("Alumno"))
                     {
                         <a class="navbar-brand" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">Gestión FCT</a>
-                         <a class="navbar-brand" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">
+                        <a class="navbar-brand" asp-area="Alumnos" asp-controller="PanelAlumno" asp-action="Index">
                             <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
-                            </a>
+                        </a>
 
 
                     }
@@ -52,114 +52,129 @@
                         <a class="navbar-brand" asp-area="TutoresEmpresa" asp-controller="PanelTutorEmpresa" asp-action="Index">
                             <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" />
                         </a>
-
-
-
                     }
-                   
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                }
-                
+                    <div class="collapse navbar-collapse" id="mainNavbar">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+                                if (User.IsInRole("TutorCentro"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="TutorCentro" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="TutorCentro" asp-controller="TareasDiarias" asp-action="Index">Tareas Diarias</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-area="TutorCentro" asp-controller="Contacto" asp-action="Index" class="nav-link">
+                                            Contactos
+                                        </a>
+                                    </li>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                                }
+                                else if (User.IsInRole("Admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
+                                    </li>
 
-                <div class="collapse navbar-collapse" id="mainNavbar">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">TutoresEmpresa</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Admin" asp-controller="TutoresCentro" asp-action="Index">TutoresCentro</a>
+                                    </li>
+
+                                }
+                                else if (User.IsInRole("Alumno"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index">Listado Tareas</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="create">Añadir Tarea</a>
+                                    </li>
+
+                                }
+                                else if (User.IsInRole("TutorEmpresa"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index">Ver Tareas Diarias</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            if (User.IsInRole("TutorCentro"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="TutorCentro" asp-controller="Empresas" asp-action="Index">Empresas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="TutorCentro" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="TutorCentro" asp-controller="TareasDiarias" asp-action="Index">Tareas Diarias</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="TutorCentro" asp-controller="Contacto" asp-action="Index" class="nav-link">
-                                        Contactos
-                                    </a>
-                                </li>
-
-                            }
-                            else if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Empresas" asp-action="Index">Empresas</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresEmpresa" asp-action="Index">TutoresEmpresa</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="TutoresCentro" asp-action="Index">TutoresCentro</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Admin" asp-controller="Alumnos" asp-action="Index">Alumnos</a>
-                                </li>
-                            }
-                            else if (User.IsInRole("Alumno"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="Index">Listado Tareas</a>
-                                </li>
-
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="Alumnos" asp-controller="TareasDiarias" asp-action="create">Añadir Tarea</a>
-                                </li>
-
-                            }
-                            else if (User.IsInRole("TutorEmpresa"))
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index">Ver Tareas Diarias</a>
-                                </li>
-                            }
+                            <!-- Botón de cambio de tema -->
+                            <label class="switch-tema">
+                                <input type="checkbox" id="toggleTema" @(Context.Request.Cookies["tema"] == "oscuro" ? "checked" : "") />
+                                <span class="slider"></span>
+                            </label>
+                            <br />
                         }
-                    </ul>
-                    <!-- Botón de cambio de tema -->
-                    <label class="switch-tema">
-                        <input type="checkbox" id="toggleTema" @(Context.Request.Cookies["tema"] == "oscuro" ? "checked" : "") />
-                        <span class="slider"></span>
-                    </label>
-                    <br />
 
 
 
 
 
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                        var user = await UserManager.GetUserAsync(User);
 
-                        var nombre = (user?.UserName?.Replace("_", " "));
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            var user = await UserManager.GetUserAsync(User);
 
-                        var roles = await UserManager.GetRolesAsync(user);
+                            var nombre = (user?.UserName?.Replace("_", " "));
 
-                        var rol = roles.FirstOrDefault() ?? "Sin rol";
+                            var roles = await UserManager.GetRolesAsync(user);
 
-                        <span class="nav-link">
-                            Usuario: @nombre (@rol)
-                        </span>
-                        <br />
-                        <a class="btn btn-outline-primary btn-sm m-3"
-                           asp-area="Identity" asp-page="/Account/Manage/Index">
-                            Mi perfil
-                        </a>
+                            var rol = roles.FirstOrDefault() ?? "Sin rol";
 
-                        <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
-                        </form>
-                    }
-                </div>
+                            <span class="nav-link">
+                                Usuario: @nombre (@rol)
+                            </span>
+
+                            <a class="btn btn-outline-primary btn-sm m-3"
+                               asp-area="Identity" asp-page="/Account/Manage/Index">
+                                Mi perfil
+                            </a>
+
+                            <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                <button type="submit" class="btn btn-outline-danger btn-sm">Cerrar sesión</button>
+                            </form>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex justify-content-between align-items-center w-100">
+                        <!-- Logo y Nombre -->
+                        <div class="navbar-brand d-flex align-items-center">
+                            <img src="~/img/logo.png" alt="Logo FCT" style="height: 60px;" class="me-2" />
+                            <span>Gestión FCT</span>
+                        </div>
+
+                        <!-- Switch -->
+                        <label class="switch-tema">
+                            <input type="checkbox" id="toggleTema" @(Context.Request.Cookies["tema"] == "oscuro" ? "checked" : "") />
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+
+                }
+
+
+                
             </div>
         </nav>
     </header>

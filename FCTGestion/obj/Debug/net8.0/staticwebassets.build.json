@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+uggeSi/RIWjIreF7oP8C88hUtncGscghgSDekZydqo=",
+  "Hash": "9gm5eIQc+yQhnw726ZJmJpAThrCyuXmWYP+xzX/wu7g=",
   "Source": "FCTGestion",
   "BasePath": "_content/FCTGestion",
   "Mode": "Default",
@@ -73,8 +73,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "6lanfg5np2",
-      "Integrity": "WlTPqkKgkbVMmUBDBnBtH/UiK+u70Gs7plrn1VFjsSo=",
+      "Fingerprint": "gew3htasdb",
+      "Integrity": "yKt52zIqq5VRgt7a9zKCcr58bKDXxpb7ifE16LHENeg=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\main.css"
@@ -304,8 +304,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "8bb0rx9boo",
-      "Integrity": "RKjfZpxcTW8fmLkUrJOP2qPjSV/LPfi9MIRX3Mx989o=",
+      "Fingerprint": "zdyk8n90dc",
+      "Integrity": "Fz/lh84fVtJpk7Z8Caku+8E0hvcwYlE+cZWobBacS40=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
@@ -3769,8 +3769,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "9fk00n1321",
-      "Integrity": "ZfPkB1aiUnRtCm9Tt5+WdZ2vZNdFfGZ+vsjNVSQSZ7E=",
+      "Fingerprint": "nvpmb0109v",
+      "Integrity": "fdhx/rRfur/BxXTuYgqKuovXayJykOCpq/Pt8TwZ7to=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\scss\\main.scss"
@@ -5038,51 +5038,6 @@
   ],
   "Endpoints": [
     {
-      "Route": "css/main.6lanfg5np2.css",
-      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\css\\main.css",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "277953"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/css"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"WlTPqkKgkbVMmUBDBnBtH/UiK+u70Gs7plrn1VFjsSo=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 10:49:11 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "6lanfg5np2"
-        },
-        {
-          "Name": "label",
-          "Value": "css/main.css"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-WlTPqkKgkbVMmUBDBnBtH/UiK+u70Gs7plrn1VFjsSo="
-        }
-      ]
-    },
-    {
       "Route": "css/main.css",
       "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\css\\main.css",
       "Selectors": [],
@@ -5093,7 +5048,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "277953"
+          "Value": "277983"
         },
         {
           "Name": "Content-Type",
@@ -5101,11 +5056,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"WlTPqkKgkbVMmUBDBnBtH/UiK+u70Gs7plrn1VFjsSo=\""
+          "Value": "\"yKt52zIqq5VRgt7a9zKCcr58bKDXxpb7ifE16LHENeg=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 10:49:11 GMT"
+          "Value": "Thu, 08 May 2025 18:02:53 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -5115,7 +5070,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-WlTPqkKgkbVMmUBDBnBtH/UiK+u70Gs7plrn1VFjsSo="
+          "Value": "sha256-yKt52zIqq5VRgt7a9zKCcr58bKDXxpb7ifE16LHENeg="
+        }
+      ]
+    },
+    {
+      "Route": "css/main.gew3htasdb.css",
+      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\css\\main.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "277983"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"yKt52zIqq5VRgt7a9zKCcr58bKDXxpb7ifE16LHENeg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 18:02:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gew3htasdb"
+        },
+        {
+          "Name": "label",
+          "Value": "css/main.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-yKt52zIqq5VRgt7a9zKCcr58bKDXxpb7ifE16LHENeg="
         }
       ]
     },
@@ -5940,51 +5940,6 @@
       ]
     },
     {
-      "Route": "favicon.8bb0rx9boo.ico",
-      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\favicon.ico",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "15406"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/x-icon"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"RKjfZpxcTW8fmLkUrJOP2qPjSV/LPfi9MIRX3Mx989o=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 11:05:55 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "8bb0rx9boo"
-        },
-        {
-          "Name": "label",
-          "Value": "favicon.ico"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-RKjfZpxcTW8fmLkUrJOP2qPjSV/LPfi9MIRX3Mx989o="
-        }
-      ]
-    },
-    {
       "Route": "favicon.ico",
       "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\favicon.ico",
       "Selectors": [],
@@ -5995,7 +5950,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "15406"
+          "Value": "15086"
         },
         {
           "Name": "Content-Type",
@@ -6003,11 +5958,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"RKjfZpxcTW8fmLkUrJOP2qPjSV/LPfi9MIRX3Mx989o=\""
+          "Value": "\"Fz/lh84fVtJpk7Z8Caku+8E0hvcwYlE+cZWobBacS40=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 11:05:55 GMT"
+          "Value": "Thu, 08 May 2025 11:10:27 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6017,7 +5972,52 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-RKjfZpxcTW8fmLkUrJOP2qPjSV/LPfi9MIRX3Mx989o="
+          "Value": "sha256-Fz/lh84fVtJpk7Z8Caku+8E0hvcwYlE+cZWobBacS40="
+        }
+      ]
+    },
+    {
+      "Route": "favicon.zdyk8n90dc.ico",
+      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\favicon.ico",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "15086"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/x-icon"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Fz/lh84fVtJpk7Z8Caku+8E0hvcwYlE+cZWobBacS40=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 11:10:27 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zdyk8n90dc"
+        },
+        {
+          "Name": "label",
+          "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Fz/lh84fVtJpk7Z8Caku+8E0hvcwYlE+cZWobBacS40="
         }
       ]
     },
@@ -21735,51 +21735,6 @@
       ]
     },
     {
-      "Route": "scss/main.9fk00n1321.scss",
-      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\main.scss",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "5740"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZfPkB1aiUnRtCm9Tt5+WdZ2vZNdFfGZ+vsjNVSQSZ7E=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 10:49:09 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "9fk00n1321"
-        },
-        {
-          "Name": "label",
-          "Value": "scss/main.scss"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZfPkB1aiUnRtCm9Tt5+WdZ2vZNdFfGZ+vsjNVSQSZ7E="
-        }
-      ]
-    },
-    {
       "Route": "scss/main.css",
       "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\main.css",
       "Selectors": [],
@@ -21899,6 +21854,51 @@
       ]
     },
     {
+      "Route": "scss/main.nvpmb0109v.scss",
+      "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\main.scss",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5773"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"fdhx/rRfur/BxXTuYgqKuovXayJykOCpq/Pt8TwZ7to=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 08 May 2025 18:02:51 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "nvpmb0109v"
+        },
+        {
+          "Name": "label",
+          "Value": "scss/main.scss"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-fdhx/rRfur/BxXTuYgqKuovXayJykOCpq/Pt8TwZ7to="
+        }
+      ]
+    },
+    {
       "Route": "scss/main.scss",
       "AssetFile": "C:\\ProyectoFinal\\FCTGestion\\FCTGestion\\wwwroot\\scss\\main.scss",
       "Selectors": [],
@@ -21909,7 +21909,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5740"
+          "Value": "5773"
         },
         {
           "Name": "Content-Type",
@@ -21917,11 +21917,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"ZfPkB1aiUnRtCm9Tt5+WdZ2vZNdFfGZ+vsjNVSQSZ7E=\""
+          "Value": "\"fdhx/rRfur/BxXTuYgqKuovXayJykOCpq/Pt8TwZ7to=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 08 May 2025 10:49:09 GMT"
+          "Value": "Thu, 08 May 2025 18:02:51 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -21931,7 +21931,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-ZfPkB1aiUnRtCm9Tt5+WdZ2vZNdFfGZ+vsjNVSQSZ7E="
+          "Value": "sha256-fdhx/rRfur/BxXTuYgqKuovXayJykOCpq/Pt8TwZ7to="
         }
       ]
     }

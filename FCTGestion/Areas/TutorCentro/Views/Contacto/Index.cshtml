@@ -4,15 +4,15 @@
     ViewData["Title"] = "Listado de Contactos";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (TempData["MensajeCreacionController"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["MensajeCreacionController"]
-    </div>
-}
-
 
 <h2>Listado de Contactos</h2>
+
+@if (TempData["MensajeEliminacionContacto"] != null)
+{
+    <div class="alert alert-success" id="alertaTemporal">
+        @TempData["MensajeEliminacionContacto"]
+    </div>
+}
 
 <a asp-area="TutorCentro" asp-controller="Contacto" asp-action="Create" class="btn btn-outline-primary mb-3">
     + Añadir Contacto
@@ -21,27 +21,19 @@
 @if (Model == null || !Model.Any())
 {
     <h4 class="text-center my-4">No hay contactos registrados todavía...</h4>
-    <div class="text-center">
-        <a asp-area="TutorCentro" asp-controller="Panel" asp-action="Index" class="btn btn-outline-primary">
-            🔙 Volver al Panel de TutorCentro
-        </a>
-    </div>
 }
 else
 {
-    <!-- Buscador -->
-    <div class="mb-3">
-        <input id="filtroContactos" type="text" class="form-control" placeholder="🔍 Buscar...">
-    </div>
-
     <div class="table-responsive">
-        <table class="table table-striped align-middle text-center" id="listado_Contactos">
-            <thead class="table-light">
+        <table class="table table-striped align-middle text-center">
+            <thead>
                 <tr>
                     <th>Fecha</th>
-                    <th>Personas implicadas</th>
-                    <th>Medio de contacto</th>
-                    <th class="text-wrap">Resumen de la conversación</th>
+                    <th>Alumno</th>
+                    <th>Tutor Empresa</th>
+                    <th>Medio</th>
+                    <th>Resumen</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,32 +41,18 @@ else
                 {
                     <tr>
                         <td>@contacto.Fecha.ToShortDateString()</td>
-                        <td>@contacto.ConQuien</td>
-                        <td>@contacto.Como</td>
-                        <td class="text-start text-break">@contacto.Resumen</td>
+                        <td>@(contacto.Alumno?.Nombre ?? "N/A")</td>
+                        <td>@(contacto.TutorEmpresa?.Nombre ?? "N/A")</td>
+                        <td>@contacto.Medio</td>
+                        <td>@contacto.Resumen</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@contacto.Id" class="btn btn-sm btn-primary me-2">Editar</a>
+                            <a asp-action="Delete" asp-route-id="@contacto.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-
-    <a asp-area="TutorCentro" asp-controller="Panel" asp-action="Index" class="btn btn-outline-primary mt-4">
-        🔙 Volver al Panel de TutorCentro
-    </a>
 }
 <script src="~/js/desvanecerAlerta.js"></script>
-@section Scripts {
-    <script>
-        const input = document.getElementById('filtroContactos');
-        const filas = document.querySelectorAll('#listado_Contactos tbody tr');
-
-        input.addEventListener('input', function () {
-            const filtro = this.value.toLowerCase();
-
-            filas.forEach(fila => {
-                const textoFila = fila.textContent.toLowerCase();
-                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
-            });
-        });
-    </script>
-}
