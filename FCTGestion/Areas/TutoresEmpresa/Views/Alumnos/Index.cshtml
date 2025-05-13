@@ -4,35 +4,57 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mb-4">Alumnos Asignados</h2>
+<h2 class="mb-4 text-center">Alumnos Asignados</h2>
 
 @if (!Model.Any())
 {
-    <div class="alert alert-warning">No tienes alumnos asignados actualmente.</div>
+    <div class="alert alert-warning text-center p-3 mb-4">
+        No tienes alumnos asignados actualmente.
+    </div>
 }
 else
 {
-    <table class="table table-bordered table-hover">
-        <thead class="table-light">
-            <tr>
-                <th>Nombre</th>
-                <th>Correo Educación</th>
-                <th>Empresa</th>
-                <th>FCT Inicio</th>
-                <th>FCT Fin</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var alumno in Model)
-            {
+    <div class="table-responsive mb-4">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead class="table-primary text-center">
                 <tr>
-                    <td>@alumno.Nombre</td>
-                    <td>@alumno.CorreoEducacion</td>
-                    <td>@alumno.Empresa?.Nombre</td>
-                    <td>@(alumno.FechaInicioFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
-                    <td>@(alumno.FechaFinFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
+                    <th>Nombre</th>
+                    <th>Correo Educación</th>
+                    <th>Empresa</th>
+                    <th>FCT Inicio</th>
+                    <th>FCT Fin</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var alumno in Model)
+                {
+                    <tr>
+                        <td class="text-center">@alumno.Nombre</td>
+                        <td class="text-center">
+                                @alumno.CorreoEducacion
+                           
+                        </td>
+                        <td class="text-center">
+                            @if (alumno.Empresa != null)
+                            {
+                                <span class="">@alumno.Empresa.Nombre</span>
+                            }
+                            else
+                            {
+                                <span class="">Sin empresa</span>
+                            }
+                        </td>
+                        <td class="text-center">@(alumno.FechaInicioFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
+                        <td class="text-center">@(alumno.FechaFinFCT?.ToString("dd/MM/yyyy") ?? "-")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 }
+
+<div class="d-flex justify-content-start mt-3">
+    <a asp-area="TutoresEmpresa" asp-controller="PanelTutorEmpresa" asp-action="Index" class="btn btn-outline-primary">
+        🔙 Volver al Panel
+    </a>
+</div>

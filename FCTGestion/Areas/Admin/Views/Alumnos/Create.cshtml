@@ -22,21 +22,31 @@
         <span asp-validation-for="CorreoEducacion" class="text-danger"></span>
     </div>
 
-    <div class="form-group mb-3">
-        <label asp-for="SeguridadSocial" class="form-label"></label>
-        <input asp-for="SeguridadSocial" class="form-control" />
+    <div class="form-group">
+        <label asp-for="SeguridadSocial" class="form-label">Seguridad Social</label>
+        <input asp-for="SeguridadSocial"
+               class="form-control"
+               maxlength="12"
+               minlength="12"
+               pattern="\d{12}"
+               placeholder="000000000000"
+               title="Debe contener exactamente 12 dígitos numéricos."
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+               required />
         <span asp-validation-for="SeguridadSocial" class="text-danger"></span>
     </div>
 
     <div class="form-group mb-3">
-        <label asp-for="TutorCentroId" class="form-label">Tutor del Centro</label>
-        <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId" required>
-            <option value="">-- Selecciona un tutor centro --</option>
-        </select>
-        <span asp-validation-for="TutorCentroId" class="text-danger"></span>
-    </div>
+        <div class="form-group">
+            <label asp-for="TutorCentroId" class="control-label">Tutor Centro</label>
+            <select asp-for="TutorCentroId" class="form-control" asp-items="ViewBag.TutorCentroId"></select>
+            <span asp-validation-for="TutorCentroId" class="text-danger"></span>
+        </div>
 
+    </div>
+   
     <button type="submit" class="btn btn-primary">💾 Crear Alumno</button>
+    <br />
     <a asp-area="Admin" asp-controller="PanelAdmin" asp-action="Index" class="btn btn-outline-primary mt-3">
         🔙 Volver al Panel
     </a>

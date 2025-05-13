@@ -32,8 +32,16 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWx1bW5vc1xBc2lnbmFyRW1wcmVzYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Alumnos/ConfirmacionAlumno.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWx1bW5vc1xDb25maXJtYWNpb25BbHVtbm8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Alumnos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWx1bW5vc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Alumnos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQWx1bW5vc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/Alumnos/Edit.cshtml]
@@ -70,6 +78,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresCentro/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHV0b3Jlc0NlbnRyb1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresCentro/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcVHV0b3Jlc0NlbnRyb1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/Admin/Views/TutoresCentro/Edit.cshtml]
@@ -194,6 +206,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Alumnos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Alumnos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHV0b3JDZW50cm9cVmlld3NcQWx1bW5vc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/ProyectoFinal/FCTGestion/FCTGestion/Areas/TutorCentro/Views/Alumnos/Edit.cshtml]

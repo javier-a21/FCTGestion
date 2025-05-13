@@ -60,14 +60,20 @@ namespace FCTGestion.Areas.Identity.Pages.Account
             await _signInManager.RefreshSignInAsync(user);
 
             // Redirección por rol
+            // Redirección por rol
             if (await _userManager.IsInRoleAsync(user, "TutorCentro"))
-                return RedirectToAction("Index", "PanelTutorCentro", new { area = "TutorCentro" });
+                return RedirectToAction("Index", "Panel", new { area = "TutorCentro" });
+
             if (await _userManager.IsInRoleAsync(user, "TutorEmpresa"))
-                return RedirectToAction("Index", "PanelTutorEmpresa", new { area = "TutorEmpresa" });
+                return RedirectToAction("Index", "PanelTutorEmpresa", new { area = "TutoresEmpresa" });
+
             if (await _userManager.IsInRoleAsync(user, "Alumno"))
                 return RedirectToAction("Index", "PanelAlumno", new { area = "Alumnos" });
+
             if (await _userManager.IsInRoleAsync(user, "Admin"))
                 return RedirectToAction("Index", "PanelAdmin", new { area = "Admin" });
+
+
 
             return RedirectToPage("/Index");
         }

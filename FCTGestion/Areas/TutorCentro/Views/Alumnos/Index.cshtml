@@ -11,6 +11,12 @@
         @TempData["MensajeCreacionAlumnos"]
     </div>
 }
+@if (TempData["MensajeEliminacionAlumnos"] != null)
+{
+    <div class="alert alert-success" id="alertaTemporal">
+        @TempData["MensajeEliminacionAlumnos"]
+    </div>
+}
 
 <h1 class="mb-4">Listado de Alumnos</h1>
 
@@ -30,7 +36,7 @@
                 <th class="text-center">Tutor Centro</th>
                 <th class="text-center">Empresa</th>
                 <th class="text-center">Tutor Empresa</th>
-                <th class="text-center"></th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -44,13 +50,15 @@
                     <td class="text-center">@(alumno.Empresa?.Nombre ?? "Sin Asignar")</td>
                     <td class="text-center">@(alumno.TutorEmpresa?.Nombre ?? "Sin Asignar")</td>
                     <td class="text-center">
-                        <a class="btn btn-outline-primary btn-sm"
+                        <a class="btn btn-outline-primary btn-sm m-1"
                            asp-area="TutorCentro"
                            asp-controller="Alumnos"
                            asp-action="AsignarEmpresa"
                            asp-route-id="@alumno.Id">
                             Asignar Empresa
                         </a>
+                        <a asp-action="Delete" asp-route-id="@alumno.Id" class="btn btn-danger btn-sm m-1">Eliminar</a>
+
                     </td>
                 </tr>
             }

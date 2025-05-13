@@ -31,7 +31,6 @@ namespace FCTGestion.Areas.Alumnos.Controllers
             if (alumno == null) return NotFound();
 
             var fechaBase = fechaReferencia ?? DateTime.Today;
-
             var inicioSemana = fechaBase.AddDays(-(int)fechaBase.DayOfWeek + (fechaBase.DayOfWeek == DayOfWeek.Sunday ? -6 : 1));
             var finSemana = inicioSemana.AddDays(6);
 
@@ -40,14 +39,25 @@ namespace FCTGestion.Areas.Alumnos.Controllers
                 .OrderBy(t => t.Fecha)
                 .ToListAsync();
 
+            // Obtener la observación del TutorCentro para la semana
+            var observacionSemana = tareas
+                .Select(t => t.Observaciones)
+                .FirstOrDefault(obs => !string.IsNullOrEmpty(obs)) ?? "Sin observaciones";
+
             ViewBag.FechaReferencia = fechaBase;
             ViewBag.SemanaInicio = inicioSemana.ToShortDateString();
             ViewBag.SemanaFin = finSemana.ToShortDateString();
+            ViewBag.ObservacionSemana = observacionSemana;
+
+            if (!tareas.Any())
+            {
+                TempData["Aviso"] = "No tienes tareas registradas esta semana.";
+            }
 
             return View("Index", tareas);
         }
-        // GET: Alumnos/TareasDiarias/Create
-        public IActionResult Create()
+// GET: Alumnos/TareasDiarias/Create
+public IActionResult Create()
         {
             return View();
         }

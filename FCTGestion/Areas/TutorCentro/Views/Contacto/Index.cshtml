@@ -14,7 +14,7 @@
     </div>
 }
 
-<a asp-area="TutorCentro" asp-controller="Contacto" asp-action="Create" class="btn btn-outline-primary mb-3">
+<a asp-area="TutorCentro" asp-controller="Contacto" asp-action="Create" class="btn btn-success mb-3">
     + Añadir Contacto
 </a>
 
@@ -44,7 +44,9 @@ else
                         <td>@(contacto.Alumno?.Nombre ?? "N/A")</td>
                         <td>@(contacto.TutorEmpresa?.Nombre ?? "N/A")</td>
                         <td>@contacto.Medio</td>
-                        <td>@contacto.Resumen</td>
+                        <td class="text-truncate" style="max-width: 150px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#resumenModal" onclick="showResumen('@contacto.Resumen')">
+                            @(contacto.Resumen.Length > 30 ? contacto.Resumen.Substring(0, 30) + "..." : contacto.Resumen)
+                        </td>
                         <td>
                             <a asp-action="Edit" asp-route-id="@contacto.Id" class="btn btn-sm btn-primary me-2">Editar</a>
                             <a asp-action="Delete" asp-route-id="@contacto.Id" class="btn btn-sm btn-danger">Eliminar</a>
@@ -55,4 +57,29 @@ else
         </table>
     </div>
 }
+
+<!-- Modal -->
+<div class="modal fade" id="resumenModal" tabindex="-1" aria-labelledby="resumenModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="resumenModalLabel">Resumen Completo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalResumen"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showResumen(resumen) {
+        document.getElementById('modalResumen').innerText = resumen;
+    }
+</script>
+
 <script src="~/js/desvanecerAlerta.js"></script>

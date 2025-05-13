@@ -105,7 +105,7 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "Alumno");
-
+                        //Se le añade al nuevo alumno: UserId y TutorCentroId
                         alumno.UserId = user.Id;
                         alumno.TutorCentroId = tutorCentro.Id;
 
@@ -132,6 +132,74 @@ namespace FCTGestion.Areas.TutorCentro.Controllers
 
             return View(alumno);
         }
+        // GET: TutorCentro/Alumnos/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var alumno = await _context.Alumnos
+                .Include(a => a.TutorCentro)
+                .Include(a => a.Empresa)
+                .Include(a => a.TutorEmpresa)
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (alumno == null)
+                return NotFound();
+
+            return View(alumno);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            try
+            {
+                var alumno = await _context.Alumnos.FirstOrDefaultAsync(a => a.Id == id);
+
+                if (alumno == null)
+                    return NotFound();
+
+                // Eliminar tareas diarias relacionadas
+                var tareasRelacionadas = await _context.TareasDiarias
+                    .Where(t => t.AlumnoId == id)
+                    .ToListAsync();
+                if (tareasRelacionadas.Any())
+                    _context.TareasDiarias.RemoveRange(tareasRelacionadas);
+
+                // Eliminar contactos relacionados
+                var contactosRelacionados = await _context.Contactos
+                    .Where(c => c.AlumnoId == id)
+                    .ToListAsync();
+                if (contactosRelacionados.Any())
+                    _context.Contactos.RemoveRange(contactosRelacionados);
+
+                // Eliminar usuario asociado
+                if (!string.IsNullOrEmpty(alumno.UserId))
+                {
+                    var user = await _userManager.FindByIdAsync(alumno.UserId);
+                    if (user != null)
+                    {
+                        await _userManager.DeleteAsync(user);
+                    }
+                }
+
+                // Finalmente, eliminar el alumno
+                _context.Alumnos.Remove(alumno);
+                await _context.SaveChangesAsync();
+
+                TempData["MensajeEliminacionAlumnos"] = "✅ Alumno y todas sus relaciones eliminadas correctamente.";
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["MensajeEliminacionAlumnos"] = $"❌ Error al eliminar el alumno: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
 
         public IActionResult ConfirmacionAlumno()
         {

@@ -110,6 +110,7 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
             }
         }
         [HttpGet]
+        [HttpGet]
         public async Task<IActionResult> ValidarSemana(int alumnoId, DateTime? fechaReferencia)
         {
             var userId = _userManager.GetUserId(User);
@@ -134,14 +135,19 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
                 .OrderBy(t => t.Fecha)
                 .ToListAsync();
 
+            // Obtener una única observación para la semana
+            string observacionSemana = tareas.FirstOrDefault()?.Observaciones ?? "Sin observaciones";
+
             ViewBag.Alumno = alumno;
             ViewBag.SemanaInicio = inicioSemana;
             ViewBag.SemanaFin = finSemana;
             ViewBag.AlumnoId = alumnoId;
             ViewBag.FechaReferencia = fechaBase;
+            ViewBag.ObservacionSemana = observacionSemana;
 
             return View(tareas);
         }
+
         [HttpPost]
         public async Task<IActionResult> ValidarSemana(int alumnoId, DateTime fechaInicio, DateTime fechaFin)
         {
@@ -168,7 +174,7 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
         }
 
 
-    [HttpPost]
+        [HttpPost]
         public async Task<IActionResult> GuardarObservacion(int alumnoId, DateTime fechaInicio, DateTime fechaFin, string observacion)
         {
             var userId = _userManager.GetUserId(User);
@@ -180,15 +186,29 @@ namespace FCTGestion.Areas.TutoresEmpresa.Controllers
                 .Where(t => t.AlumnoId == alumnoId && t.Fecha >= fechaInicio && t.Fecha <= fechaFin)
                 .ToListAsync();
 
-            foreach (var tarea in tareas)
+            if (!tareas.Any())
             {
-                tarea.Observaciones = observacion;
+                TempData["MensajeValidacionTareas"] = "⚠️ No hay tareas registradas en esta semana.";
+                return RedirectToAction("ValidarSemana", new { alumnoId, fechaReferencia = fechaInicio });
             }
 
-            await _context.SaveChangesAsync();
+            try
+            {
+                foreach (var tarea in tareas)
+                {
+                    tarea.Observaciones = observacion;
+                }
 
-            TempData["MensajeValidacionTareas"] = "💬 Observaciones guardadas correctamente.";
-            return RedirectToAction("ValidarSemana", new { alumnoId = alumnoId, fechaReferencia = fechaInicio });
+                await _context.SaveChangesAsync();
+                TempData["MensajeValidacionTareas"] = "💬 Observación guardada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                TempData["MensajeValidacionTareas"] = $"❌ Error al guardar la observación: {ex.Message}";
+            }
+
+            return RedirectToAction("ValidarSemana", new { alumnoId, fechaReferencia = fechaInicio });
         }
-        }
-        }
+
+    }
+}

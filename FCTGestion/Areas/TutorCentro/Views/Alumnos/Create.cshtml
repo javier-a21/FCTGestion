@@ -27,10 +27,19 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="SeguridadSocial" class="control-label"></label>
-        <input asp-for="SeguridadSocial" class="form-control" />
+        <label asp-for="SeguridadSocial" class="form-label">Seguridad Social</label>
+        <input asp-for="SeguridadSocial"
+               class="form-control"
+               maxlength="12"
+               minlength="12"
+               pattern="\d{12}"
+               placeholder="000000000000"
+               title="Debe contener exactamente 12 dígitos numéricos."
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+               required />
         <span asp-validation-for="SeguridadSocial" class="text-danger"></span>
     </div>
+
 
 
     <input type="hidden" asp-for="TutorCentroId" />

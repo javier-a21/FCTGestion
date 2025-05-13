@@ -19,12 +19,12 @@ namespace FCTGestion.Models
 
         [Required(ErrorMessage = "Debe asignarse una empresa.")]
         [Display(Name = "Empresa asignada")]
-        public int EmpresaId { get; set; }
+        public int? EmpresaId { get; set; }
 
         [ValidateNever]
         [ForeignKey("EmpresaId")]
         [Display(Name = "Empresa")]
-        public Empresa Empresa { get; set; }
+        public Empresa? Empresa { get; set; }
 
         [Display(Name = "Usuario vinculado")]
         public string? UserId { get; set; }

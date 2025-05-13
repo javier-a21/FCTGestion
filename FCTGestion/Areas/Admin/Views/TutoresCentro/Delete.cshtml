@@ -1,14 +1,11 @@
-﻿@model FCTGestion.Models.Empresa
-
+﻿@model FCTGestion.Models.TutorCentro
 @{
-    ViewData["Title"] = "Eliminar Empresa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2 class="text-danger">Eliminar Empresa</h2>
+<h2>Eliminar Tutor Centro</h2>
 
 <div class="alert alert-warning">
-    ¿Estás seguro de que deseas eliminar la empresa <strong>@Model.Nombre</strong>?
+    ¿Estás seguro de que deseas eliminar a @Model.Nombre?
 </div>
 
 <form asp-action="DeleteConfirmed" method="post">

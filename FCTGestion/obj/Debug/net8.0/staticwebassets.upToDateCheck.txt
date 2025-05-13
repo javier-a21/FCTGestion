@@ -9,6 +9,8 @@ wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172431.pdf
 wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172643.pdf
 wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172707.pdf
 wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250505172942.pdf
+wwwroot\evaluaciones\Evaluacion_Javier Andueza_20250512201710.pdf
+wwwroot\evaluaciones\Evaluacion_Sergio Alonso _20250509103154.pdf
 wwwroot\favicon.ico
 wwwroot\img\logo.png
 wwwroot\js\desvanecerAlerta.js

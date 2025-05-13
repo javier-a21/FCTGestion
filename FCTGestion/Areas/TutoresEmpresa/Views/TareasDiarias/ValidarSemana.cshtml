@@ -1,89 +1,150 @@
 ﻿@using FCTGestion.Models
 
 @model IEnumerable<FCTGestion.Models.TareaDiaria>
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var alumno = ViewBag.Alumno as Alumno;
     DateTime inicio = ViewBag.SemanaInicio;
     DateTime fin = ViewBag.SemanaFin;
+    string observacionSemana = ViewBag.ObservacionSemana ?? "Sin observaciones";
 }
 
-@if (TempData["MensajeValidacionTareas"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["MensajeValidacionTareas"]
-    </div>
-}
-
-<h2>Validar tareas de @alumno?.Nombre (@inicio.ToShortDateString() - @fin.ToShortDateString())</h2>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-center">Fecha</th>
-            <th class="text-center">Descripción</th>
-            <th class="text-center">Horas</th>
-            <th class="text-center">Estado</th>
-            <th class="text-center">Observaciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var tarea in Model)
-        {
-            <tr>
-                <td class="text-center">@tarea.Fecha.ToShortDateString()</td>
-                <td class="text-center">@tarea.Descripcion</td>
-                <td class="text-center">@tarea.Horas</td>
-                <td class="text-center">@tarea.Estado</td>
-                <td class="text-center">@tarea.Observaciones</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-
-<!-- Formulario para validar la semana -->
-<form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="ValidarSemana" class="mt-3">
-    <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
-    <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
-    <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
-
-    <button type="submit" class="btn btn-success">✅ Validar tareas de la semana</button>
-</form>
-
-
-<!-- Formulario para guardar observaciones -->
-<form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="GuardarObservacion" class="mt-3">
-    <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
-    <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
-    <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
-
-    <div class="mb-3">
-        <label for="observacion">Observaciones del tutor:</label>
-        <textarea class="form-control" name="observacion" id="observacion" rows="3" placeholder="Observaciones generales para esta semana...">@Model.FirstOrDefault()?.Observaciones?.Trim()</textarea>
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0 text-center">Validar Tareas de @alumno?.Nombre (@inicio.ToShortDateString() - @fin.ToShortDateString())</h2>
+        <a asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="Index" class="btn btn-outline-primary btn-sm">
+            🔙 Volver al Panel
+        </a>
     </div>
 
-    <button type="submit" class="btn btn-secondary">💾 Guardar observaciones</button>
-</form>
-<!-- Navegación entre semanas -->
-<div class="mt-4">
-    <a class="btn btn-outline-secondary"
-       asp-area="TutoresEmpresa"
-       asp-controller="TareasDiarias"
-       asp-action="ValidarSemana"
-       asp-route-alumnoId="@ViewBag.AlumnoId"
-       asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">
-        ← Semana anterior
-    </a>
+    @if (TempData["MensajeValidacionTareas"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertaTemporal">
+            @TempData["MensajeValidacionTareas"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <!-- Navegación entre semanas -->
+    <div class="d-flex justify-content-between m-3">
+        <a class="btn btn-outline-primary btn-sm"
+           asp-area="TutoresEmpresa"
+           asp-controller="TareasDiarias"
+           asp-action="ValidarSemana"
+           asp-route-alumnoId="@ViewBag.AlumnoId"
+           asp-route-fechaReferencia="@inicio.AddDays(-7).ToString("yyyy-MM-dd")">
+            ← Semana anterior
+        </a>
 
-    <a class="btn btn-outline-secondary"
-       asp-area="TutoresEmpresa"
-       asp-controller="TareasDiarias"
-       asp-action="ValidarSemana"
-       asp-route-alumnoId="@ViewBag.AlumnoId"
-       asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">
-        Semana siguiente →
-    </a>
+        <a class="btn btn-outline-primary btn-sm"
+           asp-area="TutoresEmpresa"
+           asp-controller="TareasDiarias"
+           asp-action="ValidarSemana"
+           asp-route-alumnoId="@ViewBag.AlumnoId"
+           asp-route-fechaReferencia="@inicio.AddDays(7).ToString("yyyy-MM-dd")">
+            Semana siguiente →
+        </a>
+    </div>
+    <!-- Tabla de Tareas -->
+    <div class="table-responsive mb-3">
+        <table class="table table-bordered table-striped align-middle">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Horas</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">No hay tareas registradas esta semana.</td>
+                    </tr>
+                }
+                else
+                {
+                    @foreach (var tarea in Model)
+                    {
+                        <tr>
+                            <td class="text-center">@tarea.Fecha.ToShortDateString()</td>
+                            <td class="text-truncate" style="max-width: 150px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#descripcionModal" data-descripcion="@System.Web.HttpUtility.JavaScriptStringEncode(tarea.Descripcion)" onclick="showDescription(this)">
+                                @(tarea.Descripcion.Length > 30 ? tarea.Descripcion.Substring(0, 30) + "..." : tarea.Descripcion)
+                            </td>
+                            <td class="text-center">@tarea.Horas</td>
+                            <td class="text-center">
+                                @(tarea.Estado == EstadoValidacion.Aprobada ? "Validada" : tarea.Estado.ToString())
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="ValidarSemana" class="d-inline">
+        <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
+        <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
+        <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
+        <button type="submit" class="btn btn-success btn-sm">✅ Validar Semana</button>
+    </form>
+    <!-- Observación del TutorCentro  -->
+    <div class="mt-3">
+        <h5>Observación del TutorCentro:</h5>
+        <div class="alert alert-info p-2">
+            @ViewBag.ObservacionSemana
+        </div>
+    </div>
+
+
+
+        
+
+        <!-- Formulario para Guardar Observación -->
+        
+            <form method="post" asp-area="TutoresEmpresa" asp-controller="TareasDiarias" asp-action="GuardarObservacion" class="w-100">
+                <input type="hidden" name="alumnoId" value="@ViewBag.AlumnoId" />
+                <input type="hidden" name="fechaInicio" value="@inicio.ToString("yyyy-MM-dd")" />
+                <input type="hidden" name="fechaFin" value="@fin.ToString("yyyy-MM-dd")" />
+
+                <div class="mb-2">
+                    <label for="observacion" class="form-label fw-bold">Crear o editar observaciòn:</label>
+                    <textarea class="form-control" name="observacion" rows="1" placeholder="Añadir observación..." style="width: 100%; resize: none;">@ViewBag.ObservacionSemana</textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-secondary">💾 Guardar</button>
+                </div>
+            </form>
+
+
+
+
+
+
+<!-- Modal para Descripción Completa -->
+<div class="modal fade" id="descripcionModal" tabindex="-1" aria-labelledby="descripcionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="descripcionModalLabel">Descripción Completa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescripcion"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    function showDescription(element) {
+        const descripcion = element.getAttribute('data-descripcion');
+        document.getElementById('modalDescripcion').innerText = descripcion;
+    }
+</script>
+
 <script src="~/js/desvanecerAlerta.js"></script>

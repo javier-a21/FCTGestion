@@ -1,0 +1,22 @@
+﻿<!-- Delete.cshtml -->
+@model FCTGestion.Models.Alumno
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Eliminar Alumno";
+}
+
+<h2>Eliminar Alumno</h2>
+
+<div class="alert alert-danger">
+    <h4>¿Estás seguro de que deseas eliminar al alumno @Model.Nombre?</h4>
+    <p>Esta acción eliminará al alumno y todas sus relaciones asociadas de forma permanente.</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+<hr />

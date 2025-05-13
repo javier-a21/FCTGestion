@@ -132,6 +132,30 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-2lLXmgqjZ08em3x7k1pMNDTo7iGM1Gnn3Wk6C0RsiUI="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"24147"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u00222lLXmgqjZ08em3x7k1pMNDTo7iGM1Gnn3Wk6C0RsiUI=\u0022"},{"Name":"Last-Modified","Value":"Mon, 05 May 2025 15:29:42 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FCTGestion/evaluaciones/Evaluacion_Javier Andueza_20250512201710.4ze8cu5w8n.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\evaluaciones\Evaluacion_Javier Andueza_20250512201710.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"4ze8cu5w8n"},{"Name":"integrity","Value":"sha256-MO6/MTTW4dWuhjhUwGyTY2SGFuNH//\u002BFUp0kxQjKpDM="},{"Name":"label","Value":"_content/FCTGestion/evaluaciones/Evaluacion_Javier Andueza_20250512201710.pdf"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"24340"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022MO6/MTTW4dWuhjhUwGyTY2SGFuNH//\u002BFUp0kxQjKpDM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 18:17:10 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FCTGestion/evaluaciones/Evaluacion_Javier Andueza_20250512201710.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\evaluaciones\Evaluacion_Javier Andueza_20250512201710.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-MO6/MTTW4dWuhjhUwGyTY2SGFuNH//\u002BFUp0kxQjKpDM="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"24340"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022MO6/MTTW4dWuhjhUwGyTY2SGFuNH//\u002BFUp0kxQjKpDM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 12 May 2025 18:17:10 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FCTGestion/evaluaciones/Evaluacion_Sergio Alonso _20250509103154.6yq2z4gpw5.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\evaluaciones\Evaluacion_Sergio Alonso _20250509103154.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"6yq2z4gpw5"},{"Name":"integrity","Value":"sha256-EjhJBi2gWa7oSJMecGOvzAlIEBkSCzKhW1ZIL\u002B\u002BvU9U="},{"Name":"label","Value":"_content/FCTGestion/evaluaciones/Evaluacion_Sergio Alonso _20250509103154.pdf"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"24121"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022EjhJBi2gWa7oSJMecGOvzAlIEBkSCzKhW1ZIL\u002B\u002BvU9U=\u0022"},{"Name":"Last-Modified","Value":"Fri, 09 May 2025 08:31:54 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/FCTGestion/evaluaciones/Evaluacion_Sergio Alonso _20250509103154.pdf">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\evaluaciones\Evaluacion_Sergio Alonso _20250509103154.pdf'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-EjhJBi2gWa7oSJMecGOvzAlIEBkSCzKhW1ZIL\u002B\u002BvU9U="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"24121"},{"Name":"Content-Type","Value":"application/pdf"},{"Name":"ETag","Value":"\u0022EjhJBi2gWa7oSJMecGOvzAlIEBkSCzKhW1ZIL\u002B\u002BvU9U=\u0022"},{"Name":"Last-Modified","Value":"Fri, 09 May 2025 08:31:54 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/FCTGestion/favicon.ico">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>

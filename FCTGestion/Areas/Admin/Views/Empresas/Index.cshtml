@@ -15,12 +15,13 @@
 
 <h2 class="mb-4">Empresas</h2>
 
-<div class="mb-3">
-    <a asp-action="Create" class="btn btn-primary">Nueva Empresa</a>
+<div class="mb-3 d-flex gap-2 flex-wrap">
+    <a asp-action="Create" class="btn btn-success">➕Nueva Empresa</a>
+    <input type="text" id="buscadorEmpresas" class="form-control" placeholder="Buscar Empresa..." style="max-width: 300px;" />
 </div>
 
 <div class="table-responsive">
-    <table class="table table-striped table-hover align-middle">
+    <table id="tablaEmpresas" class="table table-striped table-hover align-middle">
         <thead class="table-primary text-center">
             <tr>
                 <th>Nombre</th>
@@ -67,3 +68,16 @@
 
 <!-- Scripts -->
 <script src="~/js/desvanecerAlerta.js"></script>
+@section Scripts {
+    <script>
+        document.getElementById('buscadorEmpresas').addEventListener('input', function () {
+            const filtro = this.value.toLowerCase();
+            const filas = document.querySelectorAll('#tablaEmpresas tbody tr');
+
+            filas.forEach(fila => {
+                const textoFila = fila.textContent.toLowerCase();
+                fila.style.display = textoFila.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+}

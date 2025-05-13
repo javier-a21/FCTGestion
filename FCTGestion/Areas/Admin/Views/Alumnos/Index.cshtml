@@ -13,6 +13,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
+@if (TempData["MensajeEliminacionAlumnos"] != null)
+{
+    <div class="alert alert-success" id="alertaTemporal">
+        @TempData["MensajeEliminacionAlumnos"]
+    </div>
+}
 
 <h1 class="mb-4">Listado de Alumnos</h1>
 
@@ -27,10 +33,11 @@
     <table id="tablaAlumnos" class="table table-bordered table-striped table-hover align-middle">
         <thead class="table-primary text-center">
             <tr>
-                <th>Nombre</th>
-                <th>Correo Educación</th>
-                <th>Seguridad Social</th>
-                <th>Tutor Centro</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center"> Correo Educación</th>
+                <th class="text-center">Seguridad Social</th>
+                <th class="text-center">Tutor Centro</th>
+                <th class="text-center">Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -45,17 +52,20 @@
                 @foreach (var alumno in Model)
                 {
                     <tr>
-                        <td class="text-truncate" style="max-width: 250px;">
+                        <td class="text-truncate text-center" style="max-width: 250px;">
                             @(alumno.Nombre.Length > 50 ? alumno.Nombre.Substring(0, 50) + "..." : alumno.Nombre)
                         </td>
-                        <td class="text-truncate" style="max-width: 300px;">
+                        <td class="text-truncate text-center" style="max-width: 300px;">
                             @(alumno.CorreoEducacion.Length > 50 ? alumno.CorreoEducacion.Substring(0, 50) + "..." : alumno.CorreoEducacion)
                         </td>
-                        <td class="text-truncate" style="max-width: 200px;">
+                        <td class="text-truncate text-center " style="max-width: 200px;">
                             @(alumno.SeguridadSocial)
                         </td>
-                        <td class="text-truncate" style="max-width: 250px;">
+                        <td class="text-truncate text-center" style="max-width: 250px;">
                             @(alumno.TutorCentro?.Nombre ?? "Sin Tutor")
+                        </td>
+                        <td class="text-truncate text-center" style="max-width: 250px;">
+                            <a asp-action="Delete" asp-route-id="@alumno.Id" class="btn btn-danger btn-sm m-1">Eliminar</a>
                         </td>
                     </tr>
                 }

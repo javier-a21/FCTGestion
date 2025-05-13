@@ -26,18 +26,49 @@ public class TutoresCentroController : Controller
         return View(tutores);
     }
 
-    // POST: Admin/TutoresCentro/Delete/5
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Delete(int id)
+    // GET: Admin/TutoresCentro/Delete/5
+    public async Task<IActionResult> Delete(int? id)
     {
-        var tutor = await _context.TutoresCentro.FindAsync(id);
+        if (id == null) return NotFound();
+
+        var tutor = await _context.TutoresCentro
+                                  .FirstOrDefaultAsync(t => t.Id == id);
+
         if (tutor == null) return NotFound();
 
+        return View(tutor);
+    }
+
+    // POST: Admin/TutoresCentro/DeleteConfirmed/5
+    [HttpPost, ActionName("DeleteConfirmed")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int id)
+    {
+        var tutor = await _context.TutoresCentro.FindAsync(id);
+
+        if (tutor == null)
+        {
+            return NotFound();
+        }
+
+        // Desvincular Alumnos relacionados con este TutorCentro
+        var alumnosRelacionados = _context.Alumnos.Where(a => a.TutorCentroId == id).ToList();
+        foreach (var alumno in alumnosRelacionados)
+        {
+            alumno.TutorCentroId = null;
+        }
+
+        // Guardar cambios antes de eliminar el TutorCentro
+        await _context.SaveChangesAsync();
+
+        // Eliminar TutorCentro
         _context.TutoresCentro.Remove(tutor);
         await _context.SaveChangesAsync();
+
+        TempData["Mensaje"] = "Tutor Centro eliminado correctamente.";
         return RedirectToAction(nameof(Index));
     }
+
 
     // GET: Admin/TutoresCentro/Create
     public IActionResult Create()

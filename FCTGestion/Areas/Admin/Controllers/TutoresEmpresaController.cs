@@ -57,7 +57,7 @@ namespace FCTGestion.Areas.Admin.Controllers
                 };
 
                 // Contraseña por defecto
-                var password = "Tutor123."; 
+                var password = "TutorEmpresa123."; 
 
                 var result = await _userManager.CreateAsync(user, password);
                 if (result.Succeeded)
@@ -85,6 +85,11 @@ namespace FCTGestion.Areas.Admin.Controllers
             ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Nombre", tutorEmpresa.EmpresaId);
             return View(tutorEmpresa);
         }
+        private bool TutorEmpresaExists(int id)
+        {
+            return _context.TutoresEmpresa.Any(e => e.Id == id);
+        }
+
 
         // GET: TutorCentro/TutoresEmpresa/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -152,35 +157,36 @@ namespace FCTGestion.Areas.Admin.Controllers
 
             return View(tutor);
         }
-
-        // POST: TutorCentro/TutoresEmpresa/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tutor = await _context.TutoresEmpresa.FindAsync(id);
+            var tutorEmpresa = await _context.TutoresEmpresa.FindAsync(id);
 
-            if (tutor == null) return NotFound();
-
-            // Comprobar si tiene alumnos asignados
-            var tieneAlumnosAsignados = await _context.Alumnos.AnyAsync(a => a.TutorEmpresaId == id);
-
-            if (tieneAlumnosAsignados)
+            if (tutorEmpresa == null)
             {
-                TempData["Error"] = "❌ No puedes eliminar este tutor porque tiene alumnos asignados.";
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
-            _context.TutoresEmpresa.Remove(tutor);
-            await _context.SaveChangesAsync();
+            // Desvincular Alumnos relacionados con este TutorEmpresa
+            var alumnosRelacionados = _context.Alumnos.Where(a => a.TutorEmpresaId == id).ToList();
+            foreach (var alumno in alumnosRelacionados)
+            {
+                alumno.TutorEmpresaId = null;
+            }
 
-            TempData["MensajeCrearEmpresa"] = "✅ Tutor eliminado correctamente.";
+            // Eliminar Contactos relacionados
+            var contactosRelacionados = _context.Contactos.Where(c => c.TutorEmpresaId == id);
+            _context.Contactos.RemoveRange(contactosRelacionados);
+
+            // Eliminar TutorEmpresa
+            _context.TutoresEmpresa.Remove(tutorEmpresa);
+
+            await _context.SaveChangesAsync();
+            TempData["MensajeCrearEmpresa"] = "Tutor de Empresa eliminado correctamente.";
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TutorEmpresaExists(int id)
-        {
-            return _context.TutoresEmpresa.Any(t => t.Id == id);
-        }
+
     }
 }

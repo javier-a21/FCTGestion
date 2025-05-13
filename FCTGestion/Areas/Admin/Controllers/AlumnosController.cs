@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Identity;
 using FCTGestion.Helpers;
 
-
 namespace FCTGestion.Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -23,21 +22,56 @@ namespace FCTGestion.Areas.Admin.Controllers
             _userManager = userManager;
         }
 
+        // GET: Admin/Alumnos
         public async Task<IActionResult> Index()
         {
             var alumnos = await _context.Alumnos
                 .Include(a => a.TutorCentro)
+                .Include(a => a.Empresa)
+                .Include(a => a.TutorEmpresa)
                 .ToListAsync();
+
             return View(alumnos);
         }
-        // GET: TutorCentro/Alumnos/Create
+
+        private string GenerarContrasenaSegura()
+        {
+            const string mayusculas = "ABCDEFGHJKLMNPQRSTUVWXYZ";
+            const string minusculas = "abcdefghijkmnopqrstuvwxyz";
+            const string numeros = "23456789";
+            const string simbolos = "!@#$%&*";
+            const int longitudTotal = 10;
+
+            var random = new Random();
+
+
+            var caracteres = new List<char>
+    {
+        mayusculas[random.Next(mayusculas.Length)],
+        minusculas[random.Next(minusculas.Length)],
+        numeros[random.Next(numeros.Length)],
+        simbolos[random.Next(simbolos.Length)]
+    };
+
+
+            string todos = mayusculas + minusculas + numeros + simbolos;
+            while (caracteres.Count < longitudTotal)
+            {
+                caracteres.Add(todos[random.Next(todos.Length)]);
+            }
+
+
+            return new string(caracteres.OrderBy(x => random.Next()).ToArray());
+        }
+
+
+
         public IActionResult Create()
         {
-            ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre");
+            ViewBag.TutorCentroId = new SelectList(_context.TutoresCentro, "Id", "Nombre");
             return View();
         }
 
-        // POST: TutorCentro/Alumnos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nombre,CorreoEducacion,SeguridadSocial,TutorCentroId")] Alumno alumno)
@@ -46,37 +80,38 @@ namespace FCTGestion.Areas.Admin.Controllers
             {
                 try
                 {
-                    // Crear usuario de identidad
+                    var contrasenaGenerada = GenerarContrasenaSegura();
+
                     var user = new ApplicationUser
                     {
-                        UserName = alumno.CorreoEducacion,
+                        UserName = Utilidades.NormalizarNombreUsuario(alumno.Nombre),
                         Email = alumno.CorreoEducacion,
                         EmailConfirmed = true,
-                        DebeCambiarPassword = true,
+                        DebeCambiarPassword = true
                     };
 
-                    string passwordPorDefecto = "Alumno123.";
-
-                    var result = await _userManager.CreateAsync(user, passwordPorDefecto);
+                    var result = await _userManager.CreateAsync(user, contrasenaGenerada);
 
                     if (result.Succeeded)
                     {
                         await _userManager.AddToRoleAsync(user, "Alumno");
 
+                        // Asignamos el UserId y TutorCentroId seleccionados
                         alumno.UserId = user.Id;
-                        _context.Add(alumno);
+
+                        _context.Alumnos.Add(alumno);
                         await _context.SaveChangesAsync();
 
-                        TempData["MensajeCrearAlumno"] = "Alumno añadido correctamente.";
+                        // Pasar datos por TempData
+                        TempData["CorreoAlumno"] = alumno.CorreoEducacion;
+                        TempData["ContrasenaGenerada"] = contrasenaGenerada;
 
-                        return RedirectToAction(nameof(Index));
+                        return RedirectToAction(nameof(ConfirmacionAlumno));
                     }
                     else
                     {
                         foreach (var error in result.Errors)
-                        {
                             ModelState.AddModelError(string.Empty, error.Description);
-                        }
                     }
                 }
                 catch (Exception ex)
@@ -85,34 +120,41 @@ namespace FCTGestion.Areas.Admin.Controllers
                 }
             }
 
-            ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre", alumno.TutorCentroId);
+            ViewBag.TutoresCentro = new SelectList(_context.TutoresCentro, "Id", "Nombre");
             return View(alumno);
         }
 
 
+        public IActionResult ConfirmacionAlumno()
+        {
+            if (TempData["CorreoAlumno"] == null || TempData["ContrasenaGenerada"] == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
+            ViewBag.Correo = TempData["CorreoAlumno"];
+            ViewBag.Contrasena = TempData["ContrasenaGenerada"];
+            return View();
+        }
 
-        // GET: TutorCentro/Alumnos/Edit/5
+        // GET: Admin/Alumnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-                return NotFound();
+            if (id == null) return NotFound();
 
             var alumno = await _context.Alumnos.FindAsync(id);
-            if (alumno == null)
-                return NotFound();
+            if (alumno == null) return NotFound();
 
             ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre", alumno.TutorCentroId);
             return View(alumno);
         }
 
-        // POST: TutorCentro/Alumnos/Edit/5
+        // POST: Admin/Alumnos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,CorreoEducacion,SeguridadSocial,UserId,TutorCentroId")] Alumno alumno)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,CorreoEducacion,SeguridadSocial,TutorCentroId")] Alumno alumno)
         {
-            if (id != alumno.Id)
-                return NotFound();
+            if (id != alumno.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -120,71 +162,85 @@ namespace FCTGestion.Areas.Admin.Controllers
                 {
                     _context.Update(alumno);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!_context.Alumnos.Any(a => a.Id == alumno.Id))
                         return NotFound();
-                    else
-                        throw;
+                    throw;
                 }
-                return RedirectToAction(nameof(Index));
             }
 
             ViewData["TutorCentroId"] = new SelectList(_context.TutoresCentro, "Id", "Nombre", alumno.TutorCentroId);
             return View(alumno);
         }
-        // GET: TutorCentro/Alumnos/AsignarEmpresa
-        public async Task<IActionResult> AsignarEmpresa(int id)
-        {
-            var alumno = await _context.Alumnos.FindAsync(id);
-            if (alumno == null) return NotFound();
 
-            ViewData["EmpresaId"] = new SelectList(_context.Empresas, "Id", "Nombre");
-            ViewData["TutorEmpresaId"] = new SelectList(_context.TutoresEmpresa, "Id", "Nombre");
+        // GET: TutorCentro/Alumnos/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var alumno = await _context.Alumnos
+                .Include(a => a.TutorCentro)
+                .Include(a => a.Empresa)
+                .Include(a => a.TutorEmpresa)
+                .FirstOrDefaultAsync(a => a.Id == id);
+
+            if (alumno == null)
+                return NotFound();
 
             return View(alumno);
         }
 
-
-        // POST: TutorCentro/Alumnos/AsignarEmpresa
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AsignarEmpresa(int idAlumno, int EmpresaId, int TutorEmpresaId, DateTime FechaInicio, DateTime FechaFin)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var alumno1 = await _context.Alumnos.FindAsync(idAlumno);
-            var empresa1 = await _context.Empresas.FindAsync(EmpresaId);
-            var tutor1 = await _context.TutoresEmpresa.FindAsync(TutorEmpresaId);
-
-            if (alumno1 == null || empresa1 == null || tutor1 == null)
+            try
             {
-                return NotFound();
-            }
-            else
-            {
+                var alumno = await _context.Alumnos.FirstOrDefaultAsync(a => a.Id == id);
 
-                alumno1.EmpresaId = EmpresaId;
-                alumno1.TutorEmpresaId = TutorEmpresaId;
-                alumno1.FechaInicioFCT = FechaInicio;
-                alumno1.FechaFinFCT = FechaFin;
+                if (alumno == null)
+                    return NotFound();
 
+                // Eliminar tareas diarias relacionadas
+                var tareasRelacionadas = await _context.TareasDiarias
+                    .Where(t => t.AlumnoId == id)
+                    .ToListAsync();
+                if (tareasRelacionadas.Any())
+                    _context.TareasDiarias.RemoveRange(tareasRelacionadas);
+
+                // Eliminar contactos relacionados
+                var contactosRelacionados = await _context.Contactos
+                    .Where(c => c.AlumnoId == id)
+                    .ToListAsync();
+                if (contactosRelacionados.Any())
+                    _context.Contactos.RemoveRange(contactosRelacionados);
+
+                // Eliminar usuario asociado
+                if (!string.IsNullOrEmpty(alumno.UserId))
+                {
+                    var user = await _userManager.FindByIdAsync(alumno.UserId);
+                    if (user != null)
+                    {
+                        await _userManager.DeleteAsync(user);
+                    }
+                }
+
+                // Finalmente, eliminar el alumno
+                _context.Alumnos.Remove(alumno);
                 await _context.SaveChangesAsync();
+
+                TempData["MensajeEliminacionAlumnos"] = "✅ Alumno y todas sus relaciones eliminadas correctamente.";
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
-    }
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var empresa = await _context.Empresas
-                .Include(e => e.Tutores)
-                .FirstOrDefaultAsync(e => e.Id == id);
-
-            if (empresa == null) return NotFound();
-
-            return View(empresa);
+            catch (Exception ex)
+            {
+                TempData["MensajeEliminacionAlumnos"] = $"❌ Error al eliminar el alumno: {ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
         }
-
     }
-
-}
+    }
