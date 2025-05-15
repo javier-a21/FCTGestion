@@ -36,6 +36,9 @@ Requisitos previos
 
 -Git
 --------------------------------------------------------
+--------------------------------------------------------
+Pasos para el despliegue: 
+
 1. Clonar el Repositorio
 #git clone URL del Proyecto de GitHub.
 cd FCTGestion
