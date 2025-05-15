@@ -35,13 +35,13 @@ Requisitos previos
 -SQL Server LocalDB o SQL Server completo
 
 -Git
-///////////////////////////////////////////////////////////////////////////
+--------------------------------------------------------
 1. Clonar el Repositorio
 #git clone URL del Proyecto de GitHub.
 cd FCTGestion
  2. Crear el archivo appsettings.json
 En la raíz del proyecto, crea un archivo appsettings.json con el siguiente contenido:
---------------------------------------------------------
+```json
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=FCTGestion;Trusted_Connection=True;"
@@ -53,6 +53,7 @@ En la raíz del proyecto, crea un archivo appsettings.json con el siguiente cont
     }
   }
 }
+```
 --------------------------------------------------------
 Nota: Si usas SQL Server completo o SQLite, ajusta la cadena de conexión.
 
