@@ -4,13 +4,15 @@ using Microsoft.AspNetCore.Identity;
 using FCTGestion.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddRazorPages(); // esto debe estar antes del `Build()`
 
+// Base de datos
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Identity
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
@@ -18,12 +20,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 .AddRoles<IdentityRole>()
 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
-
-
-
-
-// Add services to the container.
+// Autorización global
 builder.Services.AddControllersWithViews(options =>
 {
     var policy = new AuthorizationPolicyBuilder()
@@ -32,27 +29,23 @@ builder.Services.AddControllersWithViews(options =>
     options.Filters.Add(new AuthorizeFilter(policy));
 });
 
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-var env = app.Environment;
+// Configuración de Rotativa
+Rotativa.AspNetCore.RotativaConfiguration.Setup(app.Environment.WebRootPath, "Rotativa");
 
-Rotativa.AspNetCore.RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
-
-// Configure the HTTP request pipeline.
+// Middleware
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-//Identity
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -66,39 +59,70 @@ app.MapControllerRoute(
 
 app.MapRazorPages();
 
+// Inicializar roles y usuario Admin
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-
-
-    var user = new ApplicationUser
+    try
     {
-        UserName = "iñigo",
-        Email = "iñigo@gmail.com",
-        EmailConfirmed = true,
-        DebeCambiarPassword = true
-    };
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        context.Database.Migrate();
 
-    var result = await userManager.CreateAsync(user, "FCTPASSWORD");
-    if (result.Succeeded)
+        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+        // Crear los roles si no existen
+        string[] roles = { "Admin", "Alumno", "TutorCentro", "TutorEmpresa", "Profesor" };
+        foreach (string role in roles)
+        {
+            if (!roleManager.Roles.Any(r => r.Name == role))
+            {
+                roleManager.CreateAsync(new IdentityRole(role)).Wait();
+            }
+        }
+
+        // Crear el usuario admin si no existe
+        var adminEmail = "admin@fctgestion.admin";
+        var adminUser = userManager.FindByEmailAsync(adminEmail).Result;
+
+        if (adminUser == null)
+        {
+            var user = new ApplicationUser
+            {
+                UserName = adminEmail,
+                Email = adminEmail,
+                EmailConfirmed = true,
+                LockoutEnabled = false,
+                PhoneNumberConfirmed = true,
+                TwoFactorEnabled = false,
+                AccessFailedCount = 0
+            };
+
+            var result = userManager.CreateAsync(user, "Password123!").Result;
+
+            if (result.Succeeded)
+            {
+                userManager.AddToRoleAsync(user, "Admin").Wait();
+                Console.WriteLine("Usuario Admin creado con éxito.");
+            }
+            else
+            {
+                Console.WriteLine("Error al crear el usuario Admin:");
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine($"- {error.Description}");
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("El usuario Admin ya existe.");
+        }
+    }
+    catch (Exception ex)
     {
-        await userManager.AddToRoleAsync(user, "Alumno");
+        Console.WriteLine($"Error al inicializar la base de datos: {ex.Message}");
     }
-    }
+}
 
-
-
-
-
-
-
-    app.Run();
-
-
-
-
-
-
-
+app.Run();

@@ -1,7 +1,22 @@
-.vs/
-*.user
-*.suo
 *.dbmdl
 *.vsp
 *.vspx
+# Visual Studio y archivos de usuario
+.vs/
+*.user
+*.suo
+
+# Archivos compilados y binarios
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Archivos de publicación (Azure, etc.)
+FCTGestion/Properties/PublishProfiles/
+FCTGestion/Properties/ServiceDependencies/
+
+
+# Archivos temporales y de configuración
 *.cache

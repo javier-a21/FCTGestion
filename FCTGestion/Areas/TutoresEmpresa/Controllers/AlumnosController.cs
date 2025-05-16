@@ -22,6 +22,10 @@ namespace Proyecto.Areas.TutoresEmpresa.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "Identity" });
+            }
 
             // Obtenemos el tutorEmpresa vinculado al usuario
             var tutorEmpresa = await _context.TutoresEmpresa

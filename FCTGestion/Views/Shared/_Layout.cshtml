@@ -206,18 +206,20 @@
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase">Enlaces</h5>
                     <ul class="list-unstyled mb-0">
-                        <li><a asp-controller="Home" asp-action="Privacy" class="text-dark text-decoration-none">Política de privacidad</a></li>
-                        <li><a href="#" class="text-dark text-decoration-none">Aviso legal</a></li>
-                        <li><a href="#" class="text-dark text-decoration-none">Política de cookies</a></li>
-                        <li><a href="mailto:soporte@centroeducativo.com" class="text-dark text-decoration-none">Contacto</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy" class="text-dark text-decoration-none">Política de privacidad</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="LegalNotice" class="text-dark text-decoration-none">Aviso legal</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="CookiesPolicy" class="text-dark text-decoration-none">Política de cookies</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact" class="text-dark text-decoration-none">Contacto</a></li>
                     </ul>
                 </div>
+
+
 
                 <!-- Información institucional o créditos -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0 text-start">
                     <h5 class="text-uppercase">Información</h5>
                     <ul class="list-unstyled">
-                        <li><span class="text-muted">© 2025 - IES NombreCentro</span></li>
+                        <li><span class="text-muted">© 2025</span></li>
                         <li><span class="text-muted">Desarrollado por Javier Andueza </span></li>
                         <li><span class="text-muted">Versión 1.0</span></li>
                     </ul>
@@ -239,7 +241,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <!-- Añade esto -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
