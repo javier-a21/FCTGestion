@@ -74,6 +74,7 @@ Accede en https://localhost:5001 o http://localhost:5000.
 Administrador: admin@example.com / Admin123!
 
 Alumnos y tutores deben ser creados manualmente.
+
 Contraseña por defecto:
 
 -Tutores Centro: "TutorCentro123."
