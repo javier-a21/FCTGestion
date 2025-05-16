@@ -75,5 +75,7 @@ Administrador: admin@example.com / Admin123!
 
 Alumnos y tutores deben ser creados manualmente.
 Contraseña por defecto:
+
 -Tutores Centro: "TutorCentro123."
+
 -Tutores Empresa: "TutorEmpresa123."
