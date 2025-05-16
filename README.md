@@ -71,7 +71,8 @@ Nota: Si usas SQL Server completo o SQLite, ajusta la cadena de conexión.
 Accede en https://localhost:5001 o http://localhost:5000.
 
  7. Usuarios de Prueba
-Administrador: admin@example.com / Admin123!
+
+Administrador: Usuario: "admin@example.com" - Contrseña: "Admin123!"
 
 Alumnos y tutores deben ser creados manualmente.
 
